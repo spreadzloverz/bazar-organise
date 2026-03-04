@@ -1,327 +1,130 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BAZAR ORGANISE</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap');
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{--bg:#f3f3f3;--dark:#1a1a1a;--muted:#999;--white:#ffffff}
-    html{scroll-behavior:smooth}
-    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--dark);min-height:100vh;display:flex;flex-direction:column}
-    header{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(255,255,255,0.92);backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(0,0,0,0.06);transition:all 0.4s ease}
-    .header-inner{width:100%;padding:0 3rem;display:flex;align-items:center;justify-content:space-between;height:80px}
-    .logo{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:600;letter-spacing:-0.02em;color:var(--dark);text-decoration:none;transition:opacity 0.2s}
-    .logo:hover{opacity:0.6}
-    nav{display:flex;align-items:center;gap:2.5rem}
-    .nav-link{font-size:0.75rem;font-weight:500;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);text-decoration:none;position:relative;transition:color 0.2s}
-    .nav-link::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--dark);transform:scaleX(0);transition:transform 0.3s ease}
-    .nav-link:hover,.nav-link.active{color:var(--dark)}
-    .nav-link:hover::after,.nav-link.active::after{transform:scaleX(1)}
-    .btn-primary{display:inline-flex;align-items:center;padding:0.6rem 1.4rem;background:var(--dark);color:var(--white);border-radius:100px;font-size:0.8rem;font-weight:500;text-decoration:none;transition:all 0.3s ease;border:1.5px solid var(--dark)}
-    .btn-primary:hover{background:transparent;color:var(--dark)}
-    .menu-btn{display:none;background:none;border:none;cursor:pointer;padding:0.5rem}
-    .mobile-nav{display:none;position:fixed;inset:80px 0 0 0;background:var(--white);z-index:40;flex-direction:column;align-items:center;justify-content:center;gap:2rem;transform:translateX(100%);transition:transform 0.5s cubic-bezier(0.77,0,0.175,1)}
-    .mobile-nav.open{transform:translateX(0)}
-    .mobile-nav a{font-family:'Space Grotesk',sans-serif;font-size:2.5rem;font-weight:600;text-transform:uppercase;color:var(--dark);text-decoration:none}
-    .vision-section{padding:10rem 3rem 6rem;background:var(--dark);color:var(--white)}
-    .vision-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
-    .vision-left{display:flex;flex-direction:column;gap:1.5rem}
-    .vision-label{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.18em;color:rgba(255,255,255,0.45)}
-    .vision-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:700;line-height:1.05;letter-spacing:-0.03em;color:var(--white)}
-    .vision-body{display:flex;flex-direction:column;gap:1.5rem;border-left:2px solid rgba(255,255,255,0.2);padding-left:2.5rem}
-    .vision-body p{font-size:1rem;line-height:1.8;color:rgba(255,255,255,0.65);font-weight:300}
-    .vision-body strong{color:var(--white);font-weight:600}
-    .manifeste-section{background:var(--white);padding:6rem 3rem;border-bottom:1px solid rgba(0,0,0,0.08)}
-    .manifeste-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 2fr;gap:5rem;align-items:start}
-    .manifeste-header{position:sticky;top:100px;display:flex;flex-direction:column;gap:1rem}
-    .manifeste-label{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.18em;color:var(--muted)}
-    .manifeste-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(2rem,3vw,3rem);font-weight:700;line-height:1.05;letter-spacing:-0.03em;color:var(--dark)}
-    .manifeste-content{display:flex;flex-direction:column;gap:3.5rem}
-    .manifeste-intro{display:flex;flex-direction:column;gap:1.2rem;padding-bottom:3rem;border-bottom:1px solid rgba(0,0,0,0.08)}
-    .manifeste-intro p{font-size:1.05rem;line-height:1.75;color:#444;font-weight:300}
-    .manifeste-intro strong{color:var(--dark);font-weight:600}
-    .manifeste-emphasis{font-style:italic;color:var(--dark)!important;font-size:1.1rem!important;font-weight:400!important;border-left:3px solid var(--dark);padding-left:1.2rem}
-    .manifeste-blocks{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem 3rem}
-    .manifeste-block{display:flex;flex-direction:column;gap:0.8rem}
-    .manifeste-block-title{font-family:'Space Grotesk',sans-serif;font-size:0.9rem;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--dark)}
-    .manifeste-block p{font-size:0.9rem;line-height:1.75;color:#555;font-weight:300}
-    .manifeste-conviction{background:var(--dark);color:var(--white);border-radius:12px;padding:2.5rem 3rem;display:flex;flex-direction:column;gap:1.2rem}
-    .manifeste-conviction-label{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.18em;color:rgba(255,255,255,0.45)}
-    .manifeste-conviction-intro{font-size:1rem;color:rgba(255,255,255,0.7);font-weight:300}
-    .manifeste-list{list-style:none;display:flex;flex-direction:column;gap:0.5rem}
-    .manifeste-list li{font-size:1rem;color:var(--white);display:flex;align-items:center;gap:0.7rem}
-    .manifeste-list li::before{content:'';width:20px;height:1px;background:rgba(255,255,255,0.4);flex-shrink:0}
-    .manifeste-conviction-close{font-size:0.95rem;line-height:1.7;color:rgba(255,255,255,0.6);font-weight:300;font-style:italic;border-top:1px solid rgba(255,255,255,0.1);padding-top:1rem}
-    .hero{padding:5rem 3rem 3rem;background:var(--bg)}
-    .hero-inner{max-width:1400px;margin:0 auto}
-    .hero-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(4rem,10vw,9rem);line-height:1;letter-spacing:-0.04em;color:var(--dark);opacity:0;transform:translateY(40px);animation:fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.2s forwards}
-    .hero-sub{display:flex;flex-direction:column;align-items:flex-end;margin-top:2rem;margin-bottom:3rem}
-    .hero-year{font-size:0.8rem;color:var(--muted);margin-bottom:0.5rem}
-    .hero-desc{font-size:clamp(1rem,2vw,1.3rem);font-weight:300;line-height:1.5;text-align:right;max-width:480px}
-    .hero-desc span{color:var(--muted)}
-    .projects-section{padding:2rem 3rem 6rem}
-    .projects-inner{max-width:1400px;margin:0 auto}
-    .projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
-    .col{display:flex;flex-direction:column;gap:2.5rem}
-    .col:last-child{margin-top:5rem}
-    .project-card{cursor:pointer;text-align:left;width:100%;display:block;text-decoration:none;color:inherit;opacity:0;animation:fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) forwards}
-    .project-img-wrap{aspect-ratio:4/3;overflow:hidden;background:#e0e0e0;border-radius:4px;margin-bottom:1rem;position:relative}
-    .project-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.6s cubic-bezier(0.16,1,0.3,1)}
-    .project-card:hover .project-img-wrap img{transform:scale(1.04)}
-    .project-img-hover{position:absolute;inset:0;background:rgba(26,26,26,0.55);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s ease}
-    .project-img-hover span{color:white;font-size:0.85rem;font-weight:500;letter-spacing:0.08em;border:1px solid rgba(255,255,255,0.6);padding:0.5rem 1.2rem;border-radius:100px}
-    .project-card:hover .project-img-hover{opacity:1}
-    .project-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:#bbb;background:#e8e8e8}
-    .project-meta{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:0.25rem}
-    .project-title{font-size:1rem;font-weight:500;color:var(--dark);transition:opacity 0.2s}
-    .project-title::before{content:'//';margin-right:0.2em;opacity:0.4}
-    .project-card:hover .project-title{opacity:0.6}
-    .project-num{font-size:0.75rem;font-family:'Space Grotesk',sans-serif;font-weight:600;color:rgba(0,0,0,0.18)}
-    .project-type{font-size:0.8rem;color:var(--muted)}
-    .project-sublist{list-style:none;margin-top:0.75rem;display:flex;flex-direction:column;gap:0.3rem;border-top:1px solid rgba(0,0,0,0.07);padding-top:0.75rem}
-    .project-sublist li{font-size:0.78rem;color:var(--muted);padding-left:0.8rem;position:relative}
-    .project-sublist li::before{content:'—';position:absolute;left:0;opacity:0.4;font-size:0.7rem}
-    .project-card--with-sub .project-img-wrap{aspect-ratio:3/2}
-    footer{background:var(--dark);color:var(--white);padding:6rem 3rem;margin-top:auto}
-    .footer-inner{max-width:900px;margin:0 auto}
-    .footer-cta{text-align:center;margin-bottom:5rem}
-    .footer-heading{font-family:'Space Grotesk',sans-serif;font-size:clamp(2rem,5vw,4rem);font-weight:600;line-height:1.15;margin-bottom:2rem}
-    .footer-heading span{color:rgba(255,255,255,0.45)}
-    .btn-white{display:inline-flex;align-items:center;padding:1rem 2.5rem;background:var(--white);color:var(--dark);border-radius:100px;font-weight:500;font-size:1rem;text-decoration:none;transition:all 0.3s ease}
-    .btn-white:hover{background:rgba(255,255,255,0.85);transform:scale(1.03)}
-    .footer-contacts{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;max-width:750px;margin:0 auto 4rem}
-    .contact-item{display:flex;align-items:center;gap:1rem}
-    .contact-icon{color:rgba(255,255,255,0.5);flex-shrink:0}
-    .contact-label{font-size:0.75rem;color:rgba(255,255,255,0.5);margin-bottom:0.2rem}
-    .contact-value{color:var(--white);font-weight:500;font-size:0.9rem;text-decoration:none}
-    .contact-value:hover{text-decoration:underline}
-    .footer-bottom{border-top:1px solid rgba(255,255,255,0.1);padding-top:2rem;display:flex;align-items:center;justify-content:space-between}
-    .footer-copy{font-size:0.8rem;color:rgba(255,255,255,0.3)}
-    @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
-    @media(max-width:768px){
-      .header-inner{padding:0 1.5rem}nav,.btn-primary{display:none}.menu-btn{display:flex}.mobile-nav{display:flex}
-      .vision-section{padding:7rem 1.5rem 4rem}.vision-inner{grid-template-columns:1fr;gap:2.5rem}
-      .vision-body{border-left:none;padding-left:0;border-top:1px solid rgba(255,255,255,0.2);padding-top:2rem}
-      .manifeste-section{padding:4rem 1.5rem}.manifeste-inner{grid-template-columns:1fr;gap:2.5rem}
-      .manifeste-header{position:static}.manifeste-blocks{grid-template-columns:1fr;gap:2rem}
-      .manifeste-conviction{padding:2rem 1.5rem}
-      .hero{padding:3rem 1.5rem 2rem}.hero-sub{align-items:flex-start}.hero-desc{text-align:left}
-      .projects-section{padding:1rem 1.5rem 4rem}.projects-grid{grid-template-columns:1fr}.col:last-child{margin-top:0}
-      footer{padding:4rem 1.5rem}.footer-contacts{grid-template-columns:1fr;gap:1.5rem}
-      .footer-bottom{flex-direction:column;gap:1rem;text-align:center}
-    }
-  </style>
+
+<meta charset="UTF-8">
+<title>Bazar Organisé</title>
+
+<style>
+
+body{
+margin:0;
+font-family: Arial, Helvetica, sans-serif;
+background:white;
+color:black;
+}
+
+header{
+padding:60px;
+text-align:center;
+}
+
+h1{
+font-size:48px;
+margin-bottom:10px;
+}
+
+.subtitle{
+font-size:18px;
+letter-spacing:2px;
+}
+
+nav{
+text-align:center;
+margin:40px;
+}
+
+nav a{
+margin:20px;
+text-decoration:none;
+color:black;
+font-weight:bold;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:20px;
+padding:40px;
+}
+
+.project{
+position:relative;
+}
+
+.project img{
+width:100%;
+height:auto;
+display:block;
+}
+
+footer{
+text-align:center;
+padding:60px;
+font-size:14px;
+}
+
+</style>
+
 </head>
+
 <body>
 
 <header>
-  <div class="header-inner">
-    <a href="#" class="logo">BAZAR ORGANISE</a>
-    <nav>
-      <a href="#vision" class="nav-link">Vision</a>
-      <a href="#manifeste" class="nav-link">Manifeste</a>
-      <a href="#work" class="nav-link active">Work</a>
-    </nav>
-    <a href="/cdn-cgi/l/email-protection#1c647d6a75796e687d707e73685c70756a79327f7371" class="btn-primary">Contact</a>
-    <button class="menu-btn" id="menuBtn" aria-label="Menu">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
-    </button>
-  </div>
-</header>
 
-<div class="mobile-nav" id="mobileNav">
-  <a href="#vision" onclick="closeMenu()">Vision</a>
-  <a href="#manifeste" onclick="closeMenu()">Manifeste</a>
-  <a href="#work" onclick="closeMenu()">Work</a>
-  <a href="/cdn-cgi/l/email-protection#542c35223d3126203538363b2014383d22317a373b39" class="btn-primary" style="margin-top:1rem;">Contact</a>
+<h1>BAZAR ORGANISÉ</h1>
+
+<div class="subtitle">
+atelier graphique
+<br>
+graphisme · graffiti · objet · espace
 </div>
 
-<main>
+</header>
 
-  <section class="vision-section" id="vision">
-    <div class="vision-inner">
-      <div class="vision-left">
-        <p class="vision-label">La Vision</p>
-        <h1 class="vision-title">L'AGILITÉ CRÉATIVE<br>AU SERVICE<br>DU RÉEL</h1>
-      </div>
-      <div class="vision-body">
-        <p>Issu des cultures urbaines (Graffiti, Dessin, Graphisme) et de la Culture Skate / Sports de glisse, j'ai forgé mon regard dans l'appropriation de l'espace et le mouvement. Formé en Écoles d'Arts Appliqués, je maîtrise les codes esthétiques avant-gardistes tout en proposant une faisabilité technique absolue.</p>
-        <p><strong>Mon approche :</strong> Je suis l'interface unique entre l'idée graphique et sa construction physique. Je conçois des univers cohérents, capables de se décliner d'un logotype à une fresque monumentale, d'une affiche à un aménagement d'espace complexe.</p>
-      </div>
-    </div>
-  </section>
+<nav>
 
-  <section class="manifeste-section" id="manifeste">
-    <div class="manifeste-inner">
-      <div class="manifeste-header">
-        <p class="manifeste-label">Manifeste</p>
-        <h2 class="manifeste-title">POSTURE<br>PROFESSIONNELLE</h2>
-      </div>
-      <div class="manifeste-content">
-        <div class="manifeste-intro">
-          <p>Je conçois l'espace comme un système vivant, où l'intention créative ne peut exister sans maîtrise technique, et où chaque choix formel engage des conséquences concrètes, humaines et durables.</p>
-          <p>Mon parcours hybride — architecture, design d'espace, institutions publiques, chantier et maîtrise d'exécution — m'a appris une chose essentielle : <strong>un bon projet est un projet qui s'inscrit dans une réalité. Le concept ne peut pas aboutir sans la faisabilité.</strong></p>
-          <p class="manifeste-emphasis">Chaque idée est pensée à l'aune de son usage, de sa mise en œuvre, de sa maintenance et de sa capacité à traverser le temps sans se dégrader.</p>
-        </div>
-        <div class="manifeste-blocks">
-          <div class="manifeste-block">
-            <h3 class="manifeste-block-title">Concevoir, c'est arbitrer</h3>
-            <p>Je travaille à l'interface entre vision et contrainte. Réglementation, budget, délais, techniques constructives, usages réels : ces paramètres ne sont pas des freins, mais des outils de conception. Mon rôle est de transformer la complexité en solutions lisibles, et les contraintes en leviers de cohérence.</p>
-          </div>
-          <div class="manifeste-block">
-            <h3 class="manifeste-block-title">Une approche ancrée dans le terrain</h3>
-            <p>Mon expérience en collectivités, en gestion de patrimoine et en conduite de travaux m'ancre dans une réalité souvent absente des projets purement conceptuels. Je conçois des espaces et objets fonctionnels, robustes et adaptables — pas seulement regardés.</p>
-          </div>
-          <div class="manifeste-block">
-            <h3 class="manifeste-block-title">Créer du sens, pas des effets</h3>
-            <p>L'esthétique n'est jamais gratuite. Chaque forme, chaque matériau, chaque couleur répond à une logique d'usage, de narration ou de contexte. Le design n'est pas une surcouche décorative : c'est un outil de clarté, de confort et d'identité.</p>
-          </div>
-          <div class="manifeste-block">
-            <h3 class="manifeste-block-title">Une posture de partenaire</h3>
-            <p>Je me positionne comme un interlocuteur fiable, capable de dialoguer avec des décideurs, des maîtres d'ouvrage, des artisans et des équipes techniques. Mon travail vise à sécuriser les projets et à accompagner les décisions avec lucidité, méthode et engagement.</p>
-          </div>
-        </div>
-        <div class="manifeste-conviction">
-          <p class="manifeste-conviction-label">Ma conviction</p>
-          <p class="manifeste-conviction-intro">Un projet réussi est un projet :</p>
-          <ul class="manifeste-list">
-            <li>Pensé globalement</li>
-            <li>Maîtrisé techniquement</li>
-            <li>Compris par ceux qui le réalisent</li>
-            <li>Approprié par ceux qui l'habitent, l'utilisent, le possèdent</li>
-          </ul>
-          <p class="manifeste-conviction-close">C'est à ce carrefour précis — entre intelligence constructive et intention sensible — que je situe ma pratique.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+<a href="projets.html">Projets</a>
+<a href="pratique.html">Pratique</a>
+<a href="apropos.html">À propos</a>
+<a href="contact.html">Contact</a>
 
-  <section class="hero" id="work">
-    <div class="hero-inner">
-      <h2 class="hero-title">WORK</h2>
-      <div class="hero-sub">
-        <p class="hero-year">(Projets 2021 – 2025)</p>
-        <p class="hero-desc">Un mix de projets graphiques, spatiaux et artistiques.<br><span>Cliquez sur un projet pour découvrir le détail.</span></p>
-      </div>
-    </div>
-  </section>
+</nav>
 
-  <section class="projects-section">
-    <div class="projects-inner">
-      <div class="projects-grid">
-        <div class="col">
-          <a href="cartographie-interieure.html" class="project-card" style="animation-delay:0.05s">
-            <div class="project-img-wrap">
-              <img src="cart-1.jpg" alt="Cartographie Intérieure" loading="lazy">
-              <div class="project-img-hover"><span>Voir le projet →</span></div>
-            </div>
-            <div class="project-meta"><h3 class="project-title">Cartographie Intérieure</h3><span class="project-num">01</span></div>
-            <p class="project-type">Sketchs / Art Mural — 6 pièces</p>
-          </a>
-          <a href="#" class="project-card" style="animation-delay:0.1s">
-            <div class="project-img-wrap"><div class="project-placeholder">Fresques MDS</div></div>
-            <div class="project-meta"><h3 class="project-title">Fresques MDS</h3><span class="project-num">02</span></div>
-            <p class="project-type">Art Mural</p>
-          </a>
-          <a href="#" class="project-card" style="animation-delay:0.15s">
-            <div class="project-img-wrap"><div class="project-placeholder">Sketchs</div></div>
-            <div class="project-meta"><h3 class="project-title">Sketchs</h3><span class="project-num">03</span></div>
-            <p class="project-type">Illustration</p>
-          </a>
-          <a href="#" class="project-card project-card--with-sub" style="animation-delay:0.2s">
-            <div class="project-img-wrap"><div class="project-placeholder">Identité Visuelle &amp; Logos</div></div>
-            <div class="project-meta"><h3 class="project-title">Identité Visuelle &amp; Logos</h3><span class="project-num">04</span></div>
-            <p class="project-type">Branding</p>
-            <ul class="project-sublist"><li>Los Tacos</li><li>Razom Thermique</li><li>La Malisse</li><li>Cercle des Ceintures Noires</li><li>Sunkalo</li><li>Club de Danse</li></ul>
-          </a>
-          <a href="#" class="project-card project-card--with-sub" style="animation-delay:0.25s">
-            <div class="project-img-wrap"><div class="project-placeholder">Projets Custom</div></div>
-            <div class="project-meta"><h3 class="project-title">Projets Custom</h3><span class="project-num">05</span></div>
-            <p class="project-type">Design</p>
-            <ul class="project-sublist"><li>Cubes</li><li>Pura Vida</li><li>Skates</li></ul>
-          </a>
-          <a href="#" class="project-card" style="animation-delay:0.3s">
-            <div class="project-img-wrap"><div class="project-placeholder">Journal Argentique</div></div>
-            <div class="project-meta"><h3 class="project-title">Journal Argentique</h3><span class="project-num">06</span></div>
-            <p class="project-type">Photographie</p>
-          </a>
-        </div>
-        <div class="col">
-          <a href="#" class="project-card" style="animation-delay:0.08s">
-            <div class="project-img-wrap"><div class="project-placeholder">La Signature comme Territoire</div></div>
-            <div class="project-meta"><h3 class="project-title">La Signature comme Territoire</h3><span class="project-num">07</span></div>
-            <p class="project-type">Graffiti / Concept</p>
-          </a>
-          <a href="#" class="project-card project-card--with-sub" style="animation-delay:0.18s">
-            <div class="project-img-wrap"><div class="project-placeholder">Design Mobilier</div></div>
-            <div class="project-meta"><h3 class="project-title">Design Mobilier</h3><span class="project-num">08</span></div>
-            <p class="project-type">Design Objet</p>
-            <ul class="project-sublist"><li>Étagère Skate</li><li>Banquette Asso</li><li>Modules Skate</li></ul>
-          </a>
-          <a href="#" class="project-card project-card--with-sub" style="animation-delay:0.28s">
-            <div class="project-img-wrap"><div class="project-placeholder">Design Espace</div></div>
-            <div class="project-meta"><h3 class="project-title">Design Espace</h3><span class="project-num">09</span></div>
-            <p class="project-type">Architecture Intérieure</p>
-            <ul class="project-sublist"><li>Projet RTCF</li><li>Projet Jambville</li></ul>
-          </a>
-          <a href="#" class="project-card project-card--with-sub" style="animation-delay:0.35s">
-            <div class="project-img-wrap"><div class="project-placeholder">Scénographie</div></div>
-            <div class="project-meta"><h3 class="project-title">Scénographie</h3><span class="project-num">10</span></div>
-            <p class="project-type">Mise en Scène</p>
-            <ul class="project-sublist"><li>Décors GRS</li><li>Anniversaire</li><li>Cinéma Éphémère</li></ul>
-          </a>
-          <a href="#" class="project-card project-card--with-sub" style="animation-delay:0.42s">
-            <div class="project-img-wrap"><div class="project-placeholder">Ateliers</div></div>
-            <div class="project-meta"><h3 class="project-title">Ateliers</h3><span class="project-num">11</span></div>
-            <p class="project-type">Médiation Créative</p>
-            <ul class="project-sublist"><li>Initiation Graffiti</li><li>Atelier Créa Kids</li><li>Ateliers Mise en Peinture Décorative</li></ul>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
+<section class="grid">
+
+<div class="project">
+<a href="projects/cartographies-interieures.html">
+<img src="assets/images/cartographies.jpg">
+</a>
+</div>
+
+<div class="project">
+<a href="projects/signature-territoire.html">
+<img src="assets/images/graffiti.jpg">
+</a>
+</div>
+
+<div class="project">
+<a href="projects/galerie-humeurs.html">
+<img src="assets/images/humeurs.jpg">
+</a>
+</div>
+
+<div class="project">
+<a href="projects/identites-visuelles.html">
+<img src="assets/images/logo.jpg">
+</a>
+</div>
+
+</section>
 
 <footer>
-  <div class="footer-inner">
-    <div class="footer-cta">
-      <h2 class="footer-heading">Ready to work with a<br><span>professional creative?</span></h2>
-      <a href="/cdn-cgi/l/email-protection#ec948d9a85899e988d808e8398ac80859a89c28f8381" class="btn-white">Get in touch</a>
-    </div>
-    <div class="footer-contacts">
-      <div class="contact-item">
-        <svg class="contact-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
-        <div><p class="contact-label">Location</p><p class="contact-value">Paris, France (CET)</p></div>
-      </div>
-      <div class="contact-item">
-        <svg class="contact-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
-        <div><p class="contact-label">Email</p><a href="/cdn-cgi/l/email-protection#97eff6e1fef2e5e3f6fbf5f8e3d7fbfee1f2b9f4f8fa" class="contact-value"><span class="__cf_email__" data-cfemail="5820392e313d2a2c39343a372c1834312e3d763b3735">[email&#160;protected]</span></a></div>
-      </div>
-      <div class="contact-item">
-        <svg class="contact-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
-        <div><p class="contact-label">Phone</p><a href="tel:+33687369377" class="contact-value">06 87 36 93 77</a></div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p class="footer-copy">©2026 BAZAR ORGANISE</p>
-      <p class="footer-copy">Concepteur-Réalisateur Pluridisciplinaire</p>
-    </div>
-  </div>
+
+Xavier Talbot  
+Bazar Organisé
+
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  const menuBtn=document.getElementById('menuBtn');
-  const mobileNav=document.getElementById('mobileNav');
-  let open=false;
-  menuBtn.addEventListener('click',()=>{
-    open=!open;
-    mobileNav.classList.toggle('open',open);
-    menuBtn.innerHTML=open
-      ?'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>'
-      :'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>';
-  });
-  function closeMenu(){
-    open=false;mobileNav.classList.remove('open');
-    menuBtn.innerHTML='<svg width="24" height="24" viewBox="0 0 
+</body>
+</html>
