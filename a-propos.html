@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>À propos — BAZAR ORGANISÉ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #FAFAFA;
+      --fg: #111;
+      --fg2: #555;
+      --fg3: #AAA;
+      --divider: #E5E3DF;
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'DM Sans', sans-serif;
+    }
+    body { background: var(--bg); color: var(--fg); font-family: var(--sans); }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 48px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--divider);
+    }
+    .nav-logo { font-family: var(--serif); font-size: 17px; text-decoration: none; color: var(--fg); }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a { font-size: 13px; color: var(--fg2); text-decoration: none; }
+    .nav-links a:hover { color: var(--fg); }
+
+    .content { max-width: 920px; margin: 0 auto; padding: 0 48px; }
+
+    /* HERO BIO */
+    .hero-bio {
+      padding: 120px 0 80px;
+      border-bottom: 1px solid var(--divider);
+    }
+    .hero-bio-label {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--fg3);
+      margin-bottom: 24px;
+    }
+    .hero-bio-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(42px, 6vw, 72px);
+      letter-spacing: -2px;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .hero-title {
+      font-size: 15px;
+      color: var(--fg2);
+      line-height: 1.6;
+    }
+    .hero-baseline {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-style: italic;
+      line-height: 1.4;
+      color: var(--fg);
+      margin-bottom: 24px;
+    }
+    .hero-intro {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--fg2);
+    }
+    .hero-intro p + p { margin-top: 14px; }
+
+    /* SECTIONS */
+    .section-block {
+      padding: 64px 0;
+      border-bottom: 1px solid var(--divider);
+    }
+    .section-heading {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .section-label {
+      font-size: 13px;
+      color: var(--fg3);
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: 28px;
+      letter-spacing: -0.5px;
+    }
+
+    /* PÔLES D'EXPERTISE — 3 colonnes */
+    .poles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--divider);
+      border: 1px solid var(--divider);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .pole {
+      background: white;
+      padding: 32px 28px;
+    }
+    .pole-icon { font-size: 28px; margin-bottom: 16px; }
+    .pole-name {
+      font-family: var(--serif);
+      font-size: 20px;
+      margin-bottom: 4px;
+      letter-spacing: -0.3px;
+    }
+    .pole-subtitle {
+      font-size: 12px;
+      color: var(--fg3);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+    .pole-items { list-style: none; }
+    .pole-items li {
+      font-size: 13px;
+      color: var(--fg2);
+      padding: 8px 0;
+      border-top: 1px solid var(--divider);
+      line-height: 1.4;
+    }
+
+    /* MANIFESTE */
+    .manifeste-text {
+      font-family: var(--serif);
+      font-size: clamp(20px, 2.5vw, 28px);
+      line-height: 1.6;
+      color: var(--fg);
+      font-style: italic;
+    }
+    .manifeste-principles {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 48px;
+    }
+    .principle {}
+    .principle-num {
+      font-size: 12px;
+      color: var(--fg3);
+      font-family: 'DM Mono', monospace;
+      margin-bottom: 12px;
+    }
+    .principle-title {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+    .principle-text {
+      font-size: 14px;
+      color: var(--fg2);
+      line-height: 1.7;
+    }
+
+    /* PARCOURS */
+    .parcours-list { display: flex; flex-direction: column; gap: 0; }
+    .parcours-item {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 40px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--divider);
+    }
+    .parcours-item:first-child { border-top: 1px solid var(--divider); }
+    .parcours-date { font-size: 13px; color: var(--fg3); padding-top: 2px; }
+    .parcours-content {}
+    .parcours-title { font-size: 15px; font-weight: 500; margin-bottom: 6px; }
+    .parcours-text { font-size: 14px; color: var(--fg2); line-height: 1.6; }
+
+    /* OUTILS */
+    .outils-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .outil-tag {
+      background: white;
+      border: 1px solid var(--divider);
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      color: var(--fg);
+    }
+
+    /* CIBLES */
+    .cibles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .cible-card {
+      background: white;
+      border: 1px solid var(--divider);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .cible-horizon {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--fg3);
+      margin-bottom: 12px;
+    }
+    .cible-name {
+      font-family: var(--serif);
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    .cible-text {
+      font-size: 13px;
+      color: var(--fg2);
+      line-height: 1.6;
+    }
+
+    /* CONTACT */
+    #contact { scroll-margin-top: 80px; }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .contact-big {
+      font-family: var(--serif);
+      font-size: clamp(32px, 4vw, 52px);
+      letter-spacing: -1px;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+    .contact-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .contact-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .contact-row-label {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--fg3);
+    }
+    .contact-row-value {
+      font-size: 16px;
+      font-weight: 500;
+    }
+    .contact-row-value a {
+      color: var(--fg);
+      text-decoration: none;
+    }
+    .contact-row-value a:hover { text-decoration: underline; }
+
+    footer {
+      background: #111;
+      color: #888;
+      padding: 40px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+    }
+    footer .footer-brand { font-family: var(--serif); font-size: 16px; color: white; }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .content { padding: 0 24px; }
+      .hero-bio { padding: 96px 0 48px; }
+      .hero-bio-grid { grid-template-columns: 1fr; gap: 32px; }
+      .poles-grid { grid-template-columns: 1fr; }
+      .manifeste-principles { grid-template-columns: 1fr; gap: 24px; }
+      .parcours-item { grid-template-columns: 1fr; gap: 8px; }
+      .cibles-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      footer { flex-direction: column; gap: 12px; text-align: center; padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Bazar Organisé</a>
+  <div class="nav-links">
+    <a href="projets.html">Projets</a>
+    <a href="a-propos.html">À propos</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<div class="content">
+
+  <!-- HERO BIO -->
+  <div class="hero-bio">
+    <div class="hero-bio-label">(À propos)</div>
+    <div class="hero-bio-grid">
+      <div>
+        <h1 class="hero-name">Xavier<br>Talbot</h1>
+        <p class="hero-title">
+          Concepteur-Réalisateur Pluridisciplinaire<br>
+          Identité Visuelle · Scénographie · Expertise Technique & Flux
+        </p>
+      </div>
+      <div>
+        <p class="hero-baseline">
+          "Je transforme vos contraintes en projets qui donnent envie."
+        </p>
+        <div class="hero-intro">
+          <p>Issu des cultures urbaines — graffiti, dessin, graphisme, skate — j'ai forgé mon regard dans l'appropriation de l'espace et le mouvement. Formé en Écoles d'Arts Appliqués, je maîtrise les codes esthétiques avant-gardistes tout en proposant une faisabilité technique absolue.</p>
+          <p>Je suis l'interface unique entre l'idée graphique et sa construction physique. Je conçois des univers cohérents, capables de se décliner d'un logotype à une fresque monumentale, d'une affiche à un aménagement d'espace complexe.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PÔLES D'EXPERTISE -->
+  <div class="section-block">
+    <div class="section-heading">
+      <span class="section-label">(Expertise)</span>
+      <span class="section-title">3 pôles, 1 posture</span>
+    </div>
+    <div class="poles-grid">
+      <div class="pole">
+        <div class="pole-icon">🧠</div>
+        <div class="pole-name">Le Cerveau</div>
+        <div class="pole-subtitle">Identité Visuelle & Graphisme</div>
+        <ul class="pole-items">
+          <li>Création de logos, chartes, univers visuels complets</li>
+          <li>Spécialité restauration & lifestyle</li>
+          <li>Déclinaison multimodale (édition, signalétique, textile)</li>
+          <li>Communication de terrain</li>
+        </ul>
+      </div>
+      <div class="pole">
+        <div class="pole-icon">👁️</div>
+        <div class="pole-name">La Vision</div>
+        <div class="pole-subtitle">Scénographie & Design Espace</div>
+        <ul class="pole-items">
+          <li>Espaces de vie, stands événementiels, ateliers</li>
+          <li>Modélisation 3D sur SketchUp (validation avant réalisation)</li>
+          <li>Fresques & réalisations murales sur-mesure</li>
+          <li>Gestion des flux et de l'ergonomie</li>
+        </ul>
+      </div>
+      <div class="pole">
+        <div class="pole-icon">🤝</div>
+        <div class="pole-name">La Main</div>
+        <div class="pole-subtitle">Réalisation Technique & Pilotage</div>
+        <ul class="pole-items">
+          <li>Maîtrise électricité, menuiserie, matériaux</li>
+          <li>Fabrication & upcycling (esprit MacGyver)</li>
+          <li>Coordination de chantier TCE</li>
+          <li>Gestion des imprévus, respect des délais</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- MANIFESTE -->
+  <div class="section-block">
+    <div class="section-heading">
+      <span class="section-label">(Manifeste)</span>
+      <span class="section-title">Posture</span>
+    </div>
+    <p class="manifeste-text">
+      "Je conçois l'espace comme un système vivant, où l'intention créative ne peut exister sans maîtrise technique, et où chaque choix formel engage des conséquences concrètes, humaines et durables."
+    </p>
+    <div class="manifeste-principles">
+      <div class="principle">
+        <div class="principle-num">(01)</div>
+        <div class="principle-title">Concevoir, c'est anticiper</div>
+        <div class="principle-text">Chaque projet est pensé au-delà de son image : usage réel, mise en œuvre, maintenance, évolution dans le temps. Ce qui n'est pas anticipé aujourd'hui devient un problème demain.</div>
+      </div>
+      <div class="principle">
+        <div class="principle-num">(02)</div>
+        <div class="principle-title">La contrainte est une matière</div>
+        <div class="principle-text">Réglementation, budget, technique, délais ne sont pas des freins. Ce sont des outils de conception qui structurent des réponses plus justes, plus solides, plus intelligentes.</div>
+      </div>
+      <div class="principle">
+        <div class="principle-num">(03)</div>
+        <div class="principle-title">La justesse avant l'effet</div>
+        <div class="principle-text">Des espaces clairs, lisibles et durables, où chaque choix a un sens. La forme découle de la fonction, du contexte et de l'usage — jamais l'inverse.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PARCOURS -->
+  <div class="section-block">
+    <div class="section-heading">
+      <span class="section-label">(Parcours)</span>
+      <span class="section-title">Fondations</span>
+    </div>
+    <div class="parcours-list">
+      <div class="parcours-item">
+        <div class="parcours-date">2006 → 2009</div>
+        <div class="parcours-content">
+          <div class="parcours-title">Collaborateur Principal d'Architecte</div>
+          <div class="parcours-text">BTS Design d'Espace en alternance. Immersion totale dans la gestion de projets globaux — de l'esquisse créative au suivi de chantier. Capacité à appréhender un projet dans sa globalité technique et esthétique.</div>
+        </div>
+      </div>
+      <div class="parcours-item">
+        <div class="parcours-date">2011 → 2012</div>
+        <div class="parcours-content">
+          <div class="parcours-title">Dessinateur Projeteur — COLAS RAIL / Aéroports de Paris</div>
+          <div class="parcours-text">Rigueur au millimètre, contraintes urbaines et réglementaires ERP. Milieux occupés à haute exigence technique.</div>
+        </div>
+      </div>
+      <div class="parcours-item">
+        <div class="parcours-date">2013 → 2018</div>
+        <div class="parcours-content">
+          <div class="parcours-title">Paris Habitat · Mairie de Fontenay-sous-Bois</div>
+          <div class="parcours-text">Responsable d'opérations de réhabilitation, conduite de travaux TCE, gestion de patrimoine. Une expertise terrain qui sécurise la viabilité de chaque concept créatif.</div>
+        </div>
+      </div>
+      <div class="parcours-item">
+        <div class="parcours-date">2019 →</div>
+        <div class="parcours-content">
+          <div class="parcours-title">Concepteur-Réalisateur Indépendant — BAZAR ORGANISÉ</div>
+          <div class="parcours-text">Création d'identités visuelles et d'aménagements pour des professionnels. Réalisation de plans, modélisation 2D/3D, suivi d'exécution. Structure qui permet la pluralité des prestations.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OUTILS -->
+  <div class="section-block">
+    <div class="section-heading">
+      <span class="section-label">(Outils)</span>
+      <span class="section-title">Méthodes & logiciels</span>
+    </div>
+    <div class="outils-grid">
+      <div class="outil-tag">Suite Adobe (Photoshop, Illustrator)</div>
+      <div class="outil-tag">SketchUp Pro</div>
+      <div class="outil-tag">AutoCAD</div>
+      <div class="outil-tag">Lettering manuel</div>
+      <div class="outil-tag">Sérigraphie</div>
+      <div class="outil-tag">CNC / Découpe numérique</div>
+      <div class="outil-tag">Photographie argentique</div>
+      <div class="outil-tag">Gestion de chantier TCE</div>
+      <div class="outil-tag">Modélisation 3D</div>
+    </div>
+  </div>
+
+  <!-- CIBLES -->
+  <div class="section-block">
+    <div class="section-heading">
+      <span class="section-label">(Cibles)</span>
+      <span class="section-title">À qui je m'adresse</span>
+    </div>
+    <div class="cibles-grid">
+      <div class="cible-card">
+        <div class="cible-horizon">Court terme</div>
+        <div class="cible-name">Entreprises & Pros</div>
+        <div class="cible-text">Identité visuelle, fabrication sur-mesure, aménagement d'espace. Restauration, lifestyle, lieux de vie.</div>
+      </div>
+      <div class="cible-card">
+        <div class="cible-horizon">Moyen terme</div>
+        <div class="cible-name">Scénographie & Événementiel</div>
+        <div class="cible-text">Commandes scénographiques, stands, expositions, installations. Structures culturelles et événementielles.</div>
+      </div>
+      <div class="cible-card">
+        <div class="cible-horizon">Long terme</div>
+        <div class="cible-name">Collectivités & Marchés publics</div>
+        <div class="cible-text">Projets territoriaux, espaces publics, médiation artistique. Maîtrise des contraintes réglementaires et budgétaires publiques.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="section-block" id="contact">
+    <div class="section-heading">
+      <span class="section-label">(Contact)</span>
+      <span class="section-title">Parlons projet</span>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <p class="contact-big">On construit quelque chose ?</p>
+        <p style="font-size:15px; color: #555; line-height:1.7;">Vous avez un projet de scénographie, d'identité visuelle, d'aménagement ou de fabrication sur-mesure. Je réponds rapidement.</p>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-row">
+          <span class="contact-row-label">Email</span>
+          <span class="contact-row-value"><a href="mailto:xaviertalbot@live.com">xaviertalbot@live.com</a></span>
+        </div>
+        <div class="contact-row">
+          <span class="contact-row-label">Téléphone</span>
+          <span class="contact-row-value"><a href="tel:+33687369377">06 87 36 93 77</a></span>
+        </div>
+        <div class="contact-row">
+          <span class="contact-row-label">Localisation</span>
+          <span class="contact-row-value">Alfortville (94) — Île-de-France</span>
+        </div>
+        <div class="contact-row">
+          <span class="contact-row-label">Structure</span>
+          <span class="contact-row-value">BAZAR ORGANISÉ — Auto-entrepreneur depuis 2022</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /content -->
+
+<footer>
+  <span class="footer-brand">Bazar Organisé</span>
+  <span>Xavier Talbot — Concepteur-Réalisateur Pluridisciplinaire</span>
+  <span>xaviertalbot@live.com</span>
+</footer>
+
+</body>
+</html>

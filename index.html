@@ -1,130 +1,780 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BAZAR ORGANISÉ — Xavier Talbot</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-<meta charset="UTF-8">
-<title>Bazar Organisé</title>
+    :root {
+      --bg: #F8F7F4;
+      --fg: #111111;
+      --fg2: #666666;
+      --fg3: #AAAAAA;
+      --accent: #111111;
+      --divider: #E0DED9;
+      --card-bg: #FFFFFF;
+      --tag-bg: #EFEFED;
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
 
-<style>
+    html { font-size: 16px; scroll-behavior: smooth; }
 
-body{
-margin:0;
-font-family: Arial, Helvetica, sans-serif;
-background:white;
-color:black;
-}
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
 
-header{
-padding:60px;
-text-align:center;
-}
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 48px;
+      background: rgba(248, 247, 244, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--divider);
+    }
 
-h1{
-font-size:48px;
-margin-bottom:10px;
-}
+    .nav-brand {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      color: var(--fg);
+    }
 
-.subtitle{
-font-size:18px;
-letter-spacing:2px;
-}
+    .nav-brand span { font-style: italic; }
 
-nav{
-text-align:center;
-margin:40px;
-}
+    .nav-links {
+      display: flex; gap: 36px; list-style: none;
+    }
 
-nav a{
-margin:20px;
-text-decoration:none;
-color:black;
-font-weight:bold;
-}
+    .nav-links a {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--fg2);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
 
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-gap:20px;
-padding:40px;
-}
+    .nav-links a:hover { color: var(--fg); }
 
-.project{
-position:relative;
-}
+    /* ── HERO ── */
+    .hero {
+      padding: 160px 48px 80px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
 
-.project img{
-width:100%;
-height:auto;
-display:block;
-}
+    .hero-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--fg3);
+      margin-bottom: 24px;
+    }
 
-footer{
-text-align:center;
-padding:60px;
-font-size:14px;
-}
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      line-height: 1.08;
+      font-weight: 400;
+      max-width: 900px;
+      margin-bottom: 32px;
+    }
 
-</style>
+    .hero-title em { font-style: italic; color: var(--fg2); }
 
+    .hero-sub {
+      font-size: 0.95rem;
+      color: var(--fg2);
+      max-width: 480px;
+      line-height: 1.7;
+      margin-bottom: 48px;
+    }
+
+    .hero-tags {
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+
+    .hero-tag {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      background: var(--tag-bg);
+      border-radius: 2px;
+      color: var(--fg2);
+    }
+
+    /* ── HERO PROJECT ── */
+    .hero-project {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 48px 80px;
+    }
+
+    .hero-project-inner {
+      position: relative;
+      background: #1A1A2E;
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .hero-project-inner:hover { transform: translateY(-2px); }
+
+    .hero-img-wrapper {
+      height: 540px;
+      overflow: hidden;
+    }
+
+    .hero-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.75;
+      transition: opacity 0.4s, transform 0.6s;
+    }
+
+    .hero-project-inner:hover .hero-img-wrapper img {
+      opacity: 0.85;
+      transform: scale(1.02);
+    }
+
+    .hero-project-caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 48px;
+      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+    }
+
+    .hero-project-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 12px;
+    }
+
+    .hero-project-name {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+
+    .hero-project-desc {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.65);
+      max-width: 520px;
+    }
+
+    .hero-project-arrow {
+      position: absolute;
+      top: 40px; right: 48px;
+      width: 48px; height: 48px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+      font-size: 1.2rem;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .hero-project-inner:hover .hero-project-arrow {
+      background: rgba(255,255,255,0.2);
+      transform: translate(2px, -2px);
+    }
+
+    /* ── SECTION HEADER ── */
+    .section-header {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 64px 48px 32px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      border-top: 1px solid var(--divider);
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 400;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--fg3);
+    }
+
+    .voir-tout {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--fg2);
+      text-decoration: none;
+      border-bottom: 1px solid var(--divider);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .voir-tout:hover { color: var(--fg); border-color: var(--fg); }
+
+    /* ── GRID ── */
+    .grid-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 48px 80px;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      cursor: pointer;
+      overflow: hidden;
+      position: relative;
+      transition: background 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .project-card:hover { background: #F0EFE9; }
+
+    .card-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: #E8E7E2;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .card-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .project-card:hover .card-img img { transform: scale(1.04); }
+
+    .card-img-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      background: #E8E7E2;
+    }
+
+    .card-img-placeholder span {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 2rem;
+      color: var(--fg3);
+    }
+
+    .card-body {
+      padding: 24px 28px 28px;
+    }
+
+    .card-acte {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--fg3);
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 400;
+      line-height: 1.25;
+      margin-bottom: 6px;
+    }
+
+    .card-sub {
+      font-size: 0.8rem;
+      color: var(--fg2);
+      line-height: 1.5;
+    }
+
+    /* ── ACTES SECTION ── */
+    .actes-section {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 48px 80px;
+    }
+
+    .actes-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+    }
+
+    .acte-card {
+      padding: 40px 32px;
+      border: 1px solid var(--divider);
+      transition: background 0.2s;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .acte-card:hover { background: var(--card-bg); }
+
+    .acte-num {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 2.5rem;
+      color: var(--fg3);
+      display: block;
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+
+    .acte-name {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .acte-desc {
+      font-size: 0.78rem;
+      color: var(--fg2);
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    .acte-count {
+      margin-top: 20px;
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--fg3);
+    }
+
+    /* ── BIO ── */
+    .bio-section {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 64px 48px;
+      border-top: 1px solid var(--divider);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .bio-title {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+      line-height: 1.2;
+      font-weight: 400;
+      margin-bottom: 24px;
+    }
+
+    .bio-title em { font-style: italic; color: var(--fg2); }
+
+    .bio-text {
+      font-size: 0.9rem;
+      color: var(--fg2);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .bio-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 24px;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--fg);
+      text-decoration: none;
+      border-bottom: 1px solid var(--fg);
+      padding-bottom: 2px;
+    }
+
+    .poles-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .pole-item {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--divider);
+      display: flex;
+      gap: 24px;
+      align-items: baseline;
+    }
+
+    .pole-num {
+      font-family: var(--serif);
+      font-style: italic;
+      color: var(--fg3);
+      font-size: 1rem;
+      min-width: 28px;
+    }
+
+    .pole-content {}
+
+    .pole-name {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .pole-desc {
+      font-size: 0.82rem;
+      color: var(--fg2);
+      line-height: 1.5;
+    }
+
+    /* ── CONTACT ── */
+    .contact-section {
+      border-top: 1px solid var(--divider);
+      padding: 80px 48px;
+      text-align: center;
+      background: #1A1A2E;
+    }
+
+    .contact-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 24px;
+    }
+
+    .contact-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .contact-title em { font-style: italic; opacity: 0.65; }
+
+    .contact-sub {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 40px;
+    }
+
+    .contact-link {
+      display: inline-block;
+      padding: 14px 36px;
+      border: 1px solid rgba(255,255,255,0.25);
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: background 0.2s, border-color 0.2s;
+      border-radius: 2px;
+    }
+
+    .contact-link:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.4);
+    }
+
+    .contact-zone {
+      margin-top: 32px;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #111;
+      padding: 24px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer span {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: #444;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .projects-grid { grid-template-columns: repeat(2, 1fr); }
+      .actes-grid { grid-template-columns: repeat(2, 1fr); }
+      .bio-section { grid-template-columns: 1fr; gap: 48px; }
+    }
+
+    @media (max-width: 680px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .hero, .hero-project, .grid-container,
+      .actes-section, .bio-section { padding-left: 24px; padding-right: 24px; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .actes-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero { padding-top: 120px; }
+      .section-header { padding: 48px 24px 24px; }
+      .contact-section { padding: 60px 24px; }
+      footer { padding: 20px 24px; flex-direction: column; gap: 8px; }
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
 </head>
-
 <body>
 
-<header>
+  <!-- NAV -->
+  <nav>
+    <a class="nav-brand" href="index.html">BAZAR <span>Organisé</span></a>
+    <ul class="nav-links">
+      <li><a href="projets.html">Projets</a></li>
+      <li><a href="a-propos.html">À propos</a></li>
+      <li><a href="/cdn-cgi/l/email-protection#f28a93849b9780b290938893809d8095939c9b8197dc9480">Contact</a></li>
+    </ul>
+  </nav>
 
-<h1>BAZAR ORGANISÉ</h1>
+  <!-- HERO TEXT -->
+  <section class="hero">
+    <p class="hero-label">(Concepteur-Réalisateur Pluridisciplinaire)</p>
+    <h1 class="hero-title">
+      Je transforme vos contraintes<br>
+      en projets qui <em>donnent envie.</em>
+    </h1>
+    <p class="hero-sub">
+      Identité Visuelle — Scénographie — Expertise Technique & Flux.<br>
+      Île-de-France. Disponible en mission ou intégration équipe.
+    </p>
+    <div class="hero-tags">
+      <span class="hero-tag">Design Mobilier</span>
+      <span class="hero-tag">Scénographie</span>
+      <span class="hero-tag">Identité Visuelle</span>
+      <span class="hero-tag">Fresque</span>
+      <span class="hero-tag">AutoCAD</span>
+      <span class="hero-tag">Fabrication</span>
+    </div>
+  </section>
 
-<div class="subtitle">
-atelier graphique
-<br>
-graphisme · graffiti · objet · espace
-</div>
+  <!-- HERO PROJECT -->
+  <section class="hero-project">
+    <a class="hero-project-inner" href="projet.html?id=001" id="hero-card">
+      <div class="hero-img-wrapper" id="hero-img-wrapper">
+        <!-- Image chargée dynamiquement -->
+      </div>
+      <div class="hero-project-caption">
+        <p class="hero-project-label">(Projet héro — Acte 1)</p>
+        <h2 class="hero-project-name">Skate Modulaire</h2>
+        <p class="hero-project-desc">Un système de modules CNC en bois qui se transforme — espace skate le jour, scène événementielle le soir.</p>
+      </div>
+      <div class="hero-project-arrow">↗</div>
+    </a>
+  </section>
 
-</header>
+  <!-- FEATURED PROJECTS -->
+  <div class="section-header">
+    <div>
+      <p class="section-label">(Sélection)</p>
+      <h2 class="section-title">Projets récents</h2>
+    </div>
+    <a href="projets.html" class="voir-tout">Voir tout →</a>
+  </div>
 
-<nav>
+  <div class="grid-container">
+    <div class="projects-grid" id="featured-grid">
+      <!-- Chargé dynamiquement -->
+    </div>
+  </div>
 
-<a href="projets.html">Projets</a>
-<a href="pratique.html">Pratique</a>
-<a href="apropos.html">À propos</a>
-<a href="contact.html">Contact</a>
+  <!-- LES 4 ACTES -->
+  <div class="section-header">
+    <div>
+      <p class="section-label">(Structure)</p>
+      <h2 class="section-title">4 actes</h2>
+    </div>
+  </div>
 
-</nav>
+  <section class="actes-section">
+    <div class="actes-grid">
+      <a class="acte-card" href="projets.html?acte=1">
+        <span class="acte-num">01</span>
+        <p class="acte-name">L'Objet qui Pense</p>
+        <p class="acte-desc">Tu inventes des systèmes, pas des objets.</p>
+        <p class="acte-count">3 projets</p>
+      </a>
+      <a class="acte-card" href="projets.html?acte=2">
+        <span class="acte-num">02</span>
+        <p class="acte-name">Le Signe qui Habite l'Espace</p>
+        <p class="acte-desc">De l'esquisse à l'échelle architecturale.</p>
+        <p class="acte-count">5 projets</p>
+      </a>
+      <a class="acte-card" href="projets.html?acte=3">
+        <span class="acte-num">03</span>
+        <p class="acte-name">L'Identité comme Matière</p>
+        <p class="acte-desc">Du logo au tag, de la charte à la planche.</p>
+        <p class="acte-count">4 projets</p>
+      </a>
+      <a class="acte-card" href="projets.html?acte=4">
+        <span class="acte-num">04</span>
+        <p class="acte-name">La Transmission & l'Intime</p>
+        <p class="acte-desc">Enseigner, photographier, cartographier.</p>
+        <p class="acte-count">3 projets</p>
+      </a>
+    </div>
+  </section>
 
-<section class="grid">
+  <!-- BIO -->
+  <section class="bio-section">
+    <div class="fade-in">
+      <h2 class="bio-title">
+        Issu des cultures urbaines.<br>
+        Formé en école d'arts appliqués.<br>
+        <em>Les deux en même temps.</em>
+      </h2>
+      <p class="bio-text">
+        Concepteur-Réalisateur basé en Île-de-France. 
+        15 ans d'expérience entre le graphisme, la scénographie, la maîtrise d'œuvre 
+        et la fabrication. Je suis l'interface entre l'idée et sa construction physique.
+      </p>
+      <p class="bio-text">
+        J'ai travaillé pour des collectivités, des mairies, des associations, 
+        des restaurants, des agences. Ce qui ne change pas : 
+        je ne sépare jamais le concept de sa faisabilité.
+      </p>
+      <a class="bio-cta" href="a-propos.html">En savoir plus →</a>
+    </div>
+    <div class="poles-list fade-in">
+      <div class="pole-item">
+        <span class="pole-num">01</span>
+        <div class="pole-content">
+          <p class="pole-name">Identité Visuelle & Graphisme</p>
+          <p class="pole-desc">Logos, chartes, déclinaisons multimodales. Spécialité restauration et lieux de vie.</p>
+        </div>
+      </div>
+      <div class="pole-item">
+        <span class="pole-num">02</span>
+        <div class="pole-content">
+          <p class="pole-name">Scénographie & Conception d'Espace</p>
+          <p class="pole-desc">Immersion, événementiel, SketchUp, relevés, fresques murales.</p>
+        </div>
+      </div>
+      <div class="pole-item">
+        <span class="pole-num">03</span>
+        <div class="pole-content">
+          <p class="pole-name">Expertise Technique & Flux</p>
+          <p class="pole-desc">AutoCAD, maîtrise d'œuvre, coordination chantier, marchés publics.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<div class="project">
-<a href="projects/cartographies-interieures.html">
-<img src="assets/images/cartographies.jpg">
-</a>
-</div>
+  <!-- CONTACT -->
+  <section class="contact-section">
+    <p class="contact-label">(Contact)</p>
+    <h2 class="contact-title">
+      Un projet,<br>une contrainte,<br><em>une idée ?</em>
+    </h2>
+    <p class="contact-sub">Disponible en mission ou intégration équipe — Île-de-France</p>
+    <a class="contact-link" href="/cdn-cgi/l/email-protection#3c445d4a55594e7c5e5d465d4e534e5b5d52554f59125a4e">Écrire un message</a>
+    <p class="contact-zone">Île-de-France · Alfortville · Disponible</p>
+  </section>
 
-<div class="project">
-<a href="projects/signature-territoire.html">
-<img src="assets/images/graffiti.jpg">
-</a>
-</div>
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2026 BAZAR ORGANISÉ — Xavier Talbot</span>
+    <span>Concepteur-Réalisateur Pluridisciplinaire</span>
+  </footer>
 
-<div class="project">
-<a href="projects/galerie-humeurs.html">
-<img src="assets/images/humeurs.jpg">
-</a>
-</div>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Charger les projets featured depuis projects.json
+    fetch('data/projects.json')
+      .then(r => r.json())
+      .then(data => {
+        const hero = data.projects.find(p => p.featured_hero);
+        const featured = data.projects.filter(p => p.featured && !p.featured_hero).slice(0, 6);
 
-<div class="project">
-<a href="projects/identites-visuelles.html">
-<img src="assets/images/logo.jpg">
-</a>
-</div>
+        // Hero image
+        if (hero) {
+          const wrapper = document.getElementById('hero-img-wrapper');
+          const img = new Image();
+          img.src = 'assets/images/' + hero.slug + '/' + (hero.images[0] || '01.jpg');
+          img.alt = hero.title;
+          img.onerror = function() {
+            wrapper.style.background = '#1A1A2E';
+            wrapper.style.minHeight = '540px';
+          };
+          wrapper.appendChild(img);
+        }
 
-</section>
+        // Featured grid
+        const grid = document.getElementById('featured-grid');
+        featured.forEach(p => {
+          const card = document.createElement('a');
+          card.className = 'project-card';
+          card.href = 'projet.html?id=' + p.id;
 
-<footer>
+          const imgDiv = document.createElement('div');
+          imgDiv.className = 'card-img';
 
-Xavier Talbot  
-Bazar Organisé
+          const img = new Image();
+          img.src = 'assets/images/' + p.slug + '/' + (p.images[0] || '01.jpg');
+          img.alt = p.title;
+          img.onerror = function() {
+            imgDiv.innerHTML = '<div class="card-img-placeholder"><span>' + p.id + '</span></div>';
+          };
+          imgDiv.appendChild(img);
 
-</footer>
+          card.innerHTML = `
+            <div class="card-body">
+              <p class="card-acte">(Acte ${p.acte} — ${p.acte_label})</p>
+              <h3 class="card-title">${p.title}</h3>
+              <p class="card-sub">${p.subtitle}</p>
+            </div>
+          `;
+          card.insertBefore(imgDiv, card.firstChild);
+          grid.appendChild(card);
+        });
+      })
+      .catch(() => {
+        // Fallback si pas de json
+        document.getElementById('featured-grid').innerHTML =
+          '<p style="padding:40px;color:#999;grid-column:1/-1">Projets en cours de chargement...</p>';
+      });
 
-</body>
-</html>
+    // Fade-in observer
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach
