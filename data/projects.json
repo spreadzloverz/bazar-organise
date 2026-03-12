@@ -10,8 +10,23 @@
       "featured": true,
       "featured_hero": true,
       "ordre_affichage": 1,
-      "tags": ["design mobilier","modulaire","bois","CNC","événementiel","skate"],
-      "images": ["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg","07.jpg"],
+      "tags": [
+        "design mobilier",
+        "modulaire",
+        "bois",
+        "CNC",
+        "événementiel",
+        "skate"
+      ],
+      "images": [
+        "01.jpg",
+        "02.jpg",
+        "03.jpg",
+        "04.jpg",
+        "05.jpg",
+        "06.jpg",
+        "07.jpg"
+      ],
       "description_courte": "Un système de modules CNC en bois qui se transforme — espace skate le jour, scène événementielle le soir.",
       "description_longue": "Conception et fabrication d'un ensemble modulaire en bois massif brut, découpé CNC. Le système se reconfigure selon l'usage : table, quarter pipe, gradins, plans inclinés pour la pratique du skate ; ou estrade, scène, tribunes pour les événements. 7 mètres de long, 4 configurations documentées. Né d'une contrainte : un lieu polyvalent qui ne voulait pas choisir.",
       "probleme": "Un espace culturel polyvalent avait besoin d'une infrastructure capable d'accueillir aussi bien des sessions skate que des concerts et événements — sans stocker deux mobiliers différents.",
@@ -28,8 +43,28 @@
       "featured": true,
       "featured_hero": false,
       "ordre_affichage": 2,
-      "tags": ["design mobilier","custom","bois","modulaire"],
-      "images": ["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg","07.jpg","08.jpg","09.jpg","10.jpg","11.jpg","12.jpg","13.jpg","14.jpg"],
+      "tags": [
+        "design mobilier",
+        "custom",
+        "bois",
+        "modulaire"
+      ],
+      "images": [
+        "01.jpg",
+        "02.jpg",
+        "03.jpg",
+        "04.jpg",
+        "05.jpg",
+        "06.jpg",
+        "07.jpg",
+        "08.jpg",
+        "09.jpg",
+        "10.jpg",
+        "11.jpg",
+        "12.jpg",
+        "13.jpg",
+        "14.jpg"
+      ],
       "description_courte": "Des cubes qui grandissent avec leur utilisateur. Mobilier évolutif, fabriqué sur mesure.",
       "description_longue": "Système de cubes modulables conçus pour évoluer selon les besoins. Chaque cube est une unité autonome qui s'assemble, se superpose, se reconvertit. Fabrication bois, finitions personnalisées.",
       "probleme": "Créer un mobilier qui ne devient pas obsolète.",
@@ -46,8 +81,19 @@
       "featured": true,
       "featured_hero": false,
       "ordre_affichage": 3,
-      "tags": ["custom","design","fabrication","objet"],
-      "images": ["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg"],
+      "tags": [
+        "custom",
+        "design",
+        "fabrication",
+        "objet"
+      ],
+      "images": [
+        "01.jpg",
+        "02.jpg",
+        "03.jpg",
+        "04.jpg",
+        "05.jpg"
+      ],
       "description_courte": "Un objet conçu et fabriqué de A à Z. Pas de catalogue, pas de compromis.",
       "description_longue": "Projet de création d'objet sur mesure. De l'esquisse à la pièce finale, conception et fabrication intégrales. Chaque détail pensé pour l'usage et la durée.",
       "probleme": "Une demande spécifique que le catalogue ne peut pas satisfaire.",
@@ -64,8 +110,18 @@
       "featured": true,
       "featured_hero": false,
       "ordre_affichage": 4,
-      "tags": ["fresque","grand format","espace public","signalétique","mural"],
-      "images": ["01.jpg","02.jpg","03.jpg"],
+      "tags": [
+        "fresque",
+        "grand format",
+        "espace public",
+        "signalétique",
+        "mural"
+      ],
+      "images": [
+        "01.jpg",
+        "02.jpg",
+        "03.jpg"
+      ],
       "description_courte": "Quand le graphisme prend la mesure de l'architecture. Habillage mural grand format sur espace public.",
       "description_longue": "Conception et exécution d'un habillage monumental. Du relevé de mesures à la réalisation sur site, le travail intègre les contraintes architecturales, les conditions d'exposition et la lisibilité à distance.",
       "probleme": "Transformer un espace architectural brut en surface de narration visuelle.",
@@ -82,8 +138,18 @@
       "featured": false,
       "featured_hero": false,
       "ordre_affichage": 5,
-      "tags": ["scénographie","événementiel","décor","spectacle","GRS"],
-      "images": ["01.jpg"],
+      "tags": [
+        "scénographie",
+        "événementiel",
+        "décor",
+        "spectacle",
+        "GRS"
+      ],
+      "images": [
+        "01.jpg",
+        "02.jpg",
+        "03.jpg"
+      ],
       "description_courte": "Un univers visuel complet pour une compétition de gymnastique rythmique. Alice au Pays des Merveilles comme fil conducteur.",
       "description_longue": "Conception et réalisation du décor scénographique pour une compétition GRS sur le thème d'Alice au Pays des Merveilles. Habillage de salle, éléments de décor, ambiance chromatique unifiée.",
       "probleme": "Créer un univers immersif dans une salle de sport standard avec un budget maîtrisé.",
@@ -100,8 +166,18 @@
       "featured": false,
       "featured_hero": false,
       "ordre_affichage": 6,
-      "tags": ["scénographie","événementiel","UV","néon","soirée"],
-      "images": [],
+      "tags": [
+        "scénographie",
+        "événementiel",
+        "UV",
+        "néon",
+        "soirée"
+      ],
+      "images": [
+        "01.jpg",
+        "02.jpg",
+        "03.jpg"
+      ],
       "description_courte": "Une soirée ne s'organise pas — elle se conçoit. Scénographie UV complète, de l'entrée à la piste.",
       "description_longue": "Conception et réalisation d'une scénographie événementielle en univers fluorescent. Habillage des espaces, création d'éléments graphiques réactifs UV, gestion des flux et de l'ambiance lumineuse.",
       "probleme": "Transformer un espace neutre en environnement immersif pour une nuit.",
@@ -118,8 +194,19 @@
       "featured": true,
       "featured_hero": false,
       "ordre_affichage": 7,
-      "tags": ["architecture","design d'espace","SketchUp","AutoCAD","aménagement"],
-      "images": ["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg","07.jpg","08.jpg","09.jpg","10.jpg"],
+      "tags": [
+        "architecture",
+        "design d'espace",
+        "SketchUp",
+        "AutoCAD",
+        "aménagement"
+      ],
+      "images": [
+        "01.jpg",
+        "02.jpg",
+        "03.jpg",
+        "04.jpg"
+      ],
       "description_courte": "Du relevé à la projection 3D. Concevoir des espaces qui fonctionnent autant qu'ils racontent quelque chose.",
       "description_longue": "Missions de conception d'espace : relevés, plans 2D/3D, SketchUp, suivi d'exécution. Projets de restauration thématique, aménagements professionnels, espaces culturels. Chaque projet pensé pour ses usages réels.",
       "probleme": "Aligner vision, contraintes techniques et budget sur des projets d'aménagement complexes.",
@@ -136,8 +223,20 @@
       "featured": false,
       "featured_hero": false,
       "ordre_affichage": 8,
-      "tags": ["graffiti","mural","lettrage","culture urbaine","aérosol"],
-      "images": ["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg","07.jpg","08.jpg"],
+      "tags": [
+        "graffiti",
+        "mural",
+        "lettrage",
+        "culture urbaine",
+        "aérosol"
+      ],
+      "images": [
+        "01.jpg",
+        "02.jpg",
+        "03.jpg",
+        "04.jpg",
+        "05.jpg"
+      ],
       "description_courte": "L'origine. Le geste, l'espace, le mouvement. Quinze ans de pratique qui informent tout le reste.",
       "description_longue": "Corpus de réalisations graffiti et lettrage. Murs, fresques, pièces. Une pratique qui précède tout le reste et qui continue d'informer la façon de penser l'espace, la composition, le rapport au support.",
       "probleme": "S'approprier un espace par le signe.",
@@ -154,8 +253,19 @@
       "featured": true,
       "featured_hero": false,
       "ordre_affichage": 9,
-      "tags": ["identité visuelle","logo","charte graphique","branding","restauration"],
-      "images": ["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg","07.jpg","08.jpg","09.jpg","10.jpg","11.jpg","12.jpg","13.jpg","14.jpg","15.jpg","16.jpg","17.jpg","18.jpg","19.jpg","20.jpg","21.jpg","22.jpg"],
+      "tags": [
+        "identité visuelle",
+        "logo",
+        "charte graphique",
+        "branding",
+        "restauration"
+      ],
+      "images": [
+        "01.jpg",
+        "02.jpg",
+        "03.jpg",
+        "04.jpg"
+      ],
       "description_courte": "Une identité n'est pas un logo. C'est un système cohérent capable de vivre sur tous les supports.",
       "description_longue": "Création d'identités visuelles complètes — logos, chartes, déclinaisons. Spécialité restauration et lieux de vie. Chaque projet commence par une question : qu'est-ce que cette marque doit dire en une fraction de seconde ?",
       "probleme": "Créer un système visuel cohérent qui fonctionne du ticket de caisse à la façade.",
@@ -172,8 +282,25 @@
       "featured": false,
       "featured_hero": false,
       "ordre_affichage": 10,
-      "tags": ["dessin","illustration","démarche personnelle","graphisme"],
-      "images": ["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg","07.jpg","08.jpg","09.jpg","10.jpg","11.jpg"],
+      "tags": [
+        "dessin",
+        "illustration",
+        "démarche personnelle",
+        "graphisme"
+      ],
+      "images": [
+        "01.jpg",
+        "02.jpg",
+        "03.jpg",
+        "04.jpg",
+        "05.jpg",
+        "06.jpg",
+        "07.jpg",
+        "08.jpg",
+        "09.jpg",
+        "10.jpg",
+        "11.jpg"
+      ],
       "description_courte": "Ce qu'on fait quand personne n'a commandé. La démarche graphique personnelle, sans brief ni client.",
       "description_longue": "Corpus de travaux graphiques personnels — illustrations, expérimentations typographiques, recherches visuelles. Le laboratoire qui alimente tout le reste.",
       "probleme": "Maintenir une pratique graphique autonome.",
@@ -190,8 +317,26 @@
       "featured": false,
       "featured_hero": false,
       "ordre_affichage": 11,
-      "tags": ["sketch","lettering","typographie","carnet","recherche"],
-      "images": ["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg","07.jpg","08.jpg","09.jpg","10.jpg","11.jpg"],
+      "tags": [
+        "sketch",
+        "lettering",
+        "typographie",
+        "carnet",
+        "recherche"
+      ],
+      "images": [
+        "01.jpg",
+        "02.jpg",
+        "03.jpg",
+        "04.jpg",
+        "05.jpg",
+        "06.jpg",
+        "07.jpg",
+        "08.jpg",
+        "09.jpg",
+        "10.jpg",
+        "11.jpg"
+      ],
       "description_courte": "Le carnet avant tout. Lettrages, sketches, recherches typographiques — là où tout commence.",
       "description_longue": "Archives de carnets et feuilles de recherche. Lettrages wild style, bubble, block — toutes les familles. Le sketch comme outil de pensée, pas comme étape décorative.",
       "probleme": "Documenter la pratique du lettrage comme discipline à part entière.",
@@ -208,8 +353,25 @@
       "featured": false,
       "featured_hero": false,
       "ordre_affichage": 12,
-      "tags": ["textile","sérigraphie","peinture","broderie","custom","vêtement"],
-      "images": ["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg","07.jpg","08.jpg","09.jpg"],
+      "tags": [
+        "textile",
+        "sérigraphie",
+        "peinture",
+        "broderie",
+        "custom",
+        "vêtement"
+      ],
+      "images": [
+        "01.jpg",
+        "02.jpg",
+        "03.jpg",
+        "04.jpg",
+        "05.jpg",
+        "06.jpg",
+        "07.jpg",
+        "08.jpg",
+        "09.jpg"
+      ],
       "description_courte": "Le vêtement comme support graphique. Sérigraphie, peinture directe, broderie — chaque technique choisie pour ce qu'elle dit.",
       "description_longue": "Créations textiles custom : t-shirts sérigraphiés, sweats peints à la main, broderies. Lettrages graffiti transposés sur tissu, illustrations originales, pièces uniques ou petites séries.",
       "probleme": "Porter un graphisme sans sacrifier ni l'un ni l'autre.",
@@ -226,8 +388,22 @@
       "featured": false,
       "featured_hero": false,
       "ordre_affichage": 13,
-      "tags": ["atelier","transmission","pédagogie","graffiti","jeunesse","collectivités"],
-      "images": ["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg"],
+      "tags": [
+        "atelier",
+        "transmission",
+        "pédagogie",
+        "graffiti",
+        "jeunesse",
+        "collectivités"
+      ],
+      "images": [
+        "01.jpg",
+        "02.jpg",
+        "03.jpg",
+        "04.jpg",
+        "05.jpg",
+        "06.jpg"
+      ],
       "description_courte": "Transmettre sans formater. Des ateliers graffiti et lettrage pensés pour faire, pas pour regarder.",
       "description_longue": "Animation d'ateliers créatifs : graffiti, lettrages, arts visuels. Interventions en structures jeunesse, associations, collectivités. Protocoles pédagogiques adaptés à chaque contexte — de l'initiation à la réalisation murale collective.",
       "probleme": "Rendre la pratique artistique accessible sans la vider de sa substance.",
@@ -244,8 +420,30 @@
       "featured": false,
       "featured_hero": false,
       "ordre_affichage": 14,
-      "tags": ["photographie","argentique","pellicule","documentation","regard"],
-      "images": ["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg","07.jpg","08.jpg","09.jpg","10.jpg","11.jpg","12.jpg","13.jpg","14.jpg","15.jpg"],
+      "tags": [
+        "photographie",
+        "argentique",
+        "pellicule",
+        "documentation",
+        "regard"
+      ],
+      "images": [
+        "01.jpg",
+        "02.jpg",
+        "03.jpg",
+        "04.jpg",
+        "05.jpg",
+        "06.jpg",
+        "07.jpg",
+        "08.jpg",
+        "09.jpg",
+        "10.jpg",
+        "11.jpg",
+        "12.jpg",
+        "13.jpg",
+        "14.jpg",
+        "15.jpg"
+      ],
       "description_courte": "La photographie comme regard, pas comme métier. Argentique surtout — pour le rapport au temps que ça impose.",
       "description_longue": "Pratique photographique personnelle, principalement argentique. Documentation de chantiers, de réalisations, de moments. Un regard qui informe la composition dans tous les autres médiums.",
       "probleme": "Documenter sans instrumentaliser.",
@@ -262,8 +460,21 @@
       "featured": false,
       "featured_hero": false,
       "ordre_affichage": 15,
-      "tags": ["dessin","cartographie","démarche personnelle","mémoire","intime"],
-      "images": ["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg"],
+      "tags": [
+        "dessin",
+        "cartographie",
+        "démarche personnelle",
+        "mémoire",
+        "intime"
+      ],
+      "images": [
+        "01.jpg",
+        "02.jpg",
+        "03.jpg",
+        "04.jpg",
+        "05.jpg",
+        "06.jpg"
+      ],
       "description_courte": "Des cartes qui ne montrent pas des territoires. Des espaces intérieurs, tracés à la main, comme on écrit un journal.",
       "description_longue": "Série de dessins cartographiques personnels. Espaces mentaux, géographies émotionnelles, mémoires de lieux. Une pratique intime qui clôt le portfolio et lui donne sa profondeur.",
       "probleme": "Représenter ce qui ne se mesure pas.",
