@@ -145,9 +145,11 @@
         "spectacle",
         "GRS"
       ],
-     "images": [
-  "01.jpg"
-],
+      "images": [
+        "01.jpg",
+        "02.jpg",
+        "03.jpg"
+      ],
       "description_courte": "Un univers visuel complet pour une compétition de gymnastique rythmique. Alice au Pays des Merveilles comme fil conducteur.",
       "description_longue": "Conception et réalisation du décor scénographique pour une compétition GRS sur le thème d'Alice au Pays des Merveilles. Habillage de salle, éléments de décor, ambiance chromatique unifiée.",
       "probleme": "Créer un univers immersif dans une salle de sport standard avec un budget maîtrisé.",
@@ -200,9 +202,11 @@
         "aménagement"
       ],
       "images": [
-  "01.jpg","02.jpg","03.jpg","04.jpg","05.jpg",
-  "06.jpg","07.jpg","08.jpg","09.jpg","10.jpg"
-],
+        "01.jpg",
+        "02.jpg",
+        "03.jpg",
+        "04.jpg"
+      ],
       "description_courte": "Du relevé à la projection 3D. Concevoir des espaces qui fonctionnent autant qu'ils racontent quelque chose.",
       "description_longue": "Missions de conception d'espace : relevés, plans 2D/3D, SketchUp, suivi d'exécution. Projets de restauration thématique, aménagements professionnels, espaces culturels. Chaque projet pensé pour ses usages réels.",
       "probleme": "Aligner vision, contraintes techniques et budget sur des projets d'aménagement complexes.",
@@ -225,10 +229,14 @@
         "lettrage",
         "culture urbaine",
         "aérosol"
-   "images": [
-  "01.jpg","02.jpg","03.jpg","04.jpg",
-  "05.jpg","06.jpg","07.jpg","08.jpg"
-],
+      ],
+      "images": [
+        "01.jpg",
+        "02.jpg",
+        "03.jpg",
+        "04.jpg",
+        "05.jpg"
+      ],
       "description_courte": "L'origine. Le geste, l'espace, le mouvement. Quinze ans de pratique qui informent tout le reste.",
       "description_longue": "Corpus de réalisations graffiti et lettrage. Murs, fresques, pièces. Une pratique qui précède tout le reste et qui continue d'informer la façon de penser l'espace, la composition, le rapport au support.",
       "probleme": "S'approprier un espace par le signe.",
@@ -252,12 +260,12 @@
         "branding",
         "restauration"
       ],
-     "images": [
-  "01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg",
-  "07.jpg","08.jpg","09.jpg","10.jpg","11.jpg","12.jpg",
-  "13.jpg","14.jpg","15.jpg","16.jpg","17.jpg","18.jpg",
-  "19.jpg","20.jpg","21.jpg","22.jpg"
-],
+      "images": [
+        "01.jpg",
+        "02.jpg",
+        "03.jpg",
+        "04.jpg"
+      ],
       "description_courte": "Une identité n'est pas un logo. C'est un système cohérent capable de vivre sur tous les supports.",
       "description_longue": "Création d'identités visuelles complètes — logos, chartes, déclinaisons. Spécialité restauration et lieux de vie. Chaque projet commence par une question : qu'est-ce que cette marque doit dire en une fraction de seconde ?",
       "probleme": "Créer un système visuel cohérent qui fonctionne du ticket de caisse à la façade.",
