@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sketchs & Lettrages (012) — Bazar Organisé</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <style>
+    .project-page { max-width: 1100px; margin: 0 auto; padding: 80px 40px 100px; }
+
+    /* HERO */
+    .proj-hero { margin-bottom: 60px; }
+    .proj-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .proj-num { font-size: 11px; font-weight: 600; letter-spacing: 0.2em; color: var(--gris3); }
+    .proj-cat-label { font-size: 11px; color: var(--gris2); letter-spacing: 0.05em; }
+    .proj-title { font-size: clamp(24px, 4vw, 44px); font-weight: 700; letter-spacing: -0.025em; line-height: 1.1; color: var(--noir); margin-bottom: 20px; }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+
+    /* HERO IMAGE */
+    .proj-hero-img { width: 100%; aspect-ratio: 16/7; object-fit: cover; background: #E8E8E8; display: block; margin-bottom: 48px; }
+
+    /* SPLIT LAYOUT */
+    .proj-body { display: grid; grid-template-columns: 1fr 280px; gap: 60px; margin-bottom: 64px; }
+    .proj-desc { font-size: 16px; color: var(--gris1); line-height: 1.85; }
+    .proj-aside {  }
+    .aside-block { margin-bottom: 28px; }
+    .aside-label { font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gris3); margin-bottom: 8px; }
+    .aside-value { font-size: 13px; color: var(--noir); line-height: 1.6; }
+
+    /* GALLERY */
+    .gallery-section { margin-bottom: 60px; }
+    .gallery-section h2 { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gris2); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+    .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .gallery-item img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; background: #E8E8E8; }
+    .gallery-item:first-child { grid-column: span 2; }
+    .gallery-item:first-child img { aspect-ratio: 16/8; }
+
+    /* NAV PROJET */
+    .proj-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding-top: 48px; border-top: 1px solid var(--border); }
+    .proj-nav-item { padding: 20px; border: 1px solid var(--border); text-decoration: none; color: inherit; display: block; transition: border-color 0.2s; }
+    .proj-nav-item:hover { border-color: var(--noir); }
+    .proj-nav-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gris3); margin-bottom: 8px; }
+    .proj-nav-title { font-size: 14px; font-weight: 600; color: var(--noir); }
+    .proj-nav-item.next { text-align: right; }
+    .back-link { display: inline-block; font-size: 12px; color: var(--gris2); text-decoration: none; letter-spacing: 0.05em; margin-bottom: 40px; border-bottom: 1px solid transparent; padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+    .back-link:hover { color: var(--noir); border-color: var(--gris3); }
+
+    @media (max-width: 720px) {
+      .project-page { padding: 60px 20px 80px; }
+      .proj-body { grid-template-columns: 1fr; gap: 32px; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-item:first-child { grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="../index.html" class="nav-logo">Bazar Organisé</a>
+  <div class="nav-links">
+    <a href="../index.html" class="active">(work)</a>
+    <a href="../about.html">(about)</a>
+    <a href="../about.html#contact">(contact)</a>
+  </div>
+</nav>
+
+<div class="page">
+<div class="project-page">
+
+  <a href="../index.html" class="back-link">← Tous les projets</a>
+
+  <div class="proj-hero">
+    <div class="proj-meta">
+      <span class="proj-num">(012)</span>
+      <span class="proj-cat-label">— Dessin</span>
+    </div>
+    <h1 class="proj-title">Sketchs & Lettrages</h1>
+    <div class="proj-tags"><span class="tag">Sketch</span><span class="tag">Calligraphie</span><span class="tag">Process créatif</span><span class="tag">Main levée</span></div>
+  </div>
+
+  <!-- HERO IMAGE -->
+  <img src="../assets/images/sketchs-lettrages/01.jpg"
+       alt="Sketchs & Lettrages"
+       class="proj-hero-img"
+       onerror="this.style.background='#E8E8E8'; this.style.minHeight='200px';" />
+
+  <!-- BODY -->
+  <div class="proj-body">
+    <div class="proj-desc">
+      <p>Carnet de recherches graphiques. Lettrages, compositions, études de formes, explorations typographiques. Ce corpus de dessins est à la fois un outil de travail et un territoire d'expérimentation : le process visible avant la mise au propre, la pensée en train de se faire.</p>
+    </div>
+    <aside class="proj-aside">
+      <div class="aside-block">
+        <div class="aside-label">Projet</div>
+        <div class="aside-value">012 — Sketchs & Lettrages</div>
+      </div>
+      <div class="aside-block">
+        <div class="aside-label">Catégorie</div>
+        <div class="aside-value">Dessin</div>
+      </div>
+      <div class="aside-block">
+        <div class="aside-label">Année</div>
+        <div class="aside-value">2019–2026</div>
+      </div>
+      <div class="aside-block">
+        <div class="aside-label">Contexte</div>
+        <div class="aside-value">Pratique continue — Carnets de recherche</div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- GALLERY -->
+  <div class="gallery-section">
+    <h2>(galerie)</h2>
+    <div class="gallery-grid">
+      
+      <div class="gallery-item">
+        <img src="../assets/images/sketchs-lettrages/01.jpg"
+             alt="Sketchs & Lettrages — 01"
+             onerror="this.parentElement.style.display='none';" />
+      </div>
+      <div class="gallery-item">
+        <img src="../assets/images/sketchs-lettrages/02.jpg"
+             alt="Sketchs & Lettrages — 02"
+             onerror="this.parentElement.style.display='none';" />
+      </div>
+      <div class="gallery-item">
+        <img src="../assets/images/sketchs-lettrages/03.jpg"
+             alt="Sketchs & Lettrages — 03"
+             onerror="this.parentElement.style.display='none';" />
+      </div>
+      <div class="gallery-item">
+        <img src="../assets/images/sketchs-lettrages/04.jpg"
+             alt="Sketchs & Lettrages — 04"
+             onerror="this.parentElement.style.display='none';" />
+      </div>
+      <div class="gallery-item">
+        <img src="../assets/images/sketchs-lettrages/05.jpg"
+             alt="Sketchs & Lettrages — 05"
+             onerror="this.parentElement.style.display='none';" />
+      </div>
+      <div class="gallery-item">
+        <img src="../assets/images/sketchs-lettrages/06.jpg"
+             alt="Sketchs & Lettrages — 06"
+             onerror="this.parentElement.style.display='none';" />
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <div class="proj-nav">
+    <a href="011-traits-identite.html" class="proj-nav-item prev">
+      <div class="proj-nav-label">← Précédent</div>
+      <div class="proj-nav-title">Traits d'Identité</div>
+    </a>
+    <a href="013-photographie.html" class="proj-nav-item next">
+      <div class="proj-nav-label">Suivant →</div>
+      <div class="proj-nav-title">Photographie Argentique</div>
+    </a>
+  </div>
+
+</div><!-- /project-page -->
+
+<!-- FOOTER -->
+<footer class="footer">
+  <span>Bazar Organisé — Xavier Talbot</span>
+  <a href="../index.html">← Retour au work</a>
+</footer>
+
+</div><!-- /page -->
+</body>
+</html>
