@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>001 — Skate Modulaire · Bazar Organisé</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:    #FAFAFA;
+    --ink:   #111111;
+    --mid:   #555555;
+    --light: #AAAAAA;
+    --rule:  #E0E0E0;
+    --font:  'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    --max:   1200px;
+    --pad:   clamp(24px, 5vw, 80px);
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px var(--pad);
+    background: rgba(250,250,250,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+  }
+  nav .logo {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  nav .back {
+    font-size: 12px;
+    color: var(--mid);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+  nav .back:hover { color: var(--ink); }
+  nav .back::before { content: '←'; }
+
+  /* WRAP */
+  .wrap {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 var(--pad);
+  }
+
+  /* HERO */
+  .hero { padding-top: 120px; padding-bottom: 0; }
+  .hero-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+  .hero-num {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    color: var(--light);
+    text-transform: uppercase;
+  }
+  .hero-tag {
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    color: var(--mid);
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-size: clamp(36px, 7vw, 96px);
+    font-weight: 300;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    font-weight: 500;
+  }
+  .hero-sub {
+    font-size: 14px;
+    color: var(--mid);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    max-width: 540px;
+    margin-bottom: 60px;
+  }
+
+  /* HERO IMAGE */
+  .hero-img {
+    width: 100%;
+    aspect-ratio: 16/8;
+    overflow: hidden;
+    background: #1a1a1a;
+    margin-top: 40px;
+  }
+  .hero-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.8s ease;
+  }
+  .hero-img:hover img { transform: scale(1.02); }
+
+  /* SECTION LABEL */
+  .section-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--light);
+    margin-bottom: 32px;
+    padding-top: 72px;
+    border-top: 1px solid var(--rule);
+  }
+
+  /* ABOUT GRID */
+  .about-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    padding-bottom: 72px;
+  }
+  @media (max-width: 800px) { .about-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .about-grid { grid-template-columns: 1fr; } }
+
+  .about-col .col-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--light);
+    margin-bottom: 12px;
+  }
+  .about-col p {
+    font-size: 14px;
+    color: var(--mid);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+  .about-col p strong {
+    color: var(--ink);
+    font-weight: 500;
+    display: block;
+    margin-bottom: 4px;
+    font-size: 13px;
+  }
+
+  /* IMAGE GRIDS */
+  .img-grid { display: grid; gap: 4px; }
+  .img-grid.two-one { grid-template-columns: 2fr 1fr; }
+  .img-grid.three   { grid-template-columns: 1fr 1fr 1fr; }
+  .img-grid.one-two { grid-template-columns: 1fr 2fr; }
+
+  .img-cell {
+    overflow: hidden;
+    background: #E8E8E8;
+    position: relative;
+  }
+  .img-cell.plan-bg { background: #fff; }
+  .img-cell img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+  .img-cell.contain img { object-fit: contain; background: #fff; }
+  .img-cell:hover img { transform: scale(1.03); }
+  .img-cell.h-tall   { aspect-ratio: 4/5; }
+  .img-cell.h-wide   { aspect-ratio: 16/9; }
+  .img-cell.h-sq     { aspect-ratio: 1; }
+  .img-cell.h-plan   { aspect-ratio: 5/2; }
+
+  /* PROCESS */
+  .process-list { padding-bottom: 72px; }
+  .process-item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 40px;
+    padding: 32px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .process-item:last-child { border-bottom: 1px solid var(--rule); }
+  .p-num {
+    font-size: 11px;
+    color: var(--light);
+    letter-spacing: 0.10em;
+    padding-top: 4px;
+  }
+  .p-content h3 {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .p-content p {
+    font-size: 14px;
+    color: var(--mid);
+    line-height: 1.7;
+    font-weight: 300;
+    max-width: 640px;
+  }
+
+  /* FULL-WIDTH */
+  .full-img {
+    width: 100%;
+    aspect-ratio: 21/9;
+    overflow: hidden;
+    background: #1a1a1a;
+  }
+  .full-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* KEYWORDS */
+  .keywords {
+    padding: 48px 0;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+  }
+  .kw-label {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: var(--light);
+    text-transform: uppercase;
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+  .kw {
+    font-size: 12px;
+    padding: 5px 14px;
+    border: 1px solid var(--rule);
+    color: var(--mid);
+    letter-spacing: 0.06em;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 32px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  footer .f-left { font-size: 11px; color: var(--light); letter-spacing: 0.06em; }
+  footer a {
+    color: var(--mid);
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    transition: color 0.2s;
+  }
+  footer a:hover { color: var(--ink); }
+
+  /* SPACER */
+  .sp { height: 72px; }
+
+  /* REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="logo">Bazar Organisé</a>
+  <a href="../index.html" class="back">Tous les projets</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero wrap">
+  <div class="hero-meta reveal">
+    <span class="hero-num">(001)</span>
+    <span class="hero-tag">Scénographie · Réalisation Technique · 2023</span>
+  </div>
+  <h1 class="reveal">Skate<br><em>Modulaire</em></h1>
+  <p class="hero-sub reveal">Conception et fabrication d'un skatepark modulaire en bois. Structure événementielle démontable, conçue sur plans, construite de A à Z — de l'esquisse au chantier.</p>
+</section>
+
+<!-- HERO IMAGE — action shot en lumière rouge -->
+<div class="hero-img reveal">
+  <img src="../assets/images/skate-modulaire/04.jpg"
+       alt="Skate Modulaire — session en cours"
+       onerror="this.style.display='none'">
+</div>
+
+<!-- ABOUT -->
+<section class="wrap">
+  <p class="section-label reveal">(À propos)</p>
+  <div class="about-grid">
+    <div class="about-col reveal">
+      <p class="col-label">Projet</p>
+      <p><strong>Skatepark modulaire</strong>Structure bois événementielle conçue pour être montée, démontée et reconfigurée. Modules indépendants assemblables selon l'espace disponible.</p>
+    </div>
+    <div class="about-col reveal">
+      <p class="col-label">Modules</p>
+      <p><strong>Table · Quarter · Gradins · Plans inclinés</strong>7 m de long, 2 m de large. Six modules distincts (A–F) positionnés selon une grille précise, cotée et vérifiable.</p>
+    </div>
+    <div class="about-col reveal">
+      <p class="col-label">Réalisation</p>
+      <p><strong>Conception + fabrication</strong>Plans d'exécution (plan + élévation), choix des matériaux, découpe, assemblage, finitions. Livré prêt à rider.</p>
+    </div>
+    <div class="about-col reveal">
+      <p class="col-label">Contexte</p>
+      <p><strong>Événementiel culturel</strong>Installation dans un lieu industriel, espace de 500 m². Cohabitation avec le public, éclairage scénique, ambiance immersive.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GRILLE A : action + structure éclairée -->
+<div class="wrap">
+  <div class="img-grid two-one reveal">
+    <div class="img-cell h-tall">
+      <img src="../assets/images/skate-modulaire/05.jpg"
+           alt="Action — skateuse sur le quarter"
+           onerror="this.style.display='none'">
+    </div>
+    <div class="img-cell h-tall">
+      <img src="../assets/images/skate-modulaire/01.jpg"
+           alt="Structure illuminée — vue d'ensemble"
+           onerror="this.style.display='none'">
+    </div>
+  </div>
+</div>
+
+<!-- PROCESS -->
+<section class="wrap">
+  <p class="section-label reveal">(Process)</p>
+  <div class="process-list">
+
+    <div class="process-item reveal">
+      <span class="p-num">(01)</span>
+      <div class="p-content">
+        <h3>Conception & plans d'exécution</h3>
+        <p>Le projet commence par une analyse de l'espace et une définition des usages. Chaque module est dessiné, coté et vérifiable : élévation avec silhouette humaine à l'échelle, plan masse avec repérage A–F. La rigueur du dossier technique garantit la faisabilité avant d'entrer en fabrication.</p>
+      </div>
+    </div>
+
+    <div class="process-item reveal">
+      <span class="p-num">(02)</span>
+      <div class="p-content">
+        <h3>Structure & assemblage</h3>
+        <p>Ossature bois en croix apparentes — à la fois choix structurel et signature visuelle. Les contrefiches diagonales raidissent chaque module et lisent la mécanique constructive à nu. Chaque module est autonome et se connecte aux autres sans modification irréversible.</p>
+      </div>
+    </div>
+
+    <div class="process-item reveal">
+      <span class="p-num">(03)</span>
+      <div class="p-content">
+        <h3>Modulaire & reconfigurable</h3>
+        <p>La grille de 7 × 2 m se décompose en six entités distinctes : table, quarter, gradins (×2), plans inclinés (×2). Chaque élément peut être repositionné selon le lieu. La structure s'adapte à différents niveaux de pratique et différentes configurations d'espace.</p>
+      </div>
+    </div>
+
+    <div class="process-item reveal">
+      <span class="p-num">(04)</span>
+      <div class="p-content">
+        <h3>Installation & contexte événementiel</h3>
+        <p>Monté dans un espace industriel de 500 m² lors d'un événement culturel, le skatepark devient scénographie à part entière. Éclairage intégré sous la structure, ambiance lumière rouge, public mixte. Le dispositif technique se fond dans une mise en scène globale.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PLANS — élévation + plan masse côte à côte -->
+<div class="wrap">
+  <div class="img-grid three reveal">
+    <div class="img-cell h-wide contain" style="grid-column: span 2;">
+      <img src="../assets/images/skate-modulaire/02.jpg"
+           alt="Plan d'élévation — TABLE / QUARTER / GRADINS / PLANS INCLINÉS"
+           onerror="this.style.display='none'">
+    </div>
+    <div class="img-cell h-wide contain">
+      <img src="../assets/images/skate-modulaire/03.jpg"
+           alt="Plan masse — modules A à F, 7 × 2 m"
+           onerror="this.style.display='none'">
+    </div>
+  </div>
+</div>
+
+<!-- FULL WIDTH — vue chantier lumière naturelle -->
+<div class="sp"></div>
+<div class="full-img reveal">
+  <img src="../assets/images/skate-modulaire/06.jpg"
+       alt="Construction — vue lumière naturelle, avant peinture"
+       onerror="this.parentElement.style.background='#E0E0E0'; this.style.display='none'">
+</div>
+
+<!-- KEYWORDS -->
+<section class="wrap">
+  <div class="keywords reveal">
+    <span class="kw-label">ADN —</span>
+    <span class="kw">Scénographie</span>
+    <span class="kw">Réalisation technique</span>
+    <span class="kw">Structure bois</span>
+    <span class="kw">Plans d'exécution</span>
+    <span class="kw">Modulaire</span>
+    <span class="kw">Événementiel</span>
+    <span class="kw">Culture skate</span>
+    <span class="kw">Pilotage de chantier</span>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="wrap">
+  <span class="f-left">001 — Skate Modulaire · Bazar Organisé</span>
+  <a href="../index.html">← Retour au portfolio</a>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('in'), i * 60);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
