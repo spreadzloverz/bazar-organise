@@ -112,9 +112,22 @@
       text-transform: uppercase;
     }
 
-    .card:hover .card-img,
-    .card:hover .card-placeholder {
-      transform: scale(1.03);
+    .card:hover .card-img {
+      transform: scale(1.04);
+    }
+
+    .card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0);
+      transition: background 0.4s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .card:hover::after {
+      background: rgba(0,0,0,0.08);
     }
 
     .card-info {
@@ -206,7 +219,14 @@
     <p class="hero-eyebrow">(portfolio — 2019 → 2026)</p>
     <h1 class="hero-title">Je conçois des systèmes<br>qui tiennent dans l'espace<br>et dans le temps.</h1>
     <p class="hero-sub">Concepteur-Réalisateur Pluridisciplinaire basé à Alfortville. De l'identité visuelle à l'aménagement d'espace, du sketch à la réalisation technique.</p>
-    <div class="hero-tags">
+    <div style="display:flex; align-items:center; gap:16px; margin-top:24px; flex-wrap:wrap;">
+      <span style="display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:500; letter-spacing:0.06em; text-transform:uppercase; color:var(--noir); border:1px solid var(--noir); padding:5px 12px; border-radius:100px;">
+        <span style="width:6px;height:6px;border-radius:50%;background:#2ECC71;display:inline-block;"></span>
+        Disponible
+      </span>
+      <span style="font-size:12px; color:var(--gris2); letter-spacing:0.04em;">// Alfortville (94) — Île-de-France</span>
+    </div>
+    <div class="hero-tags" style="margin-top:16px;">
       <span class="tag">Identité Visuelle</span>
       <span class="tag">Scénographie</span>
       <span class="tag">Design Espace</span>
@@ -227,9 +247,8 @@
 
       <!-- 001 SKATE MODULAIRE — HERO -->
       <a href="projets/001-skate-modulaire.html" class="card card-hero" style="column-span: all;">
-        <div class="card-placeholder card-img card-img-wide" style="aspect-ratio:16/7; min-height:280px;">
-          <img src="assets/images/skate-modulaire/01.jpg" alt="Skate Modulaire" class="card-img card-img-wide" onerror="this.style.display='none'; this.nextSibling.style.display='flex';" />
-          <div style="display:none; width:100%; height:100%; align-items:center; justify-content:center; background:linear-gradient(135deg,#EBEBEB,#E0E0E0); color:#BBBBBB; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; position:absolute; inset:0;">photos à venir</div>
+        <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:16/7; min-height:280px;">
+          <img src="assets/images/skate-modulaire/01.jpg" alt="Skate Modulaire" class="card-img card-img-wide" onerror="this.style.display='none';" />
         </div>
         <div class="card-info">
           <div>
@@ -415,9 +434,4 @@
   <!-- FOOTER -->
   <footer class="footer">
     <span>Bazar Organisé — Xavier Talbot, Alfortville (94) · Île-de-France</span>
-    <span><a href="mailto:contact@bazarorganise.fr">contact@bazarorganise.fr</a></span>
-  </footer>
-
-</div>
-</body>
-</html>
+    <span><a href="/cdn-cgi/l/email-protection#e3808c8d97828097a381829982918c9184828d8a9086cd8591"><span class="__cf_email__
