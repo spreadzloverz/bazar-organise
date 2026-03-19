@@ -1,173 +1,199 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cubes Évolutifs (002) — Bazar Organisé</title>
-  <link rel="stylesheet" href="../assets/css/style.css" />
-  <style>
-    .project-page { max-width: 1100px; margin: 0 auto; padding: 80px 40px 100px; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>002 — Cubes Évolutifs · Bazar Organisé</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:    #FAFAFA;
+  --ink:   #111111;
+  --mid:   #555555;
+  --light: #AAAAAA;
+  --rule:  #E2E2E2;
+  --font:  'Inter', -apple-system, sans-serif;
+  --max:   1240px;
+  --pad:   clamp(24px, 5vw, 80px);
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--bg); color: var(--ink); font-size: 15px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
 
-    /* HERO */
-    .proj-hero { margin-bottom: 60px; }
-    .proj-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
-    .proj-num { font-size: 11px; font-weight: 600; letter-spacing: 0.2em; color: var(--gris3); }
-    .proj-cat-label { font-size: 11px; color: var(--gris2); letter-spacing: 0.05em; }
-    .proj-title { font-size: clamp(24px, 4vw, 44px); font-weight: 700; letter-spacing: -0.025em; line-height: 1.1; color: var(--noir); margin-bottom: 20px; }
-    .proj-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px var(--pad);
+  background: rgba(250,250,250,0.94);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--rule);
+}
+.nav-logo { font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ink); text-decoration: none; }
+.nav-back { font-size: 12px; color: var(--mid); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color .2s; }
+.nav-back:hover { color: var(--ink); }
+.nav-back::before { content: '←'; }
 
-    /* HERO IMAGE */
-    .proj-hero-img { width: 100%; aspect-ratio: 16/7; object-fit: cover; background: #E8E8E8; display: block; margin-bottom: 48px; }
+.hero { padding: 100px var(--pad) 0; max-width: var(--max); margin: 0 auto; }
+.hero-meta { font-size: 11px; color: var(--light); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 20px; }
+.hero-title { font-size: clamp(52px, 9vw, 100px); font-weight: 300; letter-spacing: -.03em; line-height: 1; margin-bottom: 40px; }
+.hero-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; display: block; background: var(--rule); }
+.hero-img-caption { font-size: 11px; color: var(--light); margin-top: 10px; }
 
-    /* SPLIT LAYOUT */
-    .proj-body { display: grid; grid-template-columns: 1fr 280px; gap: 60px; margin-bottom: 64px; }
-    .proj-desc { font-size: 16px; color: var(--gris1); line-height: 1.85; }
-    .proj-aside {  }
-    .aside-block { margin-bottom: 28px; }
-    .aside-label { font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gris3); margin-bottom: 8px; }
-    .aside-value { font-size: 13px; color: var(--noir); line-height: 1.6; }
+.section { max-width: var(--max); margin: 0 auto; padding: 80px var(--pad); border-top: 1px solid var(--rule); }
+.section-label { font-size: 11px; color: var(--light); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 40px; display: block; }
 
-    /* GALLERY */
-    .gallery-section { margin-bottom: 60px; }
-    .gallery-section h2 { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gris2); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
-    .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .gallery-item img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; background: #E8E8E8; }
-    .gallery-item:first-child { grid-column: span 2; }
-    .gallery-item:first-child img { aspect-ratio: 16/8; }
+.about-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-bottom: 48px; }
+.about-col { padding: 24px 0; border-top: 2px solid var(--ink); }
+.about-col-label { font-size: 11px; color: var(--light); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 8px; }
+.about-col-val { font-size: 14px; font-weight: 500; }
+.about-desc { max-width: 680px; font-size: 16px; line-height: 1.75; color: var(--mid); font-weight: 300; }
+.about-desc strong { color: var(--ink); font-weight: 500; }
 
-    /* NAV PROJET */
-    .proj-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding-top: 48px; border-top: 1px solid var(--border); }
-    .proj-nav-item { padding: 20px; border: 1px solid var(--border); text-decoration: none; color: inherit; display: block; transition: border-color 0.2s; }
-    .proj-nav-item:hover { border-color: var(--noir); }
-    .proj-nav-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gris3); margin-bottom: 8px; }
-    .proj-nav-title { font-size: 14px; font-weight: 600; color: var(--noir); }
-    .proj-nav-item.next { text-align: right; }
-    .back-link { display: inline-block; font-size: 12px; color: var(--gris2); text-decoration: none; letter-spacing: 0.05em; margin-bottom: 40px; border-bottom: 1px solid transparent; padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
-    .back-link:hover { color: var(--noir); border-color: var(--gris3); }
+/* GALERIE : hero pleine largeur + grille 3 colonnes */
+.gallery { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad) 80px; }
+.gallery-hero { margin-bottom: 4px; }
+.gallery-hero img { width: 100%; aspect-ratio: 16/10; object-fit: cover; border-radius: 6px; display: block; background: var(--rule); }
+.gallery-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+.gallery-3 img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 6px; display: block; background: var(--rule); }
 
-    @media (max-width: 720px) {
-      .project-page { padding: 60px 20px 80px; }
-      .proj-body { grid-template-columns: 1fr; gap: 32px; }
-      .gallery-grid { grid-template-columns: 1fr; }
-      .gallery-item:first-child { grid-column: span 1; }
-    }
-  </style>
+.process-list { display: flex; flex-direction: column; }
+.process-item { display: grid; grid-template-columns: 80px 1fr; gap: 40px; padding: 36px 0; border-top: 1px solid var(--rule); }
+.process-item:last-child { border-bottom: 1px solid var(--rule); }
+.process-num { font-size: 11px; color: var(--light); font-weight: 500; letter-spacing: .08em; padding-top: 3px; }
+.process-body h3 { font-size: 15px; font-weight: 500; margin-bottom: 10px; }
+.process-body p { font-size: 14px; color: var(--mid); line-height: 1.7; max-width: 580px; }
+
+.keywords { max-width: var(--max); margin: 0 auto; padding: 48px var(--pad); border-top: 1px solid var(--rule); display: flex; gap: 10px; flex-wrap: wrap; }
+.kw { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; padding: 6px 14px; border: 1px solid var(--rule); border-radius: 2px; color: var(--mid); }
+
+.nav-projet { max-width: var(--max); margin: 0 auto; padding: 40px var(--pad) 80px; display: flex; justify-content: space-between; border-top: 1px solid var(--rule); }
+.nav-projet a { font-size: 12px; color: var(--mid); text-decoration: none; display: flex; flex-direction: column; gap: 4px; transition: color .2s; }
+.nav-projet a:hover { color: var(--ink); }
+.nav-projet .np-label { font-size: 10px; color: var(--light); letter-spacing: .08em; text-transform: uppercase; }
+.nav-projet .next { text-align: right; }
+
+footer { background: var(--ink); color: #999; padding: 40px var(--pad); }
+.footer-inner { max-width: var(--max); margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+.footer-left { font-size: 12px; color: #CCC; font-weight: 500; }
+.footer-right { font-size: 11px; }
+
+@media (max-width: 768px) {
+  .about-grid { grid-template-columns: repeat(2, 1fr); }
+  .process-item { grid-template-columns: 1fr; gap: 12px; }
+  .gallery-3 { grid-template-columns: repeat(2, 1fr); }
+  .nav-projet { flex-direction: column; gap: 24px; }
+  .nav-projet .next { text-align: left; }
+}
+</style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="nav">
+<nav>
   <a href="../index.html" class="nav-logo">Bazar Organisé</a>
-  <div class="nav-links">
-    <a href="../index.html" class="active">(work)</a>
-    <a href="../about.html">(about)</a>
-    <a href="../about.html#contact">(contact)</a>
-  </div>
+  <a href="../index.html" class="nav-back">Retour aux projets</a>
 </nav>
 
-<div class="page">
-<div class="project-page">
+<div class="hero">
+  <p class="hero-meta">(002) — Design Objet · Peinture main</p>
+  <h1 class="hero-title">Cubes<br>Évolutifs</h1>
+  <img class="hero-img" src="../assets/images/cubes-evolutifs/04.jpg" alt="Cubes Évolutifs — LISA 2 ANS" onerror="this.style.minHeight='480px'">
+  <p class="hero-img-caption">Commande personnalisée — "LISA 2 ANS"</p>
+</div>
 
-  <a href="../index.html" class="back-link">← Tous les projets</a>
-
-  <div class="proj-hero">
-    <div class="proj-meta">
-      <span class="proj-num">(002)</span>
-      <span class="proj-cat-label">— Design Mobilier</span>
+<section class="section">
+  <span class="section-label">(about)</span>
+  <div class="about-grid">
+    <div class="about-col">
+      <div class="about-col-label">Contexte</div>
+      <div class="about-col-val">Objet personnalisé</div>
     </div>
-    <h1 class="proj-title">Cubes Évolutifs</h1>
-    <div class="proj-tags"><span class="tag">Mobilier modulaire</span><span class="tag">Bois</span><span class="tag">Assemblage</span><span class="tag">Évolutif</span></div>
-  </div>
-
-  <!-- HERO IMAGE -->
-  <img src="../assets/images/cubes-evolutifs/01.jpg"
-       alt="Cubes Évolutifs"
-       class="proj-hero-img"
-       onerror="this.style.background='#E8E8E8'; this.style.minHeight='200px';" />
-
-  <!-- BODY -->
-  <div class="proj-body">
-    <div class="proj-desc">
-      <p>Système de rangement modulaire constitué de cubes assemblables. Chaque unité peut être combinée, empilée ou réorganisée selon les usages et les espaces. Le principe évolutif permet une adaptation continue du mobilier à son contexte d'utilisation — logique de fabrication sérielle et personnalisable.</p>
+    <div class="about-col">
+      <div class="about-col-label">Médium</div>
+      <div class="about-col-val">Bois · Peinture main</div>
     </div>
-    <aside class="proj-aside">
-      <div class="aside-block">
-        <div class="aside-label">Projet</div>
-        <div class="aside-value">002 — Cubes Évolutifs</div>
-      </div>
-      <div class="aside-block">
-        <div class="aside-label">Catégorie</div>
-        <div class="aside-value">Design Mobilier</div>
-      </div>
-      <div class="aside-block">
-        <div class="aside-label">Année</div>
-        <div class="aside-value">2022</div>
-      </div>
-      <div class="aside-block">
-        <div class="aside-label">Contexte</div>
-        <div class="aside-value">Design Mobilier — Série</div>
-      </div>
-    </aside>
+    <div class="about-col">
+      <div class="about-col-label">Année</div>
+      <div class="about-col-val">2022</div>
+    </div>
+    <div class="about-col">
+      <div class="about-col-label">Format</div>
+      <div class="about-col-val">Pièces uniques · Série</div>
+    </div>
   </div>
+  <p class="about-desc">
+    Objets modulaires en bois peints à la main, conçus comme <strong>supports typographiques manipulables</strong>.
+    Lettres, chiffres, symboles et motifs — chaque face propose une variation graphique,
+    chaque cube une pièce unique. Trois registres coexistent : <strong>naïf et délicat, graffiti saturé, personnalisé sur commande</strong>.
+    Pensé comme un objet de naissance, il s'inscrit dans une logique d'usage intime.
+  </p>
+</section>
 
-  <!-- GALLERY -->
-  <div class="gallery-section">
-    <h2>(galerie)</h2>
-    <div class="gallery-grid">
-      
-      <div class="gallery-item">
-        <img src="../assets/images/cubes-evolutifs/01.jpg"
-             alt="Cubes Évolutifs — 01"
-             onerror="this.parentElement.style.display='none';" />
+<div class="gallery">
+  <div class="gallery-hero">
+    <img src="../assets/images/cubes-evolutifs/03.jpg" alt="Ensemble graffiti — lettres et chiffres" onerror="this.style.minHeight='360px'">
+  </div>
+  <div class="gallery-3">
+    <img src="../assets/images/cubes-evolutifs/01.jpg" alt="Style naïf — lettres cursives et motifs" onerror="this.style.minHeight='280px'">
+    <img src="../assets/images/cubes-evolutifs/02.jpg" alt="Style graffiti — lettres colorées fond jaune" onerror="this.style.minHeight='280px'">
+    <img src="../assets/images/cubes-evolutifs/05.jpg" alt="Mix styles — accumulation de cubes" onerror="this.style.minHeight='280px'">
+  </div>
+</div>
+
+<section class="section">
+  <span class="section-label">(process)</span>
+  <div class="process-list">
+    <div class="process-item">
+      <span class="process-num">(01)</span>
+      <div class="process-body">
+        <h3>Dessin manuel sur bois</h3>
+        <p>Chaque face est dessinée à la main, directement sur le bois brut. Le tracé manuel est visible — variations d'épaisseur, irrégularités assumées. Pas de transfert numérique : le geste est présent dans l'objet final.</p>
       </div>
-      <div class="gallery-item">
-        <img src="../assets/images/cubes-evolutifs/02.jpg"
-             alt="Cubes Évolutifs — 02"
-             onerror="this.parentElement.style.display='none';" />
+    </div>
+    <div class="process-item">
+      <span class="process-num">(02)</span>
+      <div class="process-body">
+        <h3>Typographie hybride</h3>
+        <p>Lettres, chiffres, symboles et motifs se déclinent selon plusieurs registres graphiques : naïf et cursif, graffiti saturé, illustratif. La même lettre change de style d'un cube à l'autre — cohérence dans la diversité.</p>
       </div>
-      <div class="gallery-item">
-        <img src="../assets/images/cubes-evolutifs/03.jpg"
-             alt="Cubes Évolutifs — 03"
-             onerror="this.parentElement.style.display='none';" />
-      </div>
-      <div class="gallery-item">
-        <img src="../assets/images/cubes-evolutifs/04.jpg"
-             alt="Cubes Évolutifs — 04"
-             onerror="this.parentElement.style.display='none';" />
-      </div>
-      <div class="gallery-item">
-        <img src="../assets/images/cubes-evolutifs/05.jpg"
-             alt="Cubes Évolutifs — 05"
-             onerror="this.parentElement.style.display='none';" />
-      </div>
-      <div class="gallery-item">
-        <img src="../assets/images/cubes-evolutifs/06.jpg"
-             alt="Cubes Évolutifs — 06"
-             onerror="this.parentElement.style.display='none';" />
+    </div>
+    <div class="process-item">
+      <span class="process-num">(03)</span>
+      <div class="process-body">
+        <h3>Personnalisation sur commande</h3>
+        <p>Chaque série peut être conçue sur mesure : prénom, date, univers graphique choisi par le commanditaire. L'objet devient cadeau unique — entre jouet, objet décoratif et pièce signée.</p>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- NAVIGATION -->
-  <div class="proj-nav">
-    <a href="001-skate-modulaire.html" class="proj-nav-item prev">
-      <div class="proj-nav-label">← Précédent</div>
-      <div class="proj-nav-title">Le Skate comme Module</div>
-    </a>
-    <a href="003-pura-vida.html" class="proj-nav-item next">
-      <div class="proj-nav-label">Suivant →</div>
-      <div class="proj-nav-title">Pura Vida</div>
-    </a>
+<div class="keywords">
+  <span class="kw">Bois peint</span>
+  <span class="kw">Typographie</span>
+  <span class="kw">Dessin manuel</span>
+  <span class="kw">Graffiti</span>
+  <span class="kw">Objet personnalisé</span>
+  <span class="kw">Pièce unique</span>
+</div>
+
+<div class="nav-projet">
+  <a href="001-skate-modulaire.html">
+    <span class="np-label">← Projet précédent</span>
+    <span>001 — Le Skate comme Module</span>
+  </a>
+  <a href="003-pura-vida.html" class="next">
+    <span class="np-label">Projet suivant →</span>
+    <span>003 — Pura Vida</span>
+  </a>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-left">002 — Cubes Évolutifs · Bazar Organisé</span>
+    <span class="footer-right">© 2025</span>
   </div>
-
-</div><!-- /project-page -->
-
-<!-- FOOTER -->
-<footer class="footer">
-  <span>Bazar Organisé — Xavier Talbot</span>
-  <a href="../index.html">← Retour au work</a>
 </footer>
 
-</div><!-- /page -->
 </body>
 </html>
