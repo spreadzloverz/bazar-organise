@@ -38,7 +38,7 @@ nav {
 .hero { padding: 100px var(--pad) 0; max-width: var(--max); margin: 0 auto; }
 .hero-meta { font-size: 11px; color: var(--light); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 20px; }
 .hero-title { font-size: clamp(52px, 9vw, 100px); font-weight: 300; letter-spacing: -.03em; line-height: 1; margin-bottom: 40px; }
-.hero-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; display: block; background: var(--rule); }
+.hero-img { width: 100%; aspect-ratio: 3/1; object-fit: cover; border-radius: 8px; display: block; background: var(--rule); }
 .hero-img-caption { font-size: 11px; color: var(--light); margin-top: 10px; }
 
 .section { max-width: var(--max); margin: 0 auto; padding: 80px var(--pad); border-top: 1px solid var(--rule); }
@@ -53,9 +53,9 @@ nav {
 
 .gallery { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad) 80px; }
 .gallery-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-bottom: 4px; }
-.gallery-3 img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 6px; display: block; background: var(--rule); }
-.gallery-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px; }
-.gallery-2 img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 6px; display: block; background: var(--rule); }
+.gallery-3 img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 6px; display: block; background: var(--rule); }
+.gallery-wide { margin-top: 4px; }
+.gallery-wide img { width: 100%; aspect-ratio: 16/6; object-fit: cover; border-radius: 6px; display: block; background: var(--rule); }
 
 .process-list { display: flex; flex-direction: column; }
 .process-item { display: grid; grid-template-columns: 80px 1fr; gap: 40px; padding: 36px 0; border-top: 1px solid var(--rule); }
@@ -82,7 +82,6 @@ footer { background: var(--ink); color: #999; padding: 40px var(--pad); }
   .about-grid { grid-template-columns: repeat(2, 1fr); }
   .process-item { grid-template-columns: 1fr; gap: 12px; }
   .gallery-3 { grid-template-columns: repeat(2, 1fr); }
-  .gallery-2 { grid-template-columns: 1fr; }
   .nav-projet { flex-direction: column; gap: 24px; }
   .nav-projet .next { text-align: left; }
 }
@@ -96,9 +95,9 @@ footer { background: var(--ink); color: #999; padding: 40px var(--pad); }
 </nav>
 
 <div class="hero">
-  <p class="hero-meta">(011) — Lettrage · Graphisme · 2022–2026</p>
+  <p class="hero-meta">(011) — Lettrage · Multi-supports · 2022–2026</p>
   <h1 class="hero-title">Traits<br>d'Identité</h1>
-  <img class="hero-img" src="../assets/images/traits-identite/05.jpg" alt="Traits d'Identité — toile prénom fond violet" onerror="this.style.minHeight='480px'">
+  <img class="hero-img" src="../assets/images/traits-identite/01.jpg" alt="Traits d'Identité — toile panoramique prénom fond violet" onerror="this.style.minHeight='380px'">
   <p class="hero-img-caption">Toile panoramique — prénom stylisé, fond violet, éléments narratifs</p>
 </div>
 
@@ -134,14 +133,17 @@ footer { background: var(--ink); color: #999; padding: 40px var(--pad); }
 
 <div class="gallery">
   <div class="gallery-3">
-    <img src="../assets/images/traits-identite/01.jpg" alt="Planche skate — Skateboarding is not a Crime" onerror="this.style.minHeight='280px'">
-    <img src="../assets/images/traits-identite/02.jpg" alt="Panneaux mariage — Welcome to Sian & JB's Wedding" onerror="this.style.minHeight='280px'">
-    <img src="../assets/images/traits-identite/03.jpg" alt="Fresque mur chambre enfant — 2004" onerror="this.style.minHeight='280px'">
+    <img src="../assets/images/traits-identite/02.jpg" alt="Toile graffiti — lettrage rouge vert bleu flèches" onerror="this.style.minHeight='260px'">
+    <img src="../assets/images/traits-identite/03.jpg" alt="Fresque mur chambre enfant — 2004" onerror="this.style.minHeight='260px'">
+    <img src="../assets/images/traits-identite/04.jpg" alt="Planche skate — Skateboarding is not a Crime" onerror="this.style.minHeight='260px'">
   </div>
   <div class="gallery-3">
-    <img src="../assets/images/traits-identite/04.jpg" alt="Toile graffiti — lettrage rouge vert bleu" onerror="this.style.minHeight='280px'">
-    <img src="../assets/images/traits-identite/06.jpg" alt="Planche skate — fond violet robots" onerror="this.style.minHeight='280px'">
-    <img src="../assets/images/traits-identite/05.jpg" alt="Toile panoramique — prénom fond violet" onerror="this.style.minHeight='280px'">
+    <img src="../assets/images/traits-identite/05.jpg" alt="Planche skate — fond violet robots" onerror="this.style.minHeight='260px'">
+    <img src="../assets/images/traits-identite/06.jpg" alt="Panneaux mariage — Welcome to Sian & JB's Wedding" onerror="this.style.minHeight='260px'">
+    <img src="../assets/images/traits-identite/01.jpg" alt="Toile panoramique — prénom fond violet" onerror="this.style.minHeight='260px'">
+  </div>
+  <div class="gallery-wide">
+    <img src="../assets/images/traits-identite/07.jpg" alt="Le Metro — lettrage blanc sur fond noir" onerror="this.style.minHeight='220px'">
   </div>
 </div>
 
