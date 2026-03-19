@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projet — Bazar Organisé</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #FAFAFA;
+      --text: #111111;
+      --muted: #888888;
+      --border: #E5E5E5;
+      --accent: #111111;
+    }
+
+    html { font-size: 16px; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 40px;
+      height: 60px;
+      background: rgba(250,250,250,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── LOADING / ERROR ── */
+    #state-loading, #state-error {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    #state-error { color: #cc4444; }
+    #state-loading { display: flex; }
+    #state-error { display: none; }
+
+    /* ── MAIN CONTENT ── */
+    #project-content {
+      display: none;
+      padding-top: 60px;
+    }
+
+    /* Hero image */
+    .hero {
+      width: 100%;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      background: var(--border);
+    }
+
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+
+    .hero img.loaded { opacity: 1; }
+
+    /* ── HEADER BLOCK ── */
+    .project-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      padding: 60px 80px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .project-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .project-index {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .project-title {
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .project-category {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+
+    .project-description {
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: #333;
+      align-self: end;
+    }
+
+    /* ── TAGS ── */
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 32px 80px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tag {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 5px 12px;
+      border-radius: 100px;
+    }
+
+    /* ── GALLERY ── */
+    .gallery {
+      padding: 60px 80px;
+    }
+
+    .gallery-label {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+
+    .gallery-grid {
+      columns: 2;
+      column-gap: 16px;
+    }
+
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 16px;
+      overflow: hidden;
+      background: var(--border);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      display: block;
+      opacity: 0;
+      transition: opacity 0.5s ease, transform 0.4s ease;
+    }
+
+    .gallery-item img.loaded { opacity: 1; }
+    .gallery-item:hover img { transform: scale(1.02); }
+
+    /* ── NAV PROJETS ── */
+    .project-nav {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--border);
+    }
+
+    .project-nav-item {
+      padding: 40px 80px;
+      text-decoration: none;
+      color: var(--text);
+      transition: background 0.2s;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .project-nav-item:hover { background: #f0f0f0; }
+
+    .project-nav-item + .project-nav-item {
+      border-left: 1px solid var(--border);
+      text-align: right;
+      align-items: flex-end;
+    }
+
+    .nav-direction {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .nav-project-title {
+      font-size: 18px;
+      font-weight: 300;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+
+      .project-header {
+        grid-template-columns: 1fr;
+        padding: 40px 24px;
+        gap: 24px;
+      }
+
+      .project-tags { padding: 24px; }
+
+      .gallery { padding: 40px 24px; }
+
+      .gallery-grid { columns: 1; }
+
+      .project-nav-item {
+        padding: 32px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="index.html">Bazar Organisé</a>
+    <ul class="nav-links">
+      <li><a href="index.html">(work)</a></li>
+      <li><a href="a-propos.html">(about)</a></li>
+    </ul>
+  </nav>
+
+  <!-- ÉTATS -->
+  <div id="state-loading">chargement…</div>
+  <div id="state-error">projet introuvable.</div>
+
+  <!-- CONTENU -->
+  <main id="project-content">
+
+    <div class="hero">
+      <img id="hero-img" src="" alt="" />
+    </div>
+
+    <div class="project-header">
+      <div class="project-meta">
+        <span class="project-index" id="proj-index"></span>
+        <h1 class="project-title" id="proj-title"></h1>
+        <p class="project-category" id="proj-category"></p>
+      </div>
+      <p class="project-description" id="proj-description"></p>
+    </div>
+
+    <div class="project-tags" id="proj-tags"></div>
+
+    <div class="gallery">
+      <p class="gallery-label">(images)</p>
+      <div class="gallery-grid" id="gallery-grid"></div>
+    </div>
+
+    <div class="project-nav" id="project-nav"></div>
+
+  </main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const projectId = params.get('id');
+
+    fetch('projects.json')
+      .then(r => {
+        if (!r.ok) throw new Error('fetch failed');
+        return r.json();
+      })
+      .then(data => {
+        // Support tableau direct ou objet { projects: [...] }
+        const projects = Array.isArray(data) ? data : (data.projects || []);
+
+        const idx = projects.findIndex(p =>
+          String(p.id).padStart(3, '0') === String(projectId).padStart(3, '0') ||
+          p.id === projectId ||
+          p.slug === projectId
+        );
+
+        if (idx === -1) throw new Error('not found');
+
+        const project = projects[idx];
+        const prev = idx > 0 ? projects[idx - 1] : null;
+        const next = idx < projects.length - 1 ? projects[idx + 1] : null;
+
+        render(project, prev, next, idx, projects.length);
+      })
+      .catch(err => {
+        console.error(err);
+        document.getElementById('state-loading').style.display = 'none';
+        document.getElementById('state-error').style.display = 'flex';
+      });
+
+    function render(p, prev, next, idx, total) {
+      // Titre de page
+      document.title = `${p.title} — Bazar Organisé`;
+
+      // Champs texte
+      document.getElementById('proj-index').textContent =
+        `${String(p.id || idx + 1).padStart(3, '0')} / ${String(total).padStart(3, '0')}`;
+      document.getElementById('proj-title').textContent = p.title || '';
+      document.getElementById('proj-category').textContent = p.category || '';
+      document.getElementById('proj-description').textContent = p.description || '';
+
+      // Tags
+      const tagsEl = document.getElementById('proj-tags');
+      if (p.tags && p.tags.length) {
+        tagsEl.innerHTML = p.tags.map(t => `<span class="tag">${t}</span>`).join('');
+      } else {
+        tagsEl.style.display = 'none';
+      }
+
+      // Images — construire le chemin depuis le slug
+      const slug = p.slug || slugify(p.title);
+      const images = buildImages(p, slug);
+
+      // Hero
+      if (images.length > 0) {
+        const heroImg = document.getElementById('hero-img');
+        heroImg.src = images[0];
+        heroImg.alt = p.title;
+        heroImg.onload = () => heroImg.classList.add('loaded');
+      }
+
+      // Galerie (images 2+)
+      const grid = document.getElementById('gallery-grid');
+      images.slice(1).forEach(src => {
+        const item = document.createElement('div');
+        item.className = 'gallery-item';
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = p.title;
+        img.loading = 'lazy';
+        img.onload = () => img.classList.add('loaded');
+        item.appendChild(img);
+        grid.appendChild(item);
+      });
+
+      if (images.length <= 1) {
+        document.querySelector('.gallery').style.display = 'none';
+      }
+
+      // Navigation entre projets
+      const navEl = document.getElementById('project-nav');
+      let navHTML = '';
+      if (prev) {
+        navHTML += `<a class="project-nav-item" href="projet.html?id=${String(prev.id).padStart(3,'0')}">
+          <span class="nav-direction">← précédent</span>
+          <span class="nav-project-title">${prev.title}</span>
+        </a>`;
+      } else {
+        navHTML += `<div></div>`;
+      }
+      if (next) {
+        navHTML += `<a class="project-nav-item" href="projet.html?id=${String(next.id).padStart(3,'0')}">
+          <span class="nav-direction">suivant →</span>
+          <span class="nav-project-title">${next.title}</span>
+        </a>`;
+      }
+      navEl.innerHTML = navHTML;
+
+      // Afficher
+      document.getElementById('state-loading').style.display = 'none';
+      document.getElementById('project-content').style.display = 'block';
+    }
+
+    function buildImages(p, slug) {
+      // Si images déjà définies dans le JSON, on les utilise
+      if (p.images && Array.isArray(p.images) && p.images.length > 0) {
+        return p.images;
+      }
+      // Sinon on génère les chemins standard 01–06
+      const base = `assets/images/${slug}/`;
+      const imgs = [];
+      for (let i = 1; i <= 6; i++) {
+        imgs.push(`${base}${String(i).padStart(2,'0')}.jpg`);
+      }
+      return imgs;
+    }
+
+    function slugify(str) {
+      return (str || '')
+        .toLowerCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '');
+    }
+  </script>
+
+</body>
+</html>
