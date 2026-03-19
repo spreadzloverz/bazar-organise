@@ -4,77 +4,342 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>À propos — Bazar Organisé</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet" />
   <style>
-    .about-page { max-width: 800px; margin: 0 auto; padding: 80px 40px 100px; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    .page-eyebrow {
-      font-size: 11px; font-weight: 500; letter-spacing: 0.15em;
-      text-transform: uppercase; color: var(--gris2); margin-bottom: 48px;
+    :root {
+      --bg: #FAFAFA;
+      --noir: #111111;
+      --gris1: #444444;
+      --gris2: #777777;
+      --gris3: #AAAAAA;
+      --border: #E5E5E5;
     }
 
-    /* NAME BLOCK */
-    .name-block { margin-bottom: 60px; padding-bottom: 48px; border-bottom: 1px solid var(--border); }
-    .name-block h1 { font-size: clamp(32px, 5vw, 56px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; color: var(--noir); margin-bottom: 12px; }
-    .name-block .subtitle { font-size: 15px; color: var(--gris1); line-height: 1.5; }
+    html { font-size: 16px; scroll-behavior: smooth; }
 
-    /* BIO SECTION */
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--noir);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 40px;
+      height: 60px;
+      background: rgba(250,250,250,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--noir);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--gris2);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--noir); }
+
+    /* ── PAGE ── */
+    .page { padding-top: 60px; }
+
+    .about-page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 80px 40px 100px;
+    }
+
+    .page-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gris3);
+      margin-bottom: 48px;
+    }
+
+    /* ── NOM ── */
+    .name-block {
+      margin-bottom: 60px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .name-block h1 {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+    .name-block .subtitle {
+      font-size: 15px;
+      color: var(--gris1);
+      line-height: 1.5;
+    }
+
+    /* ── BIO ── */
     .bio-section { margin-bottom: 64px; }
-    .bio-section p { font-size: 16px; color: var(--gris1); line-height: 1.8; margin-bottom: 20px; }
+
+    .bio-section p {
+      font-size: 15px;
+      color: var(--gris1);
+      line-height: 1.8;
+      margin-bottom: 18px;
+    }
+
+    .bio-section p:last-child { margin-bottom: 0; }
     .bio-section strong { color: var(--noir); font-weight: 600; }
-    .bio-section .manifeste { font-size: 17px; color: var(--noir); line-height: 1.75; border-left: 3px solid var(--noir); padding-left: 24px; margin: 32px 0; }
 
-    /* EXPERTISE BLOCKS */
+    .manifeste {
+      font-size: 17px !important;
+      color: var(--noir) !important;
+      line-height: 1.75 !important;
+      border-left: 3px solid var(--noir);
+      padding-left: 24px;
+      margin: 32px 0 !important;
+    }
+
+    /* ── SECTION TITLE ── */
+    .section-h {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--noir);
+      margin-bottom: 28px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── PÔLES ── */
     .expertise-section { margin-bottom: 64px; }
-    .expertise-section h2 { font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--noir); margin-bottom: 32px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
 
-    .pole { margin-bottom: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 220px 1fr; gap: 40px; }
+    .pole {
+      margin-bottom: 36px;
+      padding-bottom: 36px;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 40px;
+    }
+
     .pole:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-    .pole-header {}
-    .pole-num { font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gris3); margin-bottom: 6px; }
-    .pole-name { font-size: 16px; font-weight: 700; color: var(--noir); line-height: 1.3; }
-    .pole-sub { font-size: 12px; color: var(--gris2); margin-top: 4px; font-style: italic; }
-    .pole-content p { font-size: 14px; color: var(--gris1); line-height: 1.7; margin-bottom: 10px; }
-    .pole-content ul { list-style: none; padding: 0; }
-    .pole-content li { font-size: 14px; color: var(--gris1); line-height: 1.6; padding-left: 16px; position: relative; margin-bottom: 6px; }
-    .pole-content li::before { content: '—'; position: absolute; left: 0; color: var(--gris3); }
 
-    /* PARCOURS */
+    .pole-num {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gris3);
+      margin-bottom: 6px;
+    }
+
+    .pole-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--noir);
+      line-height: 1.3;
+    }
+
+    .pole-sub {
+      font-size: 12px;
+      color: var(--gris2);
+      margin-top: 4px;
+      font-style: italic;
+    }
+
+    .pole-content ul { list-style: none; }
+
+    .pole-content li {
+      font-size: 13px;
+      color: var(--gris1);
+      line-height: 1.65;
+      padding-left: 16px;
+      position: relative;
+      margin-bottom: 10px;
+    }
+
+    .pole-content li:last-child { margin-bottom: 0; }
+
+    .pole-content li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--gris3);
+    }
+
+    .pole-content li strong { color: var(--noir); font-weight: 500; }
+
+    /* ── PRINCIPES ── */
+    .principes-section { margin-bottom: 64px; }
+
+    .principe {
+      margin-bottom: 24px;
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 16px;
+    }
+
+    .principe-n {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gris3);
+      padding-top: 2px;
+    }
+
+    .principe-body h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--noir);
+      margin-bottom: 6px;
+    }
+
+    .principe-body p {
+      font-size: 13px;
+      color: var(--gris1);
+      line-height: 1.7;
+    }
+
+    /* ── PARCOURS ── */
     .parcours-section { margin-bottom: 64px; }
-    .parcours-section h2 { font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--noir); margin-bottom: 32px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
-    .parcours-item { margin-bottom: 28px; display: grid; grid-template-columns: 180px 1fr; gap: 24px; }
-    .parcours-date { font-size: 12px; color: var(--gris3); font-weight: 500; padding-top: 2px; }
-    .parcours-content h3 { font-size: 14px; font-weight: 600; color: var(--noir); margin-bottom: 6px; }
-    .parcours-content p { font-size: 13px; color: var(--gris2); line-height: 1.6; }
 
-    /* OUTILS */
+    .parcours-item {
+      margin-bottom: 28px;
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 24px;
+    }
+
+    .parcours-date {
+      font-size: 12px;
+      color: var(--gris3);
+      font-weight: 500;
+      padding-top: 2px;
+    }
+
+    .parcours-content h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--noir);
+      margin-bottom: 6px;
+    }
+
+    .parcours-content p {
+      font-size: 13px;
+      color: var(--gris2);
+      line-height: 1.65;
+    }
+
+    /* ── OUTILS ── */
     .tools-section { margin-bottom: 64px; }
-    .tools-section h2 { font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--noir); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+
     .tools-grid { display: flex; flex-wrap: wrap; gap: 8px; }
 
-    /* PRINCIPES */
-    .principes-section { margin-bottom: 64px; }
-    .principes-section h2 { font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--noir); margin-bottom: 32px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
-    .principe { margin-bottom: 24px; display: grid; grid-template-columns: 28px 1fr; gap: 16px; align-start: start; }
-    .principe-n { font-size: 12px; font-weight: 700; color: var(--gris3); padding-top: 2px; }
-    .principe-body h3 { font-size: 14px; font-weight: 600; color: var(--noir); margin-bottom: 6px; }
-    .principe-body p { font-size: 13px; color: var(--gris1); line-height: 1.7; }
+    .tag {
+      font-size: 12px;
+      color: var(--noir);
+      border: 1px solid var(--border);
+      padding: 5px 14px;
+      border-radius: 100px;
+    }
 
-    /* CONTACT */
-    .contact-section { padding-top: 48px; border-top: 1px solid var(--border); }
-    .contact-section h2 { font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--noir); margin-bottom: 32px; }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .contact-item { padding: 24px; border: 1px solid var(--border); }
-    .contact-item-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gris3); margin-bottom: 8px; }
-    .contact-item-value { font-size: 15px; color: var(--noir); font-weight: 500; }
-    .contact-item-value a { color: var(--noir); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 2px; }
+    /* ── CONTACT ── */
+    .contact-section {
+      padding-top: 48px;
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .contact-item {
+      padding: 24px;
+      border: 1px solid var(--border);
+    }
+
+    .contact-item-label {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gris3);
+      margin-bottom: 8px;
+    }
+
+    .contact-item-value {
+      font-size: 15px;
+      color: var(--noir);
+      font-weight: 500;
+    }
+
+    .contact-item-value a {
+      color: var(--noir);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      transition: border-color 0.2s;
+    }
+
     .contact-item-value a:hover { border-color: var(--noir); }
 
-    @media (max-width: 680px) {
+    /* ── FOOTER ── */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer span, .footer a {
+      font-size: 11px;
+      color: var(--gris3);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+
+    .footer a:hover { color: var(--noir); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .nav { padding: 0 20px; }
       .about-page { padding: 60px 20px 80px; }
       .pole { grid-template-columns: 1fr; gap: 16px; }
       .parcours-item { grid-template-columns: 1fr; gap: 4px; }
       .contact-grid { grid-template-columns: 1fr; }
+      .footer { flex-direction: column; gap: 8px; }
     }
   </style>
 </head>
@@ -84,6 +349,7 @@
 <nav class="nav">
   <a href="index.html" class="nav-logo">Bazar Organisé</a>
   <div class="nav-links">
+    <a href="index.html">(work)</a>
     <a href="a-propos.html" class="active">(about)</a>
     <a href="#contact">(contact)</a>
   </div>
@@ -111,12 +377,12 @@
     <p><strong>Je ne sépare jamais le concept de sa faisabilité.</strong> Chaque idée est pensée à l'aune de son usage, de sa mise en œuvre, de sa maintenance et de sa capacité à traverser le temps sans se dégrader.</p>
   </div>
 
-  <!-- PÔLES D'EXPERTISE -->
+  <!-- PÔLES -->
   <div class="expertise-section">
-    <h2>(pôles d'expertise)</h2>
+    <p class="section-h">(pôles d'expertise)</p>
 
     <div class="pole">
-      <div class="pole-header">
+      <div>
         <div class="pole-num">01</div>
         <div class="pole-name">Identité Visuelle<br>& Graphisme</div>
         <div class="pole-sub">Le Cerveau</div>
@@ -131,7 +397,7 @@
     </div>
 
     <div class="pole">
-      <div class="pole-header">
+      <div>
         <div class="pole-num">02</div>
         <div class="pole-name">Scénographie<br>& Conception d'Espace</div>
         <div class="pole-sub">La Vision</div>
@@ -146,7 +412,7 @@
     </div>
 
     <div class="pole">
-      <div class="pole-header">
+      <div>
         <div class="pole-num">03</div>
         <div class="pole-name">Réalisation Technique<br>& Pilotage de Flux</div>
         <div class="pole-sub">La Main</div>
@@ -161,9 +427,9 @@
     </div>
   </div>
 
-  <!-- PRINCIPES -->
+  <!-- POSTURE -->
   <div class="principes-section">
-    <h2>(posture professionnelle)</h2>
+    <p class="section-h">(posture professionnelle)</p>
 
     <div class="principe">
       <div class="principe-n">01</div>
@@ -190,12 +456,12 @@
 
   <!-- PARCOURS -->
   <div class="parcours-section">
-    <h2>(parcours)</h2>
+    <p class="section-h">(parcours)</p>
 
     <div class="parcours-item">
       <div class="parcours-date">2022 → aujourd'hui</div>
       <div class="parcours-content">
-        <h3>Bazar Organisé — Fondateur &amp; Concepteur-Réalisateur</h3>
+        <h3>Bazar Organisé — Fondateur & Concepteur-Réalisateur</h3>
         <p>Activité indépendante pluridisciplinaire. Identités visuelles, scénographies événementielles, fresques murales, mobilier sur-mesure, aménagement d'espace.</p>
       </div>
     </div>
@@ -227,8 +493,8 @@
     <div class="parcours-item">
       <div class="parcours-date">2006 – 2013</div>
       <div class="parcours-content">
-        <h3>Dessinateur / Collaborateur — Bâtiment &amp; Infrastructure</h3>
-        <p>Cabinet Kalopissis · SNCF Gares &amp; Connexions · Aéroports de Paris · Colas Rail (Tramway T3) · CTS Groupe Vinci. Plans d'exécution, suivi de chantier, gestion documentaire sur projets publics et privés (hôpitaux, gares, terminaux, ouvrages d'art).</p>
+        <h3>Dessinateur / Collaborateur — Bâtiment & Infrastructure</h3>
+        <p>Cabinet Kalopissis · SNCF Gares & Connexions · Aéroports de Paris · Colas Rail (Tramway T3) · CTS Groupe Vinci. Plans d'exécution, suivi de chantier, gestion documentaire sur projets publics et privés.</p>
       </div>
     </div>
 
@@ -236,7 +502,7 @@
 
   <!-- OUTILS -->
   <div class="tools-section">
-    <h2>(méthodes & outils)</h2>
+    <p class="section-h">(méthodes & outils)</p>
     <div class="tools-grid">
       <span class="tag">Adobe Photoshop</span>
       <span class="tag">Adobe Illustrator</span>
@@ -253,11 +519,13 @@
 
   <!-- CONTACT -->
   <div class="contact-section" id="contact">
-    <h2>(contact)</h2>
+    <p class="section-h">(contact)</p>
     <div class="contact-grid">
       <div class="contact-item">
         <div class="contact-item-label">Email</div>
-        <div class="contact-item-value"><a href="/cdn-cgi/l/email-protection#27444849534644536745465d465548554046494e5442094155"><span class="__cf_email__" data-cfemail="64070b0a100507102406051e05160b1603050a0d17014a0216">[email&#160;protected]</span></a></div>
+        <div class="contact-item-value">
+          <a href="mailto:contact@bazarorganise.fr">contact@bazarorganise.fr</a>
+        </div>
       </div>
       <div class="contact-item">
         <div class="contact-item-label">Localisation</div>
@@ -265,7 +533,9 @@
       </div>
       <div class="contact-item">
         <div class="contact-item-label">Site</div>
-        <div class="contact-item-value"><a href="https://bazarorganise.fr" target="_blank">bazarorganise.fr</a></div>
+        <div class="contact-item-value">
+          <a href="https://bazarorganise.fr" target="_blank">bazarorganise.fr</a>
+        </div>
       </div>
       <div class="contact-item">
         <div class="contact-item-label">Disponible pour</div>
@@ -276,6 +546,11 @@
 
 </div><!-- /about-page -->
 
-<!-- FOOTER -->
 <footer class="footer">
-  <span>Bazar Or
+  <span>Bazar Organisé — Xavier Talbot, Alfortville (94)</span>
+  <a href="index.html">← retour au work</a>
+</footer>
+
+</div><!-- /page -->
+</body>
+</html>
