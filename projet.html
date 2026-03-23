@@ -375,6 +375,7 @@
         heroImg.src = images[0];
         heroImg.alt = p.title;
         heroImg.onload = () => heroImg.classList.add('loaded');
+        heroImg.onerror = () => document.querySelector('.hero').style.display = 'none';
       }
 
       // Galerie (images 2+)
@@ -387,6 +388,7 @@
         img.alt = p.title;
         img.loading = 'lazy';
         img.onload = () => img.classList.add('loaded');
+        img.onerror = () => item.remove();
         item.appendChild(img);
         grid.appendChild(item);
       });
@@ -424,10 +426,10 @@
       if (p.images && Array.isArray(p.images) && p.images.length > 0) {
         return p.images;
       }
-      // Sinon on génère les chemins standard 01–06
+      // Sinon on génère les chemins standard 01–20
       const base = `assets/images/${slug}/`;
       const imgs = [];
-      for (let i = 1; i <= 6; i++) {
+      for (let i = 1; i <= 20; i++) {
         imgs.push(`${base}${String(i).padStart(2,'0')}.jpg`);
       }
       return imgs;
