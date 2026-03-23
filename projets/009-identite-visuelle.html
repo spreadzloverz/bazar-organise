@@ -39,26 +39,21 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify
 .client-tag { font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--light); }
 .client-name { font-size:18px; font-weight:500; color:var(--ink); margin-top:4px; margin-bottom:20px; }
 
-/* Conteneur image sans rognage */
+/* Images — ratio naturel, zéro rognage */
 .imgbox {
   background:#F2F2F2;
   border-radius:6px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
   overflow:hidden;
 }
-.imgbox img { width:100%; height:100%; object-fit:contain; display:block; }
-/* Pour scènes photo réelles (food truck, murs, vêtements portés) */
-.imgbox.scene img { object-fit:cover; }
+.imgbox img {
+  width:100%;
+  height:auto;
+  display:block;
+}
 
 .g3 { display:grid; grid-template-columns:repeat(3,1fr); gap:4px; margin-bottom:4px; }
 .g2 { display:grid; grid-template-columns:1fr 1fr; gap:4px; margin-bottom:4px; }
 .g1 { margin-bottom:4px; }
-.h300 { height:300px; }
-.h360 { height:360px; }
-.h240 { height:240px; }
-.h160 { height:160px; }
 
 .process-list { display:flex; flex-direction:column; }
 .process-item { display:grid; grid-template-columns:80px 1fr; gap:40px; padding:36px 0; border-top:1px solid var(--rule); }
@@ -97,7 +92,7 @@ footer { background:var(--ink); color:#999; padding:40px var(--pad); }
 <div class="hero">
   <p class="hero-meta">(009) — Branding · Identité de marque · 2022–2026</p>
   <h1 class="hero-title">Identité Visuelle<br>& Graphisme</h1>
-  <img class="hero-img" src="../assets/images/identite-visuelle/09.jpg" alt="Los Tacos Chingones — skull Día de los Muertos">
+  <img class="hero-img" src="../assets/images/identite-visuelle/01.jpg" alt="Los Tacos Chingones — skull Día de los Muertos">
   <p class="hero-img-caption">Los Tacos Chingones — illustration masque · identité visuelle</p>
 </div>
 
@@ -114,16 +109,32 @@ footer { background:var(--ink); color:#999; padding:40px var(--pad); }
 
 <div class="gallery">
 
-  <!-- RAZOM THERMIQUE -->
+  <!-- LOS TACOS CHINGONES -->
   <div class="client-block">
     <div class="client-sep">
-      <div class="client-tag">Projet client · Services · Chauffage & Climatisation</div>
-      <div class="client-name">Razom Thermique — Identité complète</div>
+      <div class="client-tag">Projet client · Restauration · Cuisine mexicaine · Food truck</div>
+      <div class="client-name">Los Tacos Chingones — Logo, identité visuelle & habillage complet</div>
     </div>
     <div class="g3">
-      <div class="imgbox h300"><img src="../assets/images/identite-visuelle/01.jpg" alt="Logo Razom Thermique"></div>
-      <div class="imgbox h300"><img src="../assets/images/identite-visuelle/02.jpg" alt="Charte graphique — palette et typographie"></div>
-      <div class="imgbox h300 scene"><img src="../assets/images/identite-visuelle/03.jpg" alt="Mockup véhicule — camion"></div>
+      <div class="imgbox"><img src="../assets/images/identite-visuelle/01.jpg" alt="Skull — masque identitaire"></div>
+      <div class="imgbox"><img src="../assets/images/identite-visuelle/02.jpg" alt="Mur menu noir — Tacos Quesadillas Guacamole Nachos"></div>
+      <div class="imgbox"><img src="../assets/images/identite-visuelle/03.jpg" alt="It's Taco Time — typo signalétique"></div>
+    </div>
+    <div class="g2">
+      <div class="imgbox"><img src="../assets/images/identite-visuelle/04.jpg" alt="It's Taco Time — mur craie"></div>
+      <div class="imgbox"><img src="../assets/images/identite-visuelle/05.jpg" alt="Cuisine Mexicaine Authentique — mur craie"></div>
+    </div>
+    <div class="g3">
+      <div class="imgbox"><img src="../assets/images/identite-visuelle/06.jpg" alt="Mur rouge Bayonne — Los Tacos Chingones"></div>
+      <div class="imgbox"><img src="../assets/images/identite-visuelle/07.jpg" alt="Cactus sombrero — mur intérieur"></div>
+      <div class="imgbox"><img src="../assets/images/identite-visuelle/08.jpg" alt="Cuisine Mexicaine Authentique — entrée restaurant"></div>
+    </div>
+    <div class="g2">
+      <div class="imgbox"><img src="../assets/images/identite-visuelle/09.jpg" alt="Food truck de nuit — service"></div>
+      <div class="imgbox"><img src="../assets/images/identite-visuelle/10.jpg" alt="Enseigne bois panoramique — Los Tacos Chingones"></div>
+    </div>
+    <div class="g1">
+      <div class="imgbox"><img src="../assets/images/identite-visuelle/11.jpg" alt="Détail résine — lettrage script sur bois"></div>
     </div>
   </div>
 
@@ -134,52 +145,30 @@ footer { background:var(--ink); color:#999; padding:40px var(--pad); }
       <div class="client-name">Lamalisse — Logo, calligraphie & déclinaison textile</div>
     </div>
     <div class="g2">
-      <div class="imgbox h300"><img src="../assets/images/identite-visuelle/04.jpg" alt="Logo Lamalisse — lama trait continu"></div>
-      <div class="imgbox h300"><img src="../assets/images/identite-visuelle/05.jpg" alt="Signature calligraphique"></div>
+      <div class="imgbox"><img src="../assets/images/identite-visuelle/12.jpg" alt="Signature calligraphique — premier logo produit"></div>
+      <div class="imgbox"><img src="../assets/images/identite-visuelle/13.jpg" alt="Logo Lamalisse — lama trait continu"></div>
     </div>
     <div class="g3">
-      <div class="imgbox h360 scene"><img src="../assets/images/identite-visuelle/06.jpg" alt="Hoodie marine brodé"></div>
-      <div class="imgbox h360 scene"><img src="../assets/images/identite-visuelle/07.jpg" alt="Sweat noir brodé"></div>
-      <div class="imgbox h360 scene"><img src="../assets/images/identite-visuelle/08.jpg" alt="Hoodie rose brodé"></div>
+      <div class="imgbox"><img src="../assets/images/identite-visuelle/14.jpg" alt="Hoodie rose brodé"></div>
+      <div class="imgbox"><img src="../assets/images/identite-visuelle/15.jpg" alt="Hoodie marine brodé"></div>
+      <div class="imgbox"><img src="../assets/images/identite-visuelle/16.jpg" alt="Hoodie vert brodé"></div>
     </div>
   </div>
 
-  <!-- LOS TACOS CHINGONES -->
+  <!-- RAZOM THERMIQUE -->
   <div class="client-block">
     <div class="client-sep">
-      <div class="client-tag">Projet client · Restauration · Cuisine mexicaine · Food truck</div>
-      <div class="client-name">Los Tacos Chingones — Logo, identité visuelle & habillage complet</div>
-    </div>
-    <div class="g3">
-      <div class="imgbox h300"><img src="../assets/images/identite-visuelle/09.jpg" alt="Skull — masque identitaire"></div>
-      <div class="imgbox h300"><img src="../assets/images/identite-visuelle/10.jpg" alt="It's Taco Time — typo signalétique"></div>
-      <div class="imgbox h300 scene"><img src="../assets/images/identite-visuelle/11.jpg" alt="Mur noir — menu graffiti"></div>
+      <div class="client-tag">Projet client · Services · Chauffage & Climatisation</div>
+      <div class="client-name">Razom Thermique — Identité complète</div>
     </div>
     <div class="g2">
-      <div class="imgbox h240 scene"><img src="../assets/images/identite-visuelle/12.jpg" alt="Food truck de jour — habillage complet"></div>
-      <div class="imgbox h240 scene"><img src="../assets/images/identite-visuelle/15.jpg" alt="Food truck de nuit — service"></div>
+      <div class="imgbox"><img src="../assets/images/identite-visuelle/17.jpg" alt="Logo Razom Thermique"></div>
+      <div class="imgbox"><img src="../assets/images/identite-visuelle/18.jpg" alt="Charte graphique — palette et typographie"></div>
     </div>
     <div class="g3">
-      <div class="imgbox h240 scene"><img src="../assets/images/identite-visuelle/13.jpg" alt="Mur Bayonne rouge"></div>
-      <div class="imgbox h240 scene"><img src="../assets/images/identite-visuelle/16.jpg" alt="Détail résine — lettrage sur bois"></div>
-      <div class="imgbox h240 scene"><img src="../assets/images/identite-visuelle/14.jpg" alt="Panneau menu rétroéclairé"></div>
-    </div>
-    <div class="g1">
-      <div class="imgbox h160 scene"><img src="../assets/images/identite-visuelle/17.jpg" alt="Enseigne bois panoramique — Los Tacos Chingones"></div>
-    </div>
-  </div>
-
-  <!-- CERCLE INTERNATIONAL DES CEINTURES NOIRES -->
-  <div class="client-block">
-    <div class="client-sep">
-      <div class="client-tag">Projet client · Association · Arts martiaux</div>
-      <div class="client-name">Cercle International des Ceintures Noires — Logo</div>
-    </div>
-    <div class="g2">
-      <div class="imgbox h300"><img src="../assets/images/identite-visuelle/18.jpg" alt="Logo Cercle International des Ceintures Noires — globe et ceinture noire"></div>
-      <div style="display:flex;align-items:center;padding:24px;">
-        <p style="font-size:15px;line-height:1.75;color:var(--mid);font-weight:300;">Logotype pour association d'arts martiaux. Dessin intégrant un globe terrestre au trait, une ceinture noire nouée au centre — symbole de maîtrise et d'internationalité — avec idéogrammes japonais en rouge. Trait linéaire, noir et blanc, style emblème.</p>
-      </div>
+      <div class="imgbox"><img src="../assets/images/identite-visuelle/19.jpg" alt="Mockup véhicule — camion"></div>
+      <div class="imgbox"><img src="../assets/images/identite-visuelle/20.jpg" alt="Courrier commercial — en-tête"></div>
+      <div class="imgbox"><img src="../assets/images/identite-visuelle/21.jpg" alt="Carte de visite"></div>
     </div>
   </div>
 
@@ -190,8 +179,8 @@ footer { background:var(--ink); color:#999; padding:40px var(--pad); }
       <div class="client-name">Sunkalo Prod — Logos & identité visuelle</div>
     </div>
     <div class="g2">
-      <div class="imgbox h300"><img src="../assets/images/identite-visuelle/19.jpg" alt="Sunkalo Prod — logo S gothique avec barres"></div>
-      <div class="imgbox h300"><img src="../assets/images/identite-visuelle/20.jpg" alt="Sunkalo Prod — logo S couronne et drip"></div>
+      <div class="imgbox"><img src="../assets/images/identite-visuelle/22.jpg" alt="Sunkalo Prod — logo S gothique avec barres"></div>
+      <div class="imgbox"><img src="../assets/images/identite-visuelle/23.png" alt="Sunkalo Prod — logo S couronne et drip"></div>
     </div>
   </div>
 
