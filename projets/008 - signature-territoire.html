@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Signature comme Territoire — Bazar Organisé</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #FAFAFA;
+      --ink: #111111;
+      --ink-muted: #888888;
+      --accent: #111111;
+      --border: #E5E5E5;
+      --radius: 12px;
+      --gap: 12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ───────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(250,250,250,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-brand {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--ink); }
+
+    /* ── HERO ──────────────────────────────────────────── */
+    .hero {
+      padding-top: 100px;
+      padding-bottom: 0;
+    }
+
+    .hero-img {
+      width: 100%;
+      height: 62vh;
+      min-height: 380px;
+      object-fit: cover;
+      border-radius: 0 0 var(--radius) var(--radius);
+      display: block;
+    }
+
+    /* ── HEADER PROJET ─────────────────────────────────── */
+    .project-header {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 56px 40px 48px;
+    }
+
+    .project-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 20px;
+    }
+
+    .project-title {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 32px;
+    }
+
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 40px;
+    }
+
+    .tag {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--ink-muted);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 4px 14px;
+    }
+
+    .project-intro {
+      max-width: 600px;
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--ink);
+    }
+
+    /* ── SÉPARATEUR ────────────────────────────────────── */
+    .divider {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .divider hr {
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── TEXTE PROJET ──────────────────────────────────── */
+    .project-text {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 48px 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px 64px;
+    }
+
+    .text-block h3 {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 12px;
+    }
+
+    .text-block p {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--ink);
+    }
+
+    .adn-line {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--ink-muted);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── GALERIE ───────────────────────────────────────── */
+    .gallery-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    .gallery-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 24px;
+      padding: 0 16px;
+    }
+
+    .masonry {
+      columns: 3;
+      column-gap: var(--gap);
+    }
+
+    .masonry-item {
+      break-inside: avoid;
+      margin-bottom: var(--gap);
+      border-radius: var(--radius);
+      overflow: hidden;
+      cursor: zoom-in;
+      position: relative;
+    }
+
+    .masonry-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.4s ease, opacity 0.3s;
+      transform-origin: center;
+    }
+
+    .masonry-item:hover img {
+      transform: scale(1.02);
+      opacity: 0.92;
+    }
+
+    /* ── WIDE ITEMS ────────────────────────────────────── */
+    .masonry-item.wide {
+      column-span: all;
+      margin-bottom: var(--gap);
+    }
+
+    .masonry-item.wide img {
+      border-radius: var(--radius);
+      width: 100%;
+    }
+
+    /* ── LIGHTBOX ──────────────────────────────────────── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: rgba(0,0,0,0.92);
+      cursor: zoom-out;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox.open {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+
+    .lightbox-close {
+      position: fixed;
+      top: 24px; right: 32px;
+      font-size: 28px;
+      color: rgba(255,255,255,0.7);
+      cursor: pointer;
+      font-weight: 300;
+      line-height: 1;
+      user-select: none;
+    }
+
+    .lightbox-prev,
+    .lightbox-next {
+      position: fixed;
+      top: 50%; transform: translateY(-50%);
+      font-size: 28px;
+      color: rgba(255,255,255,0.5);
+      cursor: pointer;
+      padding: 16px;
+      user-select: none;
+      transition: color 0.2s;
+    }
+
+    .lightbox-prev:hover, .lightbox-next:hover { color: white; }
+    .lightbox-prev { left: 16px; }
+    .lightbox-next { right: 16px; }
+
+    /* ── FOOTER NAV ────────────────────────────────────── */
+    .project-nav {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 40px 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+      padding-top: 40px;
+    }
+
+    .nav-btn {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--ink-muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+
+    .nav-btn:hover { color: var(--ink); }
+
+    .back-btn {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      padding: 10px 20px;
+      border-radius: 100px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .back-btn:hover {
+      background: var(--ink);
+      color: var(--bg);
+      border-color: var(--ink);
+    }
+
+    /* ── RESPONSIVE ────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .masonry { columns: 2; }
+      .project-text { grid-template-columns: 1fr; gap: 32px; }
+      nav { padding: 16px 20px; }
+      .project-header { padding: 40px 20px 36px; }
+      .gallery-section { padding: 0 12px 60px; }
+    }
+
+    @media (max-width: 600px) {
+      .masonry { columns: 1; }
+      .nav-links { display: none; }
+      .project-title { font-size: 28px; }
+      .project-nav { flex-direction: column; gap: 20px; align-items: flex-start; }
+    }
+
+    /* ── ANIMATIONS ────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .project-header { animation: fadeUp 0.6s ease both; }
+    .masonry-item {
+      opacity: 0;
+      animation: fadeUp 0.5s ease forwards;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="../index.html" class="nav-brand">Bazar Organisé</a>
+    <ul class="nav-links">
+      <li><a href="../index.html">(work)</a></li>
+      <li><a href="../a-propos.html">(about)</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <img
+      src="../assets/images/signature-territoire/03.jpg"
+      alt="La Signature comme Territoire — Bazar Organisé"
+      class="hero-img"
+    >
+  </div>
+
+  <!-- HEADER -->
+  <div class="project-header">
+    <p class="project-label">(work) — Graffiti & interventions murales</p>
+    <h1 class="project-title">La Signature<br>comme Territoire</h1>
+    <div class="project-meta">
+      <span class="tag">Graffiti</span>
+      <span class="tag">Lettrage</span>
+      <span class="tag">Fresque murale</span>
+      <span class="tag">Personnalisation</span>
+      <span class="tag">Couleur</span>
+    </div>
+    <p class="project-intro">
+      Fresques, lettrages et interventions sur supports variés — murs, toiles, papier.
+      Le travail est centré sur la construction de la lettre comme forme graphique :
+      équilibre, tension, couleur, inscription dans l'espace.
+    </p>
+  </div>
+
+  <div class="divider"><hr></div>
+
+  <!-- TEXTE -->
+  <div class="project-text">
+    <div class="text-block">
+      <h3>(démarche)</h3>
+      <p>
+        Le graffiti est abordé ici comme une architecture graphique.
+        Le travail repose sur la construction des lettres, leur équilibre,
+        leur tension, leur inscription dans un espace existant.
+        Il ne s'agit pas de neutraliser le support, mais de composer avec lui :
+        textures, fissures, joints et aspérités participent pleinement à la peinture.
+      </p>
+    </div>
+    <div class="text-block">
+      <h3>(positionnement)</h3>
+      <p>
+        Ce projet s'inscrit dans une pratique du graffiti affirmée mais non démonstrative.
+        La signature n'est pas revendiquée comme performance, mais comme présence graphique.
+        Faire du mur — ou de la toile — un espace actif, où la lettre devient
+        une forme construite, visible, assumée, sans discours ajouté.
+      </p>
+    </div>
+    <div class="text-block">
+      <h3>(supports)</h3>
+      <p>
+        Murs extérieurs et intérieurs, toiles sur châssis, papier, béton, brique.
+        Commandes personnelles (chambres d'enfants, espaces professionnels)
+        et pièces libres. Du format A3 à la fresque monumentale.
+      </p>
+    </div>
+    <div class="text-block">
+      <h3>(ADN)</h3>
+      <p class="adn-line">Graffiti · Lettrage · Couleur<br>Mur · Espace public · Geste · Structure</p>
+    </div>
+  </div>
+
+  <div class="divider" style="margin-bottom:48px;"><hr></div>
+
+  <!-- GALERIE -->
+  <div class="gallery-section">
+    <p class="gallery-label">(galerie) — 30 pièces</p>
+    <div class="masonry" id="gallery">
+
+      <!-- Rangée 1 — grands formats panoramiques -->
+      <div class="masonry-item wide" data-index="0">
+        <img src="../assets/images/signature-territoire/02.jpg" alt="Graffiti lettrage sur toile" loading="lazy">
+      </div>
+
+      <!-- Corps principal -->
+      <div class="masonry-item" data-index="1">
+        <img src="../assets/images/signature-territoire/01.jpg" alt="Be Cool Be Jack — Graffiti" loading="lazy">
+      </div>
+      <div class="masonry-item" data-index="2">
+        <img src="../assets/images/signature-territoire/04.jpg" alt="Graffiti — Bazar Organisé" loading="lazy">
+      </div>
+      <div class="masonry-item" data-index="3">
+        <img src="../assets/images/signature-territoire/09.jpg" alt="Portrait fresque" loading="lazy">
+      </div>
+      <div class="masonry-item" data-index="4">
+        <img src="../assets/images/signature-territoire/05.jpg" alt="Composition lettrage" loading="lazy">
+      </div>
+      <div class="masonry-item" data-index="5">
+        <img src="../assets/images/signature-territoire/10.jpg" alt="Graffiti détail" loading="lazy">
+      </div>
+      <div class="masonry-item" data-index="6">
+        <img src="../assets/images/signature-territoire/06.jpg" alt="Graffiti couleur" loading="lazy">
+      </div>
+      <div class="masonry-item" data-index="7">
+        <img src="../assets/images/signature-territoire/07.jpg" alt="Fresque murale" loading="lazy">
+      </div>
+      <div class="masonry-item" data-index="8">
+        <img src="../assets/images/signature-territoire/08.jpg" alt="Composition portrait" loading="lazy">
+      </div>
+
+      <!-- Wide -->
+      <div class="masonry-item wide" data-index="9">
+        <img src="../assets/images/signature-territoire/03.jpg" alt="Grande fresque murale" loading="lazy">
+      </div>
+
+      <div class="masonry-item" data-index="10">
+        <img src="../assets/images/signature-territoire/11.jpg" alt="Graffiti — détail" loading="lazy">
+      </div>
+      <div class="masonry-item" data-index="11">
+        <img src="../assets/images/signature-territoire/12.jpg" alt="Lettrage saturé" loading="lazy">
+      </div>
+      <div class="masonry-item" data-index="12">
+        <img src="../assets/images/signature-territoire/13.jpg" alt="Composition murale" loading="lazy">
+      </div>
+      <div class="masonry-item" data-index="13">
+        <img src="../assets/images/signature-territoire/14.jpg" alt="Fresque colorée" loading="lazy">
+      </div>
+      <div class="masonry-item" data-index="14">
+        <img src="../assets/images/signature-territoire/15.jpg" alt="Graffiti pièce" loading="lazy">
+      </div>
+      <div class="masonry-item" data-index="15">
+        <img src="../assets/images/signature-territoire/16.jpg" alt="Lettrage mural" loading="lazy">
+      </div>
+      <div class="masonry-item" data-index="16">
+        <img src="../assets/images/signature-territoire/17.jpg" alt="Graffiti personnage" loading="lazy">
+      </div>
+      <div class="masonry-item" data-index="17">
+        <img src="../assets/images/signature-territoire/18.jpg" alt="Intervention urbaine" loading="lazy">
+      </div>
+      <div class="masonry-item" data-index="18">
+        <img src="../assets/images/signature-territoire/19.jpg" alt="Fresque détail" loading="lazy">
+      </div>
+      <div class="masonry-item" data-index="19">
+        <img src="../assets/images/signature-territoire/20.jpg" alt="Couleurs saturées" loading="lazy">
+      </div>
+      <div class="masonry-item" data-index="20">
+        <img src="../assets/images/signature-territoire/21.jpg" alt="Signature graphique" loading="lazy">
+      </div>
+      <div class="masonry-item" data-index="21">
+        <img src="../assets/images/signature-territoire/22.png" alt="Graffiti sur béton" loading="lazy">
+      </div>
+      <div class="masonry-item" data-index="22">
+        <img src="../assets/images/signature-territoire/23.png" alt="Détail lettrage" loading="lazy">
+      </div>
+      <div class="masonry-item" data-index="23">
+        <img src="../assets/images/signature-territoire/24.png" alt="Fresque portrait" loading="lazy">
+      </div>
+      <div class="masonry-item" data-index="24">
+        <img src="../assets/images/signature-territoire/25.png" alt="Composition colorée" loading="lazy">
+      </div>
+
+      <!-- Wide -->
+      <div class="masonry-item wide" data-index="25">
+        <img src="../assets/images/signature-territoire/11.jpg" alt="Mur panoramique" loading="lazy">
+      </div>
+
+      <div class="masonry-item" data-index="26">
+        <img src="../assets/images/signature-territoire/26.jpg" alt="Sketch lettrage" loading="lazy">
+      </div>
+      <div class="masonry-item" data-index="27">
+        <img src="../assets/images/signature-territoire/27.jpg" alt="Croquis graffiti" loading="lazy">
+      </div>
+      <div class="masonry-item" data-index="28">
+        <img src="../assets/images/signature-territoire/28.jpg" alt="Étude de lettre" loading="lazy">
+      </div>
+      <div class="masonry-item" data-index="29">
+        <img src="../assets/images/signature-territoire/29.jpg" alt="Recherche graphique" loading="lazy">
+      </div>
+      <div class="masonry-item" data-index="30">
+        <img src="../assets/images/signature-territoire/30.jpg" alt="Lettrage final" loading="lazy">
+      </div>
+      <div class="masonry-item" data-index="31">
+        <img src="../assets/images/signature-territoire/12.jpg" alt="Graffiti mural" loading="lazy">
+      </div>
+
+    </div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <span class="lightbox-close" id="lbClose">×</span>
+    <span class="lightbox-prev" id="lbPrev">‹</span>
+    <img src="" id="lbImg" alt="">
+    <span class="lightbox-next" id="lbNext">›</span>
+  </div>
+
+  <!-- NAV PROJETS -->
+  <div class="project-nav">
+    <a href="../index.html" class="nav-btn">← Retour aux projets</a>
+    <a href="../index.html" class="back-btn">Tous les projets</a>
+  </div>
+
+  <script>
+    // Animations au scroll
+    const items = document.querySelectorAll('.masonry-item');
+    items.forEach((el, i) => {
+      el.style.animationDelay = `${0.04 * (i % 9)}s`;
+    });
+
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    items.forEach(el => obs.observe(el));
+
+    // Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lbImg    = document.getElementById('lbImg');
+    const lbClose  = document.getElementById('lbClose');
+    const lbPrev   = document.getElementById('lbPrev');
+    const lbNext   = document.getElementById('lbNext');
+
+    const allImgs = [...document.querySelectorAll('.masonry-item img')];
+    let current = 0;
+
+    function openLb(idx) {
+      current = idx;
+      lbImg.src = allImgs[idx].src;
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLb() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    allImgs.forEach((img, i) => {
+      img.parentElement.addEventListener('click', () => openLb(i));
+    });
+
+    lbClose.addEventListener('click', closeLb);
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLb(); });
+
+    lbPrev.addEventListener('click', (e) => {
+      e.stopPropagation();
+      current = (current - 1 + allImgs.length) % allImgs.length;
+      lbImg.src = allImgs[current].src;
+    });
+
+    lbNext.addEventListener('click', (e) => {
+      e.stopPropagation();
+      current = (current + 1) % allImgs.length;
+      lbImg.src = allImgs[current].src;
+    });
+
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLb();
+      if (e.key === 'ArrowLeft') lbPrev.click();
+      if (e.key === 'ArrowRight') lbNext.click();
+    });
+  </script>
+
+</body>
+</html>
