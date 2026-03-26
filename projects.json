@@ -8,12 +8,7 @@
     "act": "I",
     "year": "2022",
     "hero": true,
-    "tags": [
-      "Skateboard",
-      "Mobilier",
-      "Modularité",
-      "Design objet"
-    ],
+    "tags": ["Skateboard", "Mobilier", "Modularité", "Design objet"],
     "description": "Bibliothèques et étagères conçues à partir de planches de skateboard détournées. Chaque structure compose une grille spatiale tridimensionnelle : tiges filetées verticales, plateaux en decks authentiques, roulettes permettant la mobilité. Palette primaire assumée — rouge, bleu, jaune en aplats alternés. L'objet d'origine est transformé en élément structurant de l'espace domestique.",
     "context": "Projet personnel — Design objet",
     "images_folder": "assets/images/skate-modulaire/",
@@ -29,12 +24,7 @@
     "act": "I",
     "year": "2022",
     "hero": false,
-    "tags": [
-      "Mobilier",
-      "Modularité",
-      "Rangement",
-      "Système"
-    ],
+    "tags": ["Mobilier", "Modularité", "Rangement", "Système"],
     "description": "Système de rangement modulaire constitué de cubes assemblables. Chaque unité peut être combinée, empilée ou réorganisée selon les usages et les espaces. Le principe évolutif permet une adaptation continue du mobilier à son contexte d'utilisation — logique de fabrication sérielle et personnalisable.",
     "context": "Projet personnel — Design objet",
     "images_folder": "assets/images/cubes-evolutifs/",
@@ -50,12 +40,7 @@
     "act": "II",
     "year": "2023",
     "hero": false,
-    "tags": [
-      "Logo",
-      "Charte graphique",
-      "Restauration",
-      "Lifestyle"
-    ],
+    "tags": ["Logo", "Charte graphique", "Restauration", "Lifestyle"],
     "description": "Identité visuelle complète pour un établissement de restauration à l'univers lifestyle et solaire. Conception du logotype, de la charte graphique et déclinaison multimodale : signalétique, supports print, habillage de mobilier. Le projet traduit une énergie bonne vivante en système visuel cohérent et immédiatement reconnaissable.",
     "context": "Commande client — Identité de marque",
     "images_folder": "assets/images/pura-vida/",
@@ -71,12 +56,7 @@
     "act": "II",
     "year": "2019–2026",
     "hero": false,
-    "tags": [
-      "Dessin",
-      "Territoire",
-      "Observation",
-      "Cartographie"
-    ],
+    "tags": ["Dessin", "Territoire", "Observation", "Cartographie"],
     "description": "Séries de dessins explorant le territoire comme espace mental. Des relevés graphiques qui cartographient l'espace vécu, les flux, les textures urbaines. Le dessin ici n'est pas illustratif mais topographique — une façon d'habiter par le trait, de rendre visible ce qu'un regard rapide ne retient pas.",
     "context": "Démarche personnelle — Série ouverte",
     "images_folder": "assets/images/cartographies/",
@@ -92,12 +72,7 @@
     "act": "III",
     "year": "2024",
     "hero": false,
-    "tags": [
-      "Scénographie",
-      "Spectacle",
-      "Décor",
-      "GRS"
-    ],
+    "tags": ["Scénographie", "Spectacle", "Décor", "GRS"],
     "description": "Scénographie pour un spectacle de Gymnastique Rythmique Sportive (GRS). Conception et réalisation des éléments de décor, habillage de l'espace de performance, coordination des contraintes techniques liées à la pratique sportive et à la mise en scène visuelle. Le projet conjugue exigences fonctionnelles et intention esthétique.",
     "context": "Commande — Association sportive",
     "images_folder": "assets/images/scenographie-alice/",
@@ -106,27 +81,6 @@
   },
   {
     "id": "006",
-    "slug": "scenographie-fluo",
-    "title": "Soirée Fluo",
-    "subtitle": "Scénographie · UV",
-    "category": "Scénographie Événementielle",
-    "act": "III",
-    "year": "2024",
-    "hero": false,
-    "tags": [
-      "Scénographie",
-      "UV",
-      "Ambiance",
-      "Événement"
-    ],
-    "description": "Scénographie événementielle immersive pour une soirée à thème fluorescent. Conception de l'ensemble du dispositif lumineux et décoratif sous lumière UV : habillage de l'espace, peintures fluo, signalétique lumineuse. La contrainte technique du spectre UV est utilisée comme moteur d'invention visuelle.",
-    "context": "Commande événementielle",
-    "images_folder": "assets/images/scenographie-fluo/",
-    "page": "projets/006-scenographie-fluo.html",
-    "status": "photos_pending"
-  },
-  {
-    "id": "007",
     "slug": "design-espace",
     "title": "Design Espace",
     "subtitle": "Architecture intérieure · SketchUp",
@@ -134,20 +88,15 @@
     "act": "III",
     "year": "2022–2025",
     "hero": false,
-    "tags": [
-      "Architecture intérieure",
-      "SketchUp",
-      "Chantier",
-      "Aménagement"
-    ],
+    "tags": ["Architecture intérieure", "SketchUp", "Chantier", "Aménagement"],
     "description": "Projets d'aménagement intérieur de la conception à la réalisation. Relevés de mesures, modélisation 3D sur SketchUp, coordination des corps d'état, suivi de chantier. Chaque projet engage une approche globale qui anticipe l'usage, la maintenance et l'évolution du lieu dans le temps.",
     "context": "Commandes privées — Architecture intérieure",
     "images_folder": "assets/images/design-espace/",
-    "page": "projets/007-design-espace.html",
+    "page": "projets/006-design-espace.html",
     "status": "photos_pending"
   },
   {
-    "id": "008",
+    "id": "007",
     "slug": "graffiti",
     "title": "La signature comme territoire",
     "subtitle": "Art Mural · Lettrage structuré",
@@ -155,36 +104,29 @@
     "act": "I",
     "year": "2019–2026",
     "hero": false,
-    "tags": [
-      "Graffiti structuré",
-      "Lettrage complexe",
-      "Énergie urbaine",
-      "Identité graphique",
-      "Geste assumé"
-    ],
+    "tags": ["Graffiti structuré", "Lettrage complexe", "Énergie urbaine", "Identité graphique", "Geste assumé"],
     "description": "Pratique fondatrice. Le graffiti comme langue première : appropriation de l'espace, rapport direct au mur, maîtrise du geste et de l'échelle. De la pièce de rue au mur privé commandé, ces travaux ancrent l'ensemble de la pratique dans une culture du geste, de la lisibilité et de la signature visuelle.",
     "context": "Pratique personnelle & commandes",
     "images_folder": "assets/images/graffiti/",
-    "page": "projets/008-graffiti.html",
+    "page": "projets/007-graffiti.html",
     "status": "photos_ok",
     "images": [
-      "assets/images/graffiti/01.jpg",
-      "assets/images/graffiti/02.jpg",
-      "assets/images/graffiti/03.jpg",
-      "assets/images/graffiti/04.jpg",
-      "assets/images/graffiti/05.jpg",
-      "assets/images/graffiti/06.jpg",
-      "assets/images/graffiti/07.jpg",
-      "assets/images/graffiti/08.jpg",
-      "assets/images/graffiti/09.jpg",
-      "assets/images/graffiti/10.jpg",
-      "assets/images/graffiti/11.jpg",
-      "assets/images/graffiti/12.jpg",
-      "assets/images/graffiti/13.jpg"
+      "assets/images/graffiti/01.png",
+      "assets/images/graffiti/02.png",
+      "assets/images/graffiti/03.png",
+      "assets/images/graffiti/04.png",
+      "assets/images/graffiti/05.png",
+      "assets/images/graffiti/06.png",
+      "assets/images/graffiti/07.png",
+      "assets/images/graffiti/08.png",
+      "assets/images/graffiti/09.png",
+      "assets/images/graffiti/10.png",
+      "assets/images/graffiti/11.png",
+      "assets/images/graffiti/12.png"
     ]
   },
   {
-    "id": "009",
+    "id": "008",
     "slug": "identite-visuelle",
     "title": "Identité Visuelle & Graphisme",
     "subtitle": "Branding · Charte graphique",
@@ -192,20 +134,15 @@
     "act": "II",
     "year": "2022–2026",
     "hero": false,
-    "tags": [
-      "Logo",
-      "Charte graphique",
-      "Branding",
-      "Print"
-    ],
+    "tags": ["Logo", "Charte graphique", "Branding", "Print"],
     "description": "Identités visuelles et systèmes graphiques pour marques et professionnels. Logos, chartes, déclinaisons print et digitales.",
     "context": "Commandes clients — Identité de marque",
     "images_folder": "assets/images/identite-visuelle/",
-    "page": "projets/009-identite-visuelle.html",
+    "page": "projets/008-identite-visuelle.html",
     "status": "photos_pending"
   },
   {
-    "id": "010",
+    "id": "009",
     "slug": "habillage-monumental",
     "title": "Habillage Monumental",
     "subtitle": "Fresque · Grand format",
@@ -213,20 +150,15 @@
     "act": "III",
     "year": "2021–2025",
     "hero": false,
-    "tags": [
-      "Fresque",
-      "Grand format",
-      "Architecture",
-      "Monumental"
-    ],
+    "tags": ["Fresque", "Grand format", "Architecture", "Monumental"],
     "description": "Réalisations murales à grande échelle : fresques architecturales, habillages de façades, signalétique monumentale.",
     "context": "Commandes — Espaces publics & privés",
     "images_folder": "assets/images/habillage-monumental/",
-    "page": "projets/010-habillage-monumental.html",
+    "page": "projets/009-habillage-monumental.html",
     "status": "photos_ok"
   },
   {
-    "id": "011",
+    "id": "010",
     "slug": "traits-identite",
     "title": "Traits d'Identité",
     "subtitle": "Identité visuelle · Marques",
@@ -234,20 +166,15 @@
     "act": "II",
     "year": "2022–2026",
     "hero": false,
-    "tags": [
-      "Identité visuelle",
-      "Marques",
-      "Territoire graphique",
-      "Branding"
-    ],
+    "tags": ["Identité visuelle", "Marques", "Territoire graphique", "Branding"],
     "description": "Exploration des systèmes d'identité visuelle à travers leurs éléments fondamentaux : le trait, la couleur, la typographie, la répétition.",
     "context": "Projets personnels & commandes",
     "images_folder": "assets/images/traits-identite/",
-    "page": "projets/011-traits-identite.html",
+    "page": "projets/010-traits-identite.html",
     "status": "photos_ok"
   },
   {
-    "id": "012",
+    "id": "011",
     "slug": "sketchs-lettrages",
     "title": "Sketchs & Lettrages",
     "subtitle": "Dessin · Process créatif",
@@ -255,20 +182,15 @@
     "act": "I",
     "year": "2019–2026",
     "hero": false,
-    "tags": [
-      "Sketch",
-      "Calligraphie",
-      "Process créatif",
-      "Main levée"
-    ],
+    "tags": ["Sketch", "Calligraphie", "Process créatif", "Main levée"],
     "description": "Carnet de recherches graphiques. Lettrages, compositions, études de formes, explorations typographiques. Le process visible avant la mise au propre.",
     "context": "Pratique continue — Carnets de recherche",
     "images_folder": "assets/images/sketchs-lettrages/",
-    "page": "projets/012-sketchs-lettrages.html",
+    "page": "projets/011-sketchs-lettrages.html",
     "status": "photos_ok"
   },
   {
-    "id": "013",
+    "id": "012",
     "slug": "photographie",
     "title": "Ce qui reste quand on ne pose pas",
     "subtitle": "Argentique · Regard",
@@ -276,21 +198,15 @@
     "act": "IV",
     "year": "2019–2026",
     "hero": false,
-    "tags": [
-      "Argentique",
-      "Grain",
-      "Intime",
-      "Mémoire",
-      "Instant"
-    ],
+    "tags": ["Argentique", "Grain", "Intime", "Mémoire", "Instant"],
     "description": "Une pratique photographique sans prétention de photographe — juste un œil qui documente, observe, s'amuse. Argentique principalement.",
     "context": "Pratique personnelle",
     "images_folder": "assets/images/photographie/",
-    "page": "projets/013-photographie.html",
+    "page": "projets/012-photographie.html",
     "status": "photos_ok"
   },
   {
-    "id": "014",
+    "id": "013",
     "slug": "vetements",
     "title": "Vêtements",
     "subtitle": "Textile · Customisation",
@@ -298,20 +214,15 @@
     "act": "II",
     "year": "2021–2026",
     "hero": false,
-    "tags": [
-      "Customisation",
-      "Textile",
-      "Sérigraphie",
-      "Pièce unique"
-    ],
+    "tags": ["Customisation", "Textile", "Sérigraphie", "Pièce unique"],
     "description": "Pièces textiles customisées : sérigraphies, peintures directes, patchs, broderies. Chaque pièce est unique, pensée comme un objet graphique porté.",
     "context": "Projets personnels & commandes",
     "images_folder": "assets/images/vetements/",
-    "page": "projets/014-vetements.html",
+    "page": "projets/013-vetements.html",
     "status": "photos_ok"
   },
   {
-    "id": "015",
+    "id": "014",
     "slug": "ateliers",
     "title": "Ateliers",
     "subtitle": "Transmission · Pédagogie",
@@ -319,16 +230,11 @@
     "act": "IV",
     "year": "2021–2026",
     "hero": false,
-    "tags": [
-      "Atelier",
-      "Transmission",
-      "Pédagogie",
-      "Création collective"
-    ],
+    "tags": ["Atelier", "Transmission", "Pédagogie", "Création collective"],
     "description": "Ateliers de pratiques artistiques et créatives. Arts plastiques, cinéma itinérant, lettrages, graffiti initiation. L'atelier comme espace de transmission horizontale.",
     "context": "Ateliers — Associations & événements",
     "images_folder": "assets/images/ateliers/",
-    "page": "projets/015-ateliers.html",
+    "page": "projets/014-ateliers.html",
     "status": "photos_ok"
   }
 ]
