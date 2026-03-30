@@ -53,10 +53,10 @@ nav {
 
 .gallery { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad) 80px; }
 .gallery-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-bottom: 4px; }
-.gallery-3 img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 6px; display: block; background: var(--rule); }
+.gallery-3 img { width: 100%; height: auto; border-radius: 6px; display: block; }
 .gallery-wide { margin-bottom: 4px; }
-.gallery-wide img { width: 100%; aspect-ratio: 3/1; object-fit: cover; border-radius: 6px; display: block; background: var(--rule); }
-.gallery-wide-tall img { width: 100%; aspect-ratio: 16/7; object-fit: cover; border-radius: 6px; display: block; background: var(--rule); }
+.gallery-wide img { width: 100%; height: auto; border-radius: 6px; display: block; }
+.gallery-wide-tall img { width: 100%; height: auto; border-radius: 6px; display: block; }
 
 .process-list { display: flex; flex-direction: column; }
 .process-item { display: grid; grid-template-columns: 80px 1fr; gap: 40px; padding: 36px 0; border-top: 1px solid var(--rule); }
@@ -100,6 +100,10 @@ footer { background: var(--ink); color: #999; padding: 40px var(--pad); }
   <h1 class="hero-title">Traits<br>d'Identité</h1>
   <img class="hero-img" src="../assets/images/traits-identite/01.jpg" alt="Be Cool Be Jack — toile graffiti" onerror="this.style.minHeight='480px'">
   <p class="hero-img-caption">Be Cool Be Jack — toile graffiti · lettrage stylisé · personnage</p>
+
+  <div class="gallery-wide" style="margin-top:4px;">
+    <img src="../assets/images/traits-identite/9.jpg" alt="Traits d'Identite — 9" loading="lazy" onerror="this.style.minHeight='260px'">
+  </div>
 </div>
 
 <section class="section">
@@ -150,7 +154,7 @@ footer { background: var(--ink); color: #999; padding: 40px var(--pad); }
   </div>
   <!-- Le Metro pleine largeur -->
   <div class="gallery-wide-tall" style="margin-top:4px;">
-    <img src="../assets/images/traits-identite/08.jpg" alt="Le Metro — lettrage blanc sur fond noir" onerror="this.style.minHeight='220px'">
+    <img src="../assets/images/traits-identite/8.png" alt="Le Metro — lettrage blanc sur fond noir" onerror="this.style.minHeight='220px'">
   </div>
 </div>
 

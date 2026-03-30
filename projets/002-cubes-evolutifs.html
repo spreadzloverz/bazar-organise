@@ -54,9 +54,9 @@ nav {
 /* GALERIE : hero pleine largeur + grille 3 colonnes */
 .gallery { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad) 80px; }
 .gallery-hero { margin-bottom: 4px; }
-.gallery-hero img { width: 100%; aspect-ratio: 16/10; object-fit: cover; border-radius: 6px; display: block; background: var(--rule); }
+.gallery-hero img { width: 100%; height: auto; border-radius: 6px; display: block; }
 .gallery-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
-.gallery-3 img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 6px; display: block; background: var(--rule); }
+.gallery-3 img { width: 100%; height: auto; border-radius: 6px; display: block; }
 
 .process-list { display: flex; flex-direction: column; }
 .process-item { display: grid; grid-template-columns: 80px 1fr; gap: 40px; padding: 36px 0; border-top: 1px solid var(--rule); }
@@ -132,12 +132,30 @@ footer { background: var(--ink); color: #999; padding: 40px var(--pad); }
 
 <div class="gallery">
   <div class="gallery-hero">
-    <img src="../assets/images/cubes-evolutifs/03.jpg" alt="Ensemble graffiti — lettres et chiffres" onerror="this.style.minHeight='360px'">
+    <img src="../assets/images/cubes-evolutifs/01.jpg" alt="Cubes Evolutifs" loading="lazy" onerror="this.style.minHeight='360px'">
   </div>
   <div class="gallery-3">
-    <img src="../assets/images/cubes-evolutifs/01.jpg" alt="Style naïf — lettres cursives et motifs" onerror="this.style.minHeight='280px'">
-    <img src="../assets/images/cubes-evolutifs/02.jpg" alt="Style graffiti — lettres colorées fond jaune" onerror="this.style.minHeight='280px'">
-    <img src="../assets/images/cubes-evolutifs/05.jpg" alt="Mix styles — accumulation de cubes" onerror="this.style.minHeight='280px'">
+    <img src="../assets/images/cubes-evolutifs/02.jpg" alt="Cubes Evolutifs — 02.jpg" loading="lazy" onerror="this.style.minHeight='260px'">
+    <img src="../assets/images/cubes-evolutifs/03.jpg" alt="Cubes Evolutifs — 03.jpg" loading="lazy" onerror="this.style.minHeight='260px'">
+    <img src="../assets/images/cubes-evolutifs/04.jpg" alt="Cubes Evolutifs — 04.jpg" loading="lazy" onerror="this.style.minHeight='260px'">
+  </div>
+  <div class="gallery-3">
+    <img src="../assets/images/cubes-evolutifs/05.jpg" alt="Cubes Evolutifs — 05.jpg" loading="lazy" onerror="this.style.minHeight='260px'">
+    <img src="../assets/images/cubes-evolutifs/06.jpg" alt="Cubes Evolutifs — 06.jpg" loading="lazy" onerror="this.style.minHeight='260px'">
+    <img src="../assets/images/cubes-evolutifs/07.jpg" alt="Cubes Evolutifs — 07.jpg" loading="lazy" onerror="this.style.minHeight='260px'">
+  </div>
+  <div class="gallery-3">
+    <img src="../assets/images/cubes-evolutifs/08.jpg" alt="Cubes Evolutifs — 08.jpg" loading="lazy" onerror="this.style.minHeight='260px'">
+    <img src="../assets/images/cubes-evolutifs/09.jpg" alt="Cubes Evolutifs — 09.jpg" loading="lazy" onerror="this.style.minHeight='260px'">
+    <img src="../assets/images/cubes-evolutifs/10.jpg" alt="Cubes Evolutifs — 10.jpg" loading="lazy" onerror="this.style.minHeight='260px'">
+  </div>
+  <div class="gallery-3">
+    <img src="../assets/images/cubes-evolutifs/11.jpg" alt="Cubes Evolutifs — 11.jpg" loading="lazy" onerror="this.style.minHeight='260px'">
+    <img src="../assets/images/cubes-evolutifs/12.jpg" alt="Cubes Evolutifs — 12.jpg" loading="lazy" onerror="this.style.minHeight='260px'">
+    <img src="../assets/images/cubes-evolutifs/13.jpg" alt="Cubes Evolutifs — 13.jpg" loading="lazy" onerror="this.style.minHeight='260px'">
+  </div>
+  <div class="gallery-3">
+    <img src="../assets/images/cubes-evolutifs/14.jpg" alt="Cubes Evolutifs — 14.jpg" loading="lazy" onerror="this.style.minHeight='260px'">
   </div>
 </div>
 

@@ -31,9 +31,8 @@
     .gallery-section { margin-bottom: 60px; }
     .gallery-section h2 { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gris2); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
     .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .gallery-item img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; background: #E8E8E8; }
+    .gallery-item img { width: 100%; height: auto; display: block; }
     .gallery-item:first-child { grid-column: span 2; }
-    .gallery-item:first-child img { aspect-ratio: 16/8; }
 
     /* NAV PROJET */
     .proj-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding-top: 48px; border-top: 1px solid var(--border); }
@@ -111,41 +110,29 @@
   </div>
 
   <!-- GALLERY -->
-  <div class="gallery-section">
+    <div class="gallery-section">
     <h2>(galerie)</h2>
     <div class="gallery-grid">
-      
       <div class="gallery-item">
-        <img src="../assets/images/cartographies/01.jpg"
-             alt="Cartographies Intérieures — 01"
-             onerror="this.parentElement.style.display='none';" />
+        <img src="../assets/images/cartographies/01.jpg" alt="Cartographies — 01.jpg" loading="lazy" onerror="this.parentElement.style.display='none';" />
       </div>
       <div class="gallery-item">
-        <img src="../assets/images/cartographies/02.jpg"
-             alt="Cartographies Intérieures — 02"
-             onerror="this.parentElement.style.display='none';" />
+        <img src="../assets/images/cartographies/02.jpg" alt="Cartographies — 02.jpg" loading="lazy" onerror="this.parentElement.style.display='none';" />
       </div>
       <div class="gallery-item">
-        <img src="../assets/images/cartographies/03.jpg"
-             alt="Cartographies Intérieures — 03"
-             onerror="this.parentElement.style.display='none';" />
+        <img src="../assets/images/cartographies/03.jpg" alt="Cartographies — 03.jpg" loading="lazy" onerror="this.parentElement.style.display='none';" />
       </div>
       <div class="gallery-item">
-        <img src="../assets/images/cartographies/04.jpg"
-             alt="Cartographies Intérieures — 04"
-             onerror="this.parentElement.style.display='none';" />
+        <img src="../assets/images/cartographies/05.jpg" alt="Cartographies — 05.jpg" loading="lazy" onerror="this.parentElement.style.display='none';" />
       </div>
       <div class="gallery-item">
-        <img src="../assets/images/cartographies/05.jpg"
-             alt="Cartographies Intérieures — 05"
-             onerror="this.parentElement.style.display='none';" />
+        <img src="../assets/images/cartographies/06.jpg" alt="Cartographies — 06.jpg" loading="lazy" onerror="this.parentElement.style.display='none';" />
       </div>
       <div class="gallery-item">
-        <img src="../assets/images/cartographies/06.jpg"
-             alt="Cartographies Intérieures — 06"
-             onerror="this.parentElement.style.display='none';" />
+        <img src="../assets/images/cartographies/07.jpg" alt="Cartographies — 07.jpg" loading="lazy" onerror="this.parentElement.style.display='none';" />
       </div>
     </div>
+  </div>
   </div>
 
   <!-- NAVIGATION -->

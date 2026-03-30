@@ -38,7 +38,7 @@ nav {
 .hero { padding: 100px var(--pad) 0; max-width: var(--max); margin: 0 auto; }
 .hero-meta { font-size: 11px; color: var(--light); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 20px; }
 .hero-title { font-size: clamp(40px, 7vw, 86px); font-weight: 300; letter-spacing: -.03em; line-height: 1; margin-bottom: 40px; }
-.hero-img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; display: block; background: var(--rule); max-height: 680px; object-position: center; }
+.hero-img { width: 100%; height: auto; border-radius: 8px; display: block; }
 .hero-img-caption { font-size: 11px; color: var(--light); margin-top: 10px; }
 
 .section { max-width: var(--max); margin: 0 auto; padding: 80px var(--pad); border-top: 1px solid var(--rule); }
@@ -54,8 +54,8 @@ nav {
 /* GALERIE */
 .gallery { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad) 80px; }
 .gallery-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-bottom: 4px; }
-.gallery-3 img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 6px; display: block; background: var(--rule); }
-.gallery-wide img { width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 6px; display: block; background: var(--rule); }
+.gallery-3 img { width: 100%; height: auto; border-radius: 6px; display: block; }
+.gallery-wide img { width: 100%; height: auto; border-radius: 6px; display: block; }
 
 .process-list { display: flex; flex-direction: column; }
 .process-item { display: grid; grid-template-columns: 80px 1fr; gap: 40px; padding: 36px 0; border-top: 1px solid var(--rule); }
@@ -99,6 +99,11 @@ footer { background: var(--ink); color: #999; padding: 40px var(--pad); }
   <h1 class="hero-title">Capsule de<br>Naissance<br>Augmentée</h1>
   <img class="hero-img" src="../assets/images/pura-vida/01.jpg" alt="Capsule de Naissance — face avant PURA VIDA" onerror="this.style.minHeight='480px'">
   <p class="hero-img-caption">Face avant — élément frontal organique · graffiti peint main</p>
+
+  <div class="gallery-3">
+    <img src="../assets/images/pura-vida/01.1.jpg" alt="Pura Vida — 01.1.jpg" loading="lazy" onerror="this.style.minHeight='260px'">
+    <img src="../assets/images/pura-vida/02.2.jpg" alt="Pura Vida — 02.2.jpg" loading="lazy" onerror="this.style.minHeight='260px'">
+  </div>
 </div>
 
 <section class="section">
