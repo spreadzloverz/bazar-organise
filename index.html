@@ -198,6 +198,21 @@
       .work-section { padding: 0 20px 60px; }
       .card-hero .card-img { aspect-ratio: 3/2; }
     }
+
+    /* ── TAGS CLIQUABLES ──────────────────────────── */
+    .hero-tags a.tag {
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+    .hero-tags a.tag:hover {
+      background: var(--noir);
+      color: #FFF;
+      border-color: var(--noir);
+    }
+    [id^="cat-"] {
+      scroll-margin-top: 80px;
+    }
   </style>
 </head>
 <body>
@@ -227,12 +242,12 @@
       <span style="font-size:12px; color:var(--gris2); letter-spacing:0.04em;">// Alfortville (94) — Île-de-France</span>
     </div>
     <div class="hero-tags" style="margin-top:16px;">
-      <span class="tag">Identité Visuelle</span>
-      <span class="tag">Scénographie</span>
-      <span class="tag">Design Espace</span>
-      <span class="tag">Art Mural</span>
-      <span class="tag">Design Mobilier</span>
-      <span class="tag">Ateliers</span>
+      <a href="#cat-identite-visuelle" class="tag">Identité Visuelle</a>
+      <a href="#cat-scenographie" class="tag">Scénographie</a>
+      <a href="#cat-design-espace" class="tag">Design Espace</a>
+      <a href="#cat-art-mural" class="tag">Art Mural</a>
+      <a href="#cat-design-mobilier" class="tag">Design Mobilier</a>
+      <a href="#cat-ateliers" class="tag">Ateliers</a>
     </div>
   </div>
 
@@ -246,9 +261,9 @@
     <div class="masonry">
 
       <!-- 001 SKATE MODULAIRE — HERO -->
-      <a href="projets/001-skate-modulaire.html" class="card card-hero" style="column-span: all;">
+      <a href="projets/001-skate-modulaire.html" class="card card-hero" id="cat-design-mobilier" style="column-span: all;">
         <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:16/7; min-height:280px;">
-          <img src="assets/images/skate-modulaire/01.jpg" alt="Skate Modulaire" class="card-img card-img-wide" onerror="this.style.display='none';" />
+          <img src="assets/images/skate-modulaire/01.jpg" alt="Skate Modulaire" class="card-img card-img-wide" onerror="this.style.display='none';this.parentElement.style.background='transparent';this.parentElement.style.minHeight='0';" />
         </div>
         <div class="card-info">
           <div>
@@ -263,7 +278,7 @@
       <!-- 002 CUBES ÉVOLUTIFS -->
       <a href="projets/002-cubes-evolutifs.html" class="card">
         <div class="card-placeholder" style="aspect-ratio:4/3; min-height:180px; position:relative;">
-          <img src="assets/images/cubes-evolutifs/01.jpg" alt="Cubes Évolutifs" class="card-img" onerror="this.style.display='none';" />
+          <img src="assets/images/cubes-evolutifs/01.jpg" alt="Cubes Évolutifs" class="card-img" onerror="this.style.display='none';this.parentElement.style.background='transparent';this.parentElement.style.minHeight='0';" />
         </div>
         <div class="card-info">
           <div class="card-num">(002) — Design Mobilier</div>
@@ -273,9 +288,9 @@
       </a>
 
       <!-- 003 PURA VIDA -->
-      <a href="projets/003-pura-vida.html" class="card">
+      <a href="projets/003-pura-vida.html" class="card" id="cat-identite-visuelle">
         <div class="card-placeholder" style="aspect-ratio:4/3; min-height:180px; position:relative;">
-          <img src="assets/images/pura-vida/01.jpg" alt="Pura Vida" class="card-img" onerror="this.style.display='none';" />
+          <img src="assets/images/pura-vida/01.jpg" alt="Pura Vida" class="card-img" onerror="this.style.display='none';this.parentElement.style.background='transparent';this.parentElement.style.minHeight='0';" />
         </div>
         <div class="card-info">
           <div class="card-num">(003) — Identité Visuelle</div>
@@ -287,7 +302,7 @@
       <!-- 004 CARTOGRAPHIES -->
       <a href="projets/004-cartographies.html" class="card">
         <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:3/4;">
-          <img src="assets/images/cartographies/01.jpg" alt="Cartographies" class="card-img card-img-tall" onerror="this.style.display='none';" />
+          <img src="assets/images/cartographies/01.jpg" alt="Cartographies" class="card-img card-img-tall" onerror="this.style.display='none';this.parentElement.style.background='transparent';this.parentElement.style.minHeight='0';" />
         </div>
         <div class="card-info">
           <div class="card-num">(004) — Graphisme</div>
@@ -297,9 +312,9 @@
       </a>
 
       <!-- 005 SCÉNOGRAPHIE ALICE -->
-      <a href="projets/005-scenographie-alice.html" class="card">
+      <a href="projets/005-scenographie-alice.html" class="card" id="cat-scenographie">
         <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:4/3;">
-          <img src="assets/images/scenographie-alice/01.jpg" alt="Scénographie Alice" class="card-img" onerror="this.style.display='none';" />
+          <img src="assets/images/scenographie-alice/01.jpg" alt="Scénographie Alice" class="card-img" onerror="this.style.display='none';this.parentElement.style.background='transparent';this.parentElement.style.minHeight='0';" />
         </div>
         <div class="card-info">
           <div class="card-num">(005) — Scénographie</div>
@@ -309,9 +324,9 @@
       </a>
 
       <!-- 006 DESIGN ESPACE -->
-      <a href="projets/006-design-espace.html" class="card">
+      <a href="projets/006-design-espace.html" class="card" id="cat-design-espace">
         <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:4/3;">
-          <img src="assets/images/design-espace/01.jpg" alt="Design Espace" class="card-img" onerror="this.style.display='none';" />
+          <img src="assets/images/design-espace/01.jpg" alt="Design Espace" class="card-img" onerror="this.style.display='none';this.parentElement.style.background='transparent';this.parentElement.style.minHeight='0';" />
         </div>
         <div class="card-info">
           <div class="card-num">(006) — Architecture Intérieure</div>
@@ -323,7 +338,7 @@
       <!-- 007 IDENTITÉ VISUELLE -->
       <a href="projets/007-identite-visuelle.html" class="card">
         <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:4/3;">
-          <img src="assets/images/identite-visuelle/01.jpg" alt="Identité Visuelle" class="card-img" onerror="this.style.display='none';" />
+          <img src="assets/images/identite-visuelle/01.jpg" alt="Identité Visuelle" class="card-img" onerror="this.style.display='none';this.parentElement.style.background='transparent';this.parentElement.style.minHeight='0';" />
         </div>
         <div class="card-info">
           <div class="card-num">(007) — Branding</div>
@@ -333,9 +348,9 @@
       </a>
 
       <!-- 008 SIGNATURE COMME TERRITOIRE -->
-      <a href="projets/008-signature-territoire.html" class="card">
+      <a href="projets/008-signature-territoire.html" class="card" id="cat-art-mural">
         <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:16/9;">
-          <img src="assets/images/signature-territoire/10.png" alt="La Signature comme Territoire" class="card-img card-img-wide" onerror="this.style.display='none';" />
+          <img src="assets/images/signature-territoire/10.png" alt="La Signature comme Territoire" class="card-img card-img-wide" onerror="this.style.display='none';this.parentElement.style.background='transparent';this.parentElement.style.minHeight='0';" />
         </div>
         <div class="card-info">
           <div class="card-num">(008) — Art Mural</div>
@@ -347,7 +362,7 @@
       <!-- 009 HABILLAGE MONUMENTAL -->
       <a href="projets/009-habillage-monumental.html" class="card">
         <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:3/4;">
-          <img src="assets/images/habillage-monumental/01.jpg" alt="Habillage Monumental" class="card-img card-img-tall" onerror="this.style.display='none';" />
+          <img src="assets/images/habillage-monumental/01.jpg" alt="Habillage Monumental" class="card-img card-img-tall" onerror="this.style.display='none';this.parentElement.style.background='transparent';this.parentElement.style.minHeight='0';" />
         </div>
         <div class="card-info">
           <div class="card-num">(009) — Signalétique</div>
@@ -359,19 +374,19 @@
       <!-- 011 TRAITS D'IDENTITÉ -->
       <a href="projets/010-traits-identite.html" class="card">
         <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:4/3;">
-          <img src="assets/images/traits-identite/01.jpg" alt="Traits d'Identité" class="card-img" onerror="this.style.display='none';" />
+          <img src="assets/images/traits-identite/01.jpg" alt="Traits d'Identité" class="card-img" onerror="this.style.display='none';this.parentElement.style.background='transparent';this.parentElement.style.minHeight='0';" />
         </div>
         <div class="card-info">
           <div class="card-num">(010) — Graphisme</div>
           <div class="card-title">Traits d'Identité</div>
-          <div class="card-cat">Identité visuelle · Marques · Territories</div>
+          <div class="card-cat">Identité visuelle · Marques · Territoires</div>
         </div>
       </a>
 
       <!-- 012 SKETCHS & LETTRAGES -->
       <a href="projets/011-sketchs-lettrages.html" class="card">
         <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:4/3;">
-          <img src="assets/images/sketchs-lettrages/01.jpg" alt="Sketchs Lettrages" class="card-img" onerror="this.style.display='none';" />
+          <img src="assets/images/sketchs-lettrages/01.jpg" alt="Sketchs Lettrages" class="card-img" onerror="this.style.display='none';this.parentElement.style.background='transparent';this.parentElement.style.minHeight='0';" />
         </div>
         <div class="card-info">
           <div class="card-num">(011) — Dessin</div>
@@ -383,7 +398,7 @@
       <!-- 013 PHOTOGRAPHIE -->
       <a href="projets/012-photographie.html" class="card">
         <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:3/4;">
-          <img src="assets/images/photographie/01.jpg" alt="Photographie" class="card-img card-img-tall" onerror="this.style.display='none';" />
+          <img src="assets/images/photographie/01.jpg" alt="Photographie" class="card-img card-img-tall" onerror="this.style.display='none';this.parentElement.style.background='transparent';this.parentElement.style.minHeight='0';" />
         </div>
         <div class="card-info">
           <div class="card-num">(012) — Photographie</div>
@@ -395,7 +410,7 @@
       <!-- 014 VÊTEMENTS -->
       <a href="projets/013-vetements.html" class="card">
         <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:4/3;">
-          <img src="assets/images/vetements/01.jpg" alt="Vêtements" class="card-img" onerror="this.style.display='none';" />
+          <img src="assets/images/vetements/01.jpg" alt="Vêtements" class="card-img" onerror="this.style.display='none';this.parentElement.style.background='transparent';this.parentElement.style.minHeight='0';" />
         </div>
         <div class="card-info">
           <div class="card-num">(013) — Textile</div>
@@ -405,9 +420,9 @@
       </a>
 
       <!-- 015 ATELIERS -->
-      <a href="projets/014-ateliers.html" class="card">
+      <a href="projets/014-ateliers.html" class="card" id="cat-ateliers">
         <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:16/9;">
-          <img src="assets/images/ateliers/01.jpg" alt="Ateliers" class="card-img card-img-wide" onerror="this.style.display='none';" />
+          <img src="assets/images/ateliers/01.jpg" alt="Ateliers" class="card-img card-img-wide" onerror="this.style.display='none';this.parentElement.style.background='transparent';this.parentElement.style.minHeight='0';" />
         </div>
         <div class="card-info">
           <div class="card-num">(014) — Transmission</div>
