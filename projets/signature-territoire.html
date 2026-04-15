@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>La Signature comme Territoire — Bazar Organisé</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#FAFAFA;--fg:#111;--muted:#888;--border:#DCDCDC;--ff:'Helvetica Neue',Helvetica,Arial,sans-serif;--mono:'Courier New',Courier,monospace}
+html{scroll-behavior:smooth}
+body{font-family:var(--ff);background:var(--bg);color:var(--fg);-webkit-font-smoothing:antialiased;line-height:1.5}
+nav{position:fixed;top:0;left:0;right:0;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;background:var(--bg);border-bottom:1px solid var(--border);z-index:100}
+.nav-logo{font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;color:var(--fg)}
+.nav-links{display:flex;gap:24px}
+.nav-links a{font-size:11px;color:var(--muted);text-decoration:none;font-family:var(--mono);letter-spacing:.05em;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--fg)}
+main{padding-top:52px}
+footer{padding:40px 32px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--muted);font-family:var(--mono)}
+@media(max-width:640px){nav{padding:0 16px}footer{flex-direction:column;gap:8px;padding:24px 16px;text-align:center}}
+
+.proj-header{padding:72px 32px 56px;border-bottom:1px solid var(--border);display:grid;grid-template-columns:2fr 1fr;gap:32px}
+.proj-label{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.15em;text-transform:uppercase;margin-bottom:20px}
+.proj-title{font-size:clamp(26px,4vw,48px);font-weight:700;letter-spacing:-.02em;line-height:1.1;margin-bottom:8px}
+.proj-sub{font-size:13px;color:var(--muted);font-style:italic}
+.proj-meta{display:flex;flex-direction:column;gap:16px;justify-content:flex-end;padding-bottom:4px}
+.proj-meta-row{display:flex;gap:12px;font-size:12px;align-items:baseline}
+.proj-meta-label{font-family:var(--mono);font-size:10px;color:var(--muted);min-width:72px}
+.proj-body{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border-bottom:1px solid var(--border)}
+.proj-section{background:var(--bg);padding:40px 32px}
+.sect-label{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.1em;margin-bottom:20px;border-bottom:1px solid var(--border);padding-bottom:12px}
+.sect-text{font-size:13px;color:#444;line-height:1.85}
+.sect-text p{margin-bottom:14px}
+.sect-text p:last-child{margin-bottom:0}
+.adn-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.adn-tag{font-family:var(--mono);font-size:10px;color:var(--muted);border:1px solid var(--border);padding:5px 10px}
+.intention-block{background:var(--fg);color:var(--bg);padding:40px 32px}
+.intention-block .sect-label{color:#555;border-color:#333}
+.intention-text{font-size:16px;font-weight:600;line-height:1.6}
+.gallery{display:grid;gap:1px;background:var(--border)}
+.gallery.cols-2{grid-template-columns:1fr 1fr}
+.gallery.cols-1{grid-template-columns:1fr}
+.gallery-item{background:var(--bg);overflow:hidden}
+.gallery-item.cover img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/3;display:block}
+.gallery-item.contain img{width:100%;height:auto;object-fit:contain;background:#F0F0F0;padding:24px;display:block}
+.gallery-item.full img{width:100%;height:auto;display:block}
+.proj-nav{padding:24px 32px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border)}
+.proj-nav a{font-family:var(--mono);font-size:11px;color:var(--muted);text-decoration:none;transition:color .2s}
+.proj-nav a:hover{color:var(--fg)}
+@media(max-width:640px){.proj-header{grid-template-columns:1fr;padding:60px 16px 40px}.proj-body{grid-template-columns:1fr}.proj-section{padding:28px 16px}.gallery.cols-2{grid-template-columns:1fr}.proj-nav{padding:16px}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">Bazar Organisé</a>
+  <div class="nav-links">
+    <a href="../index.html"class="active">(work)</a>
+    <a href="../about.html">(about)</a>
+    <a href="../about.html#contact">(contact)</a>
+  </div>
+</nav>
+<main>
+  <header class="proj-header">
+    <div>
+      <div class="proj-label">(004) — Acte II — L'Identité</div>
+      <h1 class="proj-title">La Signature comme Territoire</h1>
+      <p class="proj-sub">Fresques graffiti — espace urbain</p>
+    </div>
+    <div class="proj-meta">
+      <div class="proj-meta-row">
+        <span class="proj-meta-label">(catégorie)</span>
+        <span>Graffiti / Fresque</span>
+      </div>
+    </div>
+  </header>
+  <div class="proj-body">
+    <div class="proj-section">
+      <div class="sect-label">(présentation)</div>
+      <div class="sect-text"><p>Ensemble de fresques graffiti réalisées sur murs et supports urbains. Lettrage imbriqué, lisibilité intermédiaire, couleur franche pensée pour l'espace public et le regard en mouvement.</p></div>
+    </div>
+    <div class="proj-section">
+      <div class="sect-label">(démarche)</div>
+      <div class="sect-text"><p>Le graffiti est abordé comme architecture graphique. Construction des lettres, équilibre, tension, inscription dans l'espace existant. Les fissures et textures participent à la composition.</p></div>
+    </div>
+    <div class="intention-block">
+      <div class="sect-label">(intention)</div>
+      <div class="intention-text">Faire du mur un espace actif, où la lettre devient forme construite, visible, assumée.</div>
+    </div>
+    <div class="proj-section">
+      <div class="sect-label">(adn)</div>
+      <div class="adn-tags"><span class="adn-tag">Graffiti</span><span class="adn-tag">Lettrage</span><span class="adn-tag">Couleur</span><span class="adn-tag">Mur</span><span class="adn-tag">Espace public</span><span class="adn-tag">Structure</span></div>
+    </div>
+  </div>
+  <div class="gallery cols-2"><div class="gallery-item cover"><img src="../assets/images/signature-territoire/01.jpg" alt="La Signature comme Territoire — 01" loading="lazy"></div><div class="gallery-item cover"><img src="../assets/images/signature-territoire/02.jpg" alt="La Signature comme Territoire — 02" loading="lazy"></div><div class="gallery-item cover"><img src="../assets/images/signature-territoire/03.jpg" alt="La Signature comme Territoire — 03" loading="lazy"></div><div class="gallery-item cover"><img src="../assets/images/signature-territoire/04.jpg" alt="La Signature comme Territoire — 04" loading="lazy"></div><div class="gallery-item cover"><img src="../assets/images/signature-territoire/05.jpg" alt="La Signature comme Territoire — 05" loading="lazy"></div></div>
+  <div class="proj-nav">
+    <a href="cartographies-interieures.html">&#8592; Cartographies Intérieures</a>
+    <a href="../index.html">(work)</a>
+    <a href="etudes-lettres.html">Études de Lettres &#8594;</a>
+  </div>
+</main>
+<footer>
+  <span>© Bazar Organisé — Xavier Talbot</span>
+  <span>contact@bazarorganise.fr</span>
+</footer>
+</body>
+</html>
