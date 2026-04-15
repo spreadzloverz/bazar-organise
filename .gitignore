@@ -1,0 +1,9 @@
+# Archives lourdes — ne pas committer
+*.7z
+*.zip
+*.tar.gz
+*.rar
+
+# OS
+.DS_Store
+Thumbs.db

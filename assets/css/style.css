@@ -3,17 +3,18 @@
    Style: Draftline/Framer — Minimal, Editorial, Light
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap');
 
 :root {
-  --bg: #FAFAFA;
-  --noir: #111111;
-  --gris1: #444444;
-  --gris2: #888888;
-  --gris3: #BBBBBB;
-  --border: #E5E5E5;
-  --accent: #111111;
+  --bg: #F4F1EA;
+  --noir: #0D0D0D;
+  --gris1: #3A3835;
+  --gris2: #7A7468;
+  --gris3: #B0A99E;
+  --border: #D6D0C4;
+  --accent: #E8360A;
   --font: 'Inter', -apple-system, sans-serif;
+  --display: 'Bebas Neue', sans-serif;
   --nav-h: 60px;
 }
 
@@ -45,9 +46,10 @@ body {
 }
 
 .nav-logo {
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--noir);
   text-decoration: none;
