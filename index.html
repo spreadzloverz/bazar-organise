@@ -581,8 +581,8 @@
 
     /* ── MASONRY GRID ─────────────────────────────── */
     .masonry {
-      columns: 2;
-      column-gap: 20px;
+      columns: 3;
+      column-gap: 16px;
     }
 
     .card {
@@ -590,12 +590,12 @@
       text-decoration: none;
       color: inherit;
       break-inside: avoid;
-      margin-bottom: 20px;
+      margin-bottom: 14px;
       position: relative;
       background: #F0F0F0;
       overflow: hidden;
       cursor: pointer;
-      border-radius: 24px;
+      border-radius: 18px;
       transition: transform 0.28s ease, box-shadow 0.28s ease;
     }
 
@@ -732,12 +732,20 @@
     [id^="cat-"] { scroll-margin-top: 84px; }
 
     /* ── RESPONSIVE ───────────────────────────────── */
+      .hero-art   { min-height: 420px; }
+      .hero-facts { grid-template-columns: 1fr; }
+      .intro-band { grid-template-columns: 1fr; gap: 16px; }
+      .cta-band   { grid-template-columns: 1fr; }
+    }
+    }
+
     @media (max-width: 980px) {
       .hero-shell { grid-template-columns: 1fr; }
       .hero-art   { min-height: 420px; }
       .hero-facts { grid-template-columns: 1fr; }
       .intro-band { grid-template-columns: 1fr; gap: 16px; }
       .cta-band   { grid-template-columns: 1fr; }
+      .masonry    { columns: 2; }
     }
 
     @media (max-width: 768px) {
@@ -849,7 +857,7 @@
 
         <!-- 001 — Projet héro pleine largeur -->
         <a href="projets/001-skate-modulaire.html" class="card card-hero" id="cat-design-mobilier" style="column-span: all;">
-          <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:16/7; min-height:280px;">
+          <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:21/9;">
             <img src="assets/images/skate-modulaire/01.jpg" alt="Skate Modulaire" class="card-img card-img-wide"
                  onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#151929 0%,#0f3460 100%)';" />
           </div>
@@ -865,7 +873,7 @@
 
         <!-- 002 -->
         <a href="projets/002-cubes-evolutifs.html" class="card">
-          <div class="card-placeholder" style="aspect-ratio:4/3; min-height:180px; position:relative;">
+          <div class="card-placeholder" style="aspect-ratio:4/3; position:relative;">
             <img src="assets/images/cubes-evolutifs/01.jpg" alt="Cubes Évolutifs" class="card-img"
                  onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#2a2a2a 0%,#4d4d4d 100%)';" />
           </div>
@@ -878,7 +886,7 @@
 
         <!-- 003 -->
         <a href="projets/003-pura-vida.html" class="card" id="cat-identite-visuelle">
-          <div class="card-placeholder" style="aspect-ratio:4/3; min-height:180px; position:relative;">
+          <div class="card-placeholder" style="aspect-ratio:4/3; position:relative;">
             <img src="assets/images/pura-vida/01.jpg" alt="Pura Vida" class="card-img"
                  onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#2c1f1f 0%,#5e3535 100%)';" />
           </div>
@@ -891,7 +899,7 @@
 
         <!-- 004 -->
         <a href="projets/004-cartographies.html" class="card">
-          <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:3/4;">
+          <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:4/5;">
             <img src="assets/images/cartographies/01.jpg" alt="Cartographies Intérieures" class="card-img card-img-tall"
                  onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#17172a 0%,#27274a 100%)';" />
           </div>
@@ -956,7 +964,7 @@
 
         <!-- 009 -->
         <a href="projets/009-habillage-monumental.html" class="card">
-          <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:3/4;">
+          <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:4/5;">
             <img src="assets/images/habillage-monumental/01.jpg" alt="Habillage Monumental" class="card-img card-img-tall"
                  onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#1a0a00 0%,#3d1a00 100%)';" />
           </div>
@@ -995,7 +1003,7 @@
 
         <!-- 012 -->
         <a href="projets/012-photographie.html" class="card">
-          <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:3/4;">
+          <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:4/5;">
             <img src="assets/images/photographie/01.jpg" alt="Photographie" class="card-img card-img-tall"
                  onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#0a0a0a 0%,#2a2a2a 100%)';" />
           </div>
