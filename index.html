@@ -6,6 +6,7 @@
   <title>Bazar Organisé — Xavier Talbot</title>
   <meta name="description" content="Concepteur-Réalisateur Pluridisciplinaire — Identité Visuelle, Scénographie, Réalisation Technique" />
   <link rel="stylesheet" href="assets/css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet" />
   <style>
     /* ── HERO ─────────────────────────────────── */
     .hero {
@@ -77,7 +78,7 @@
       break-inside: avoid;
       margin-bottom: 20px;
       position: relative;
-      background: #F0F0F0;
+      background: #E8E4DC;
       overflow: hidden;
       cursor: pointer;
     }
@@ -143,19 +144,22 @@
       letter-spacing: 0.15em;
       color: var(--gris3);
       margin-bottom: 4px;
+      font-family: 'Space Mono', monospace;
     }
 
     .card-title {
-      font-size: 14px;
-      font-weight: 600;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      font-weight: 400;
       color: var(--noir);
-      letter-spacing: -0.01em;
+      letter-spacing: .04em;
+      line-height: 1.1;
     }
 
     .card-cat {
       font-size: 11px;
       color: var(--gris2);
-      margin-top: 4px;
+      margin-top: 5px;
     }
 
     /* HERO CARD — spans 2 columns */
@@ -199,6 +203,37 @@
       .card-hero .card-img { aspect-ratio: 3/2; }
     }
 
+    /* ── MODULE LABELS ───────────────────────────── */
+    .module-label {
+      column-span: all;
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      padding: 36px 0 16px;
+      border-top: 1.5px solid var(--noir);
+      margin-top: 8px;
+    }
+    .module-label:first-of-type { margin-top: 20px; }
+    .mod-num {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gris3);
+    }
+    .mod-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: .06em;
+      color: var(--noir);
+    }
+    .mod-count {
+      font-size: 10px;
+      color: var(--gris3);
+      letter-spacing: 0.08em;
+      margin-left: auto;
+    }
+
     /* ── TAGS CLIQUABLES ──────────────────────────── */
     .hero-tags a.tag {
       text-decoration: none;
@@ -221,9 +256,9 @@
 <nav class="nav">
   <a href="index.html" class="nav-logo">Bazar Organisé</a>
   <div class="nav-links">
-    <a href="index.html" class="active">(work)</a>
-    <a href="about.html">(about)</a>
-    <a href="about.html#contact">(contact)</a>
+    <a href="index.html" class="active">// work</a>
+    <a href="about.html">// about</a>
+    <a href="about.html#contact">// contact</a>
   </div>
 </nav>
 
@@ -231,37 +266,35 @@
 
   <!-- HERO INTRO -->
   <div class="hero">
-    <p class="hero-eyebrow">(portfolio — 2019 → 2026)</p>
-    <h1 class="hero-title">Je conçois des systèmes<br>qui tiennent dans l'espace<br>et dans le temps.</h1>
-    <p class="hero-sub">Concepteur-Réalisateur Pluridisciplinaire basé à Alfortville. De l'identité visuelle à l'aménagement d'espace, du sketch à la réalisation technique.</p>
-    <div style="display:flex; align-items:center; gap:16px; margin-top:24px; flex-wrap:wrap;">
-      <span style="display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:500; letter-spacing:0.06em; text-transform:uppercase; color:var(--noir); border:1px solid var(--noir); padding:5px 12px; border-radius:100px;">
-        <span style="width:6px;height:6px;border-radius:50%;background:#2ECC71;display:inline-block;"></span>
-        Disponible
+    <p class="hero-eyebrow">// Xavier Talbot — Concepteur-Réalisateur · 2019 → 2026</p>
+    <h1 class="hero-title" style="font-family:'Bebas Neue',sans-serif; font-size:clamp(52px,8vw,96px); font-weight:400; letter-spacing:.03em; line-height:.9;">Systèmes qui tiennent<br>dans l'espace<br>et dans le temps.</h1>
+    <p class="hero-sub">Identité visuelle, aménagement d'espace, scénographie, art mural, design produit. Du sketch à la réalisation technique — un seul interlocuteur.</p>
+    <div style="display:flex; align-items:center; gap:20px; margin-top:28px; flex-wrap:wrap;">
+      <span style="display:inline-flex; align-items:center; gap:8px; font-size:11px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:var(--noir); border:1.5px solid var(--noir); padding:6px 14px;">
+        <span style="width:7px;height:7px;border-radius:50%;background:#2ECC71;display:inline-block;flex-shrink:0;"></span>
+        Available for Work
       </span>
-      <span style="font-size:12px; color:var(--gris2); letter-spacing:0.04em;">// Alfortville (94) — Île-de-France</span>
+      <span style="font-size:11px; color:var(--gris2); letter-spacing:0.06em; font-family:'Inter',sans-serif;">// Paris CET (UTC+1)</span>
     </div>
-    <div class="hero-tags" style="margin-top:16px;">
-      <a href="#cat-identite-visuelle" class="tag">Identité Visuelle</a>
-      <a href="#cat-scenographie" class="tag">Scénographie</a>
-      <a href="#cat-design-espace" class="tag">Design Espace</a>
-      <a href="#cat-art-mural" class="tag">Art Mural</a>
-      <a href="#cat-design-mobilier" class="tag">Design Mobilier</a>
-      <a href="#cat-ateliers" class="tag">Ateliers</a>
+    <div class="hero-tags" style="margin-top:20px;">
+      <a href="#mod-branding" class="tag">* Branding</a>
+      <a href="#mod-espace" class="tag">* Espace</a>
+      <a href="#mod-produit" class="tag">* Produit</a>
+      <a href="#mod-transmission" class="tag">* Transmission</a>
     </div>
   </div>
 
   <!-- WORK GRID -->
   <section class="work-section">
     <div class="work-header">
-      <span class="section-label">(work)</span>
-      <span class="work-count">14 projets</span>
+      <span class="section-label">// work</span>
+      <span class="work-count">14 projets · 4 modules</span>
     </div>
 
     <div class="masonry">
 
       <!-- 001 SKATE MODULAIRE — HERO -->
-      <a href="projets/001-skate-modulaire.html" class="card card-hero" id="cat-design-mobilier" style="column-span: all;">
+      <a href="projets/001-skate-modulaire.html" class="card card-hero" style="column-span: all;">
         <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:16/7; min-height:280px;">
           <img src="assets/images/skate-modulaire/01.jpg" alt="Skate Modulaire" class="card-img card-img-wide" onerror="this.style.display='none';this.parentElement.style.background='transparent';this.parentElement.style.minHeight='0';" />
         </div>
@@ -275,65 +308,12 @@
         </div>
       </a>
 
-      <!-- 002 CUBES ÉVOLUTIFS -->
-      <a href="projets/002-cubes-evolutifs.html" class="card">
-        <div class="card-placeholder" style="aspect-ratio:4/3; min-height:180px; position:relative;">
-          <img src="assets/images/cubes-evolutifs/01.jpg" alt="Cubes Évolutifs" class="card-img" onerror="this.style.display='none';this.parentElement.style.background='transparent';this.parentElement.style.minHeight='0';" />
-        </div>
-        <div class="card-info">
-          <div class="card-num">(002) — Design Mobilier</div>
-          <div class="card-title">Cubes Évolutifs</div>
-          <div class="card-cat">Mobilier modulaire · Bois</div>
-        </div>
-      </a>
-
-      <!-- 003 PURA VIDA -->
-      <a href="projets/003-pura-vida.html" class="card" id="cat-identite-visuelle">
-        <div class="card-placeholder" style="aspect-ratio:4/3; min-height:180px; position:relative;">
-          <img src="assets/images/pura-vida/01.jpg" alt="Pura Vida" class="card-img" onerror="this.style.display='none';this.parentElement.style.background='transparent';this.parentElement.style.minHeight='0';" />
-        </div>
-        <div class="card-info">
-          <div class="card-num">(003) — Identité Visuelle</div>
-          <div class="card-title">Pura Vida</div>
-          <div class="card-cat">Branding · Restauration · Lifestyle</div>
-        </div>
-      </a>
-
-      <!-- 004 CARTOGRAPHIES -->
-      <a href="projets/004-cartographies.html" class="card">
-        <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:3/4;">
-          <img src="assets/images/cartographies/01.jpg" alt="Cartographies" class="card-img card-img-tall" onerror="this.style.display='none';this.parentElement.style.background='transparent';this.parentElement.style.minHeight='0';" />
-        </div>
-        <div class="card-info">
-          <div class="card-num">(004) — Graphisme</div>
-          <div class="card-title">Cartographies Intérieures</div>
-          <div class="card-cat">Dessin · Territoire · Observation</div>
-        </div>
-      </a>
-
-      <!-- 005 SCÉNOGRAPHIE ALICE -->
-      <a href="projets/005-scenographie-alice.html" class="card" id="cat-scenographie">
-        <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:4/3;">
-          <img src="assets/images/scenographie-alice/01.jpg" alt="Scénographie Alice" class="card-img" onerror="this.style.display='none';this.parentElement.style.background='transparent';this.parentElement.style.minHeight='0';" />
-        </div>
-        <div class="card-info">
-          <div class="card-num">(005) — Scénographie</div>
-          <div class="card-title">Scénographie — Alice GRS</div>
-          <div class="card-cat">Scénographie · Spectacle · Espace</div>
-        </div>
-      </a>
-
-      <!-- 006 DESIGN ESPACE -->
-      <a href="projets/006-design-espace.html" class="card" id="cat-design-espace">
-        <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:4/3;">
-          <img src="assets/images/design-espace/01.jpg" alt="Design Espace" class="card-img" onerror="this.style.display='none';this.parentElement.style.background='transparent';this.parentElement.style.minHeight='0';" />
-        </div>
-        <div class="card-info">
-          <div class="card-num">(006) — Architecture Intérieure</div>
-          <div class="card-title">Design Espace</div>
-          <div class="card-cat">Architecture intérieure · SketchUp · Chantier</div>
-        </div>
-      </a>
+      <!-- ── MODULE 01 · BRANDING & IDENTITÉ VISUELLE ── -->
+      <div class="module-label" id="mod-branding">
+        <span class="mod-num">// 01</span>
+        <span class="mod-name">Branding & Identité Visuelle</span>
+        <span class="mod-count">4 projets</span>
+      </div>
 
       <!-- 007 IDENTITÉ VISUELLE -->
       <a href="projets/007-identite-visuelle.html" class="card">
@@ -347,8 +327,75 @@
         </div>
       </a>
 
+      <!-- 003 PURA VIDA -->
+      <a href="projets/003-pura-vida.html" class="card">
+        <div class="card-placeholder" style="aspect-ratio:4/3; min-height:180px; position:relative;">
+          <img src="assets/images/pura-vida/01.jpg" alt="L'Objet Pura Vida" class="card-img" onerror="this.style.display='none';this.parentElement.style.background='transparent';this.parentElement.style.minHeight='0';" />
+        </div>
+        <div class="card-info">
+          <div class="card-num">(003) — Objet Upcyclé</div>
+          <div class="card-title">L'Objet Pura Vida</div>
+          <div class="card-cat">Planches de skate · Résine époxy · Graffiti</div>
+        </div>
+      </a>
+
+      <!-- 010 TRAITS D'IDENTITÉ -->
+      <a href="projets/010-traits-identite.html" class="card">
+        <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:4/3;">
+          <img src="assets/images/traits-identite/01.jpg" alt="Traits d'Identité" class="card-img" onerror="this.style.display='none';this.parentElement.style.background='transparent';this.parentElement.style.minHeight='0';" />
+        </div>
+        <div class="card-info">
+          <div class="card-num">(010) — Graphisme</div>
+          <div class="card-title">Traits d'Identité</div>
+          <div class="card-cat">Identité visuelle · Marques · Territoires</div>
+        </div>
+      </a>
+
+      <!-- 011 SKETCHS & LETTRAGES -->
+      <a href="projets/011-sketchs-lettrages.html" class="card">
+        <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:4/3;">
+          <img src="assets/images/sketchs-lettrages/01.jpg" alt="Sketchs Lettrages" class="card-img" onerror="this.style.display='none';this.parentElement.style.background='transparent';this.parentElement.style.minHeight='0';" />
+        </div>
+        <div class="card-info">
+          <div class="card-num">(011) — Dessin</div>
+          <div class="card-title">Sketchs & Lettrages</div>
+          <div class="card-cat">Dessin · Process créatif · Lettrages</div>
+        </div>
+      </a>
+
+      <!-- ── MODULE 02 · ESPACE & SCÉNOGRAPHIE ── -->
+      <div class="module-label" id="mod-espace">
+        <span class="mod-num">// 02</span>
+        <span class="mod-name">Espace & Scénographie</span>
+        <span class="mod-count">4 projets</span>
+      </div>
+
+      <!-- 006 DESIGN ESPACE / LOFT INDUSTRIEL -->
+      <a href="projets/006-design-espace.html" class="card">
+        <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:4/3;">
+          <img src="assets/images/design-espace/04.jpg" alt="Loft Industriel" class="card-img" onerror="this.style.display='none';this.parentElement.style.background='transparent';this.parentElement.style.minHeight='0';" />
+        </div>
+        <div class="card-info">
+          <div class="card-num">(006) — Architecture Intérieure</div>
+          <div class="card-title">Loft Industriel</div>
+          <div class="card-cat">Architecture intérieure · SketchUp · Ossature métal</div>
+        </div>
+      </a>
+
+      <!-- 005 SCÉNOGRAPHIE ALICE -->
+      <a href="projets/005-scenographie-alice.html" class="card">
+        <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:4/3;">
+          <img src="assets/images/scenographie-alice/01.jpg" alt="Scénographie Alice" class="card-img" onerror="this.style.display='none';this.parentElement.style.background='transparent';this.parentElement.style.minHeight='0';" />
+        </div>
+        <div class="card-info">
+          <div class="card-num">(005) — Scénographie</div>
+          <div class="card-title">Scénographie — Alice GRS</div>
+          <div class="card-cat">Scénographie · Spectacle · Espace</div>
+        </div>
+      </a>
+
       <!-- 008 SIGNATURE COMME TERRITOIRE -->
-      <a href="projets/008-signature-territoire.html" class="card" id="cat-art-mural">
+      <a href="projets/008-signature-territoire.html" class="card">
         <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:16/9;">
           <img src="assets/images/signature-territoire/10.png" alt="La Signature comme Territoire" class="card-img card-img-wide" onerror="this.style.display='none';this.parentElement.style.background='transparent';this.parentElement.style.minHeight='0';" />
         </div>
@@ -371,43 +418,26 @@
         </div>
       </a>
 
-      <!-- 011 TRAITS D'IDENTITÉ -->
-      <a href="projets/010-traits-identite.html" class="card">
-        <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:4/3;">
-          <img src="assets/images/traits-identite/01.jpg" alt="Traits d'Identité" class="card-img" onerror="this.style.display='none';this.parentElement.style.background='transparent';this.parentElement.style.minHeight='0';" />
+      <!-- ── MODULE 03 · DESIGN PRODUIT & MOBILIER ── -->
+      <div class="module-label" id="mod-produit">
+        <span class="mod-num">// 03</span>
+        <span class="mod-name">Design Produit & Mobilier</span>
+        <span class="mod-count">3 projets</span>
+      </div>
+
+      <!-- 002 CUBES ÉVOLUTIFS -->
+      <a href="projets/002-cubes-evolutifs.html" class="card">
+        <div class="card-placeholder" style="aspect-ratio:4/3; min-height:180px; position:relative;">
+          <img src="assets/images/cubes-evolutifs/01.jpg" alt="Cubes Évolutifs" class="card-img" onerror="this.style.display='none';this.parentElement.style.background='transparent';this.parentElement.style.minHeight='0';" />
         </div>
         <div class="card-info">
-          <div class="card-num">(010) — Graphisme</div>
-          <div class="card-title">Traits d'Identité</div>
-          <div class="card-cat">Identité visuelle · Marques · Territoires</div>
+          <div class="card-num">(002) — Design Mobilier</div>
+          <div class="card-title">Cubes Évolutifs</div>
+          <div class="card-cat">Mobilier modulaire · Bois</div>
         </div>
       </a>
 
-      <!-- 012 SKETCHS & LETTRAGES -->
-      <a href="projets/011-sketchs-lettrages.html" class="card">
-        <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:4/3;">
-          <img src="assets/images/sketchs-lettrages/01.jpg" alt="Sketchs Lettrages" class="card-img" onerror="this.style.display='none';this.parentElement.style.background='transparent';this.parentElement.style.minHeight='0';" />
-        </div>
-        <div class="card-info">
-          <div class="card-num">(011) — Dessin</div>
-          <div class="card-title">Sketchs & Lettrages</div>
-          <div class="card-cat">Dessin · Calligraphie · Process créatif</div>
-        </div>
-      </a>
-
-      <!-- 013 PHOTOGRAPHIE -->
-      <a href="projets/012-photographie.html" class="card">
-        <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:3/4;">
-          <img src="assets/images/photographie/01.jpg" alt="Photographie" class="card-img card-img-tall" onerror="this.style.display='none';this.parentElement.style.background='transparent';this.parentElement.style.minHeight='0';" />
-        </div>
-        <div class="card-info">
-          <div class="card-num">(012) — Photographie</div>
-          <div class="card-title">Photographie Argentique</div>
-          <div class="card-cat">Argentique · Regard · Exploration</div>
-        </div>
-      </a>
-
-      <!-- 014 VÊTEMENTS -->
+      <!-- 013 VÊTEMENTS -->
       <a href="projets/013-vetements.html" class="card">
         <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:4/3;">
           <img src="assets/images/vetements/01.jpg" alt="Vêtements" class="card-img" onerror="this.style.display='none';this.parentElement.style.background='transparent';this.parentElement.style.minHeight='0';" />
@@ -419,8 +449,15 @@
         </div>
       </a>
 
-      <!-- 015 ATELIERS -->
-      <a href="projets/014-ateliers.html" class="card" id="cat-ateliers">
+      <!-- ── MODULE 04 · TRANSMISSION & CRÉATION ── -->
+      <div class="module-label" id="mod-transmission">
+        <span class="mod-num">// 04</span>
+        <span class="mod-name">Transmission & Création</span>
+        <span class="mod-count">3 projets</span>
+      </div>
+
+      <!-- 014 ATELIERS -->
+      <a href="projets/014-ateliers.html" class="card">
         <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:16/9;">
           <img src="assets/images/ateliers/01.jpg" alt="Ateliers" class="card-img card-img-wide" onerror="this.style.display='none';this.parentElement.style.background='transparent';this.parentElement.style.minHeight='0';" />
         </div>
@@ -431,10 +468,34 @@
         </div>
       </a>
 
+      <!-- 012 PHOTOGRAPHIE -->
+      <a href="projets/012-photographie.html" class="card">
+        <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:3/4;">
+          <img src="assets/images/photographie/01.jpg" alt="Photographie" class="card-img card-img-tall" onerror="this.style.display='none';this.parentElement.style.background='transparent';this.parentElement.style.minHeight='0';" />
+        </div>
+        <div class="card-info">
+          <div class="card-num">(012) — Photographie</div>
+          <div class="card-title">Photographie Argentique</div>
+          <div class="card-cat">Argentique · Regard · Exploration</div>
+        </div>
+      </a>
+
+      <!-- 004 CARTOGRAPHIES -->
+      <a href="projets/004-cartographies.html" class="card">
+        <div style="position:relative; overflow:hidden; background:#E8E8E8; aspect-ratio:3/4;">
+          <img src="assets/images/cartographies/01.jpg" alt="Cartographies" class="card-img card-img-tall" onerror="this.style.display='none';this.parentElement.style.background='transparent';this.parentElement.style.minHeight='0';" />
+        </div>
+        <div class="card-info">
+          <div class="card-num">(004) — Graphisme</div>
+          <div class="card-title">Cartographies Intérieures</div>
+          <div class="card-cat">Dessin · Territoire · Observation</div>
+        </div>
+      </a>
+
     </div><!-- /masonry -->
   </section>
 
   <!-- FOOTER -->
   <footer class="footer">
-    <span>Bazar Organisé — Xavier Talbot, Alfortville (94) · Île-de-France</span>
+    <span>Bazar Organisé — Xavier Talbot · // Paris CET · contact@bazarorganise.fr</span>
     <span><a href="/cdn-cgi/l/email-protection#e3808c8d97828097a381829982918c9184828d8a9086cd8591"><span class="__cf_email__
