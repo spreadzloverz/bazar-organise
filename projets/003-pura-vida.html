@@ -3,375 +3,67 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>003 — Capsule de Naissance Augmentée · Bazar Organisé</title>
+<title>003 — L'Objet Pura Vida · Bazar Organisé</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --paper:   #F3F1ED;
-      --noir:    #111111;
-      --ink2:    #252A31;
-      --gris1:   #444444;
-      --gris2:   #777777;
-      --gris3:   #AAAAAA;
-      --border:  #E0DEDB;
-      --orange:  #C46A2D;
-      --shadow:  0 20px 50px rgba(17,17,17,0.07);
-      --font:    'Inter', -apple-system, sans-serif;
-      --nav-h:   60px;
-      --max:     1180px;
-      --pad:     clamp(20px, 5vw, 80px);
-    }
-
-    html { font-size: 16px; scroll-behavior: smooth; }
-
-    body {
-      font-family: var(--font);
-      background: var(--paper);
-      color: var(--noir);
-      font-size: 15px;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ── NAV ── */
-    .nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: var(--nav-h);
-      background: rgba(243,241,237,0.92);
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 40px;
-      z-index: 100;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-    }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      color: var(--noir);
-    }
-
-    .nav-logo img {
-      height: 36px;
-      width: auto;
-      display: block;
-    }
-
-    .nav-logo-text {
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--noir);
-    }
-
-    .back {
-      font-size: 12px;
-      color: var(--gris2);
-      text-decoration: none;
-      letter-spacing: 0.04em;
-      padding: 7px 16px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: rgba(255,255,255,0.72);
-      transition: color 0.2s, background 0.2s;
-    }
-
-    .back:hover { color: var(--noir); background: #fff; }
-
-    /* ── LAYOUT ── */
-    .wrap {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 var(--pad);
-    }
-
-    /* ── HERO ── */
-    .hero { padding-top: 108px; }
-
-    .hero-meta {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-
-    .num {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      color: var(--gris3);
-      text-transform: uppercase;
-      border: 1px solid var(--border);
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.72);
-    }
-
-    .tag, .kw {
-      display: inline-block;
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--gris2);
-      border: 1px solid var(--border);
-      border-radius: 100px;
-      padding: 4px 12px;
-      background: rgba(255,255,255,0.72);
-    }
-
-    h1 {
-      font-size: clamp(40px, 8vw, 96px);
-      font-weight: 700;
-      line-height: 0.97;
-      letter-spacing: -0.04em;
-      color: var(--noir);
-      margin-bottom: 20px;
-    }
-
-    h1 em {
-      font-style: normal;
-      color: var(--orange);
-    }
-
-    .hero-sub {
-      font-size: 16px;
-      color: var(--gris1);
-      max-width: 580px;
-      line-height: 1.75;
-      margin-bottom: 52px;
-    }
-
-    /* ── HERO BAND ── */
-    .hero-band {
-      width: 100%;
-      aspect-ratio: 21/9;
-      overflow: hidden;
-      background: var(--ink2);
-      border-radius: 20px;
-    }
-
-    .hero-band img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.8s ease;
-    }
-
-    .hero-band:hover img { transform: scale(1.02); }
-
-    /* ── LABELS ── */
-    .label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gris2);
-      padding-top: 56px;
-      margin-bottom: 28px;
-      border-top: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .label::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--orange);
-      flex-shrink: 0;
-    }
-
-    /* ── ABOUT GRID ── */
-    .about {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 32px;
-      padding-bottom: 56px;
-    }
-
-    @media (max-width: 820px) { .about { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 480px) { .about { grid-template-columns: 1fr; } }
-
-    .col-lbl {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--gris3);
-      margin-bottom: 10px;
-    }
-
-    .col-txt {
-      font-size: 14px;
-      color: var(--gris1);
-      line-height: 1.7;
-    }
-
-    .col-txt strong {
-      color: var(--noir);
-      font-weight: 600;
-      display: block;
-      margin-bottom: 4px;
-    }
-
-    /* ── IMAGE GRIDS ── */
-    .grid { display: grid; gap: 6px; }
-    .g-2-1 { grid-template-columns: 2fr 1fr; }
-    @media (max-width: 600px) { .g-2-1 { grid-template-columns: 1fr; } }
-
-    .cell {
-      overflow: hidden;
-      background: #E2E0DC;
-      border-radius: 12px;
-    }
-
-    .cell img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.55s ease;
-    }
-
-    .cell:hover img { transform: scale(1.035); }
-    .cell.contain img { object-fit: contain; background: var(--paper); padding: 24px; }
-    .r4-5 { aspect-ratio: 4/3; }
-    .r16-9 { aspect-ratio: 16/9; }
-
-    /* ── PROCESS ── */
-    .process { padding-bottom: 56px; }
-
-    .step {
-      display: grid;
-      grid-template-columns: 72px 1fr;
-      gap: 36px;
-      padding: 26px 0;
-      border-top: 1px solid var(--border);
-    }
-
-    .step:last-child { border-bottom: 1px solid var(--border); }
-
-    .s-num {
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--gris3);
-      padding-top: 3px;
-      letter-spacing: 0.1em;
-    }
-
-    .s-body h3 {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--noir);
-      margin-bottom: 8px;
-      letter-spacing: -0.01em;
-    }
-
-    .s-body p {
-      font-size: 14px;
-      color: var(--gris1);
-      line-height: 1.75;
-      max-width: 640px;
-    }
-
-    /* ── FULL WIDTH ── */
-    .fw {
-      width: 100%;
-      aspect-ratio: 21/9;
-      overflow: hidden;
-      background: var(--ink2);
-      border-radius: 20px;
-    }
-
-    .fw img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* ── KEYWORDS ── */
-    .kws {
-      padding: 40px 0;
-      border-top: 1px solid var(--border);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
-    }
-
-    .kw-intro {
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      color: var(--orange);
-      font-weight: 700;
-      text-transform: uppercase;
-      margin-right: 6px;
-    }
-
-    /* ── GALERIE ── */
-    .grid[style*="repeat(2"] .cell { border-radius: 12px; }
-
-    /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 28px var(--pad);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 100%;
-    }
-
-    .f-l {
-      font-size: 11px;
-      color: var(--gris3);
-      letter-spacing: 0.06em;
-    }
-
-    footer a {
-      font-size: 12px;
-      color: var(--gris2);
-      text-decoration: none;
-      letter-spacing: 0.04em;
-      padding: 7px 16px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: rgba(255,255,255,0.72);
-      transition: color 0.2s, background 0.2s;
-    }
-
-    footer a:hover { color: var(--noir); background: #fff; }
-
-    /* ── SPACER ── */
-    .sp { height: 56px; }
-
-    /* ── REVEAL ANIM ── */
-    .rv { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
-    .rv.in { opacity: 1; transform: none; }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 640px) {
-      .nav { padding: 0 20px; }
-      .nav-logo-text { display: none; }
-      footer { flex-direction: column; gap: 12px; text-align: center; }
-    }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--paper:#F3F1ED;--noir:#111111;--ink2:#252A31;--gris1:#444444;--gris2:#777777;--gris3:#AAAAAA;--border:#E0DEDB;--orange:#C46A2D;--font:'Inter',-apple-system,sans-serif;--nav-h:60px;--max:1180px;--pad:clamp(20px,5vw,80px)}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--paper);color:var(--noir);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);background:rgba(243,241,237,0.92);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 40px;z-index:100;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--noir)}
+.nav-logo img{height:36px;width:auto;display:block}
+.nav-logo-text{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--noir)}
+.back{font-size:12px;color:var(--gris2);text-decoration:none;letter-spacing:.04em;padding:7px 16px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,0.72);transition:color .2s,background .2s}
+.back:hover{color:var(--noir);background:#fff}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+.hero{padding-top:108px}
+.hero-meta{display:flex;align-items:center;gap:12px;margin-bottom:24px}
+.num{font-size:10px;font-weight:700;letter-spacing:.18em;color:var(--gris3);text-transform:uppercase;border:1px solid var(--border);padding:4px 10px;border-radius:999px;background:rgba(255,255,255,0.72)}
+.tag,.kw{display:inline-block;font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--gris2);border:1px solid var(--border);border-radius:100px;padding:4px 12px;background:rgba(255,255,255,0.72)}
+h1{font-size:clamp(40px,8vw,96px);font-weight:700;line-height:.97;letter-spacing:-.04em;color:var(--noir);margin-bottom:20px}
+h1 em{font-style:normal;color:var(--orange)}
+.hero-sub{font-size:16px;color:var(--gris1);max-width:580px;line-height:1.75;margin-bottom:52px}
+.hero-band{width:100%;aspect-ratio:21/9;overflow:hidden;background:var(--ink2);border-radius:20px}
+.hero-band img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s ease}
+.hero-band:hover img{transform:scale(1.02)}
+.label{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gris2);padding-top:56px;margin-bottom:28px;border-top:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.label::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--orange);flex-shrink:0}
+.about{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;padding-bottom:56px}
+@media(max-width:820px){.about{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.about{grid-template-columns:1fr}}
+.col-lbl{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gris3);margin-bottom:10px}
+.col-txt{font-size:14px;color:var(--gris1);line-height:1.7}
+.col-txt strong{color:var(--noir);font-weight:600;display:block;margin-bottom:4px}
+.grid{display:grid;gap:6px}
+.g-2-1{grid-template-columns:2fr 1fr}
+@media(max-width:600px){.g-2-1{grid-template-columns:1fr}}
+.cell{overflow:hidden;background:#E2E0DC;border-radius:12px}
+.cell img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s ease}
+.cell:hover img{transform:scale(1.035)}
+.cell.contain img{object-fit:contain;background:var(--paper);padding:24px}
+.r4-5{aspect-ratio:4/3}
+.r16-9{aspect-ratio:16/9}
+.process{padding-bottom:56px}
+.step{display:grid;grid-template-columns:72px 1fr;gap:36px;padding:26px 0;border-top:1px solid var(--border)}
+.step:last-child{border-bottom:1px solid var(--border)}
+.s-num{font-size:10px;font-weight:700;color:var(--gris3);padding-top:3px;letter-spacing:.1em}
+.s-body h3{font-size:15px;font-weight:700;color:var(--noir);margin-bottom:8px;letter-spacing:-.01em}
+.s-body p{font-size:14px;color:var(--gris1);line-height:1.75;max-width:640px}
+.fw{width:100%;aspect-ratio:21/9;overflow:hidden;background:var(--ink2);border-radius:20px}
+.fw img{width:100%;height:100%;object-fit:cover;display:block}
+.kws{padding:40px 0;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.kw-intro{font-size:10px;letter-spacing:.14em;color:var(--orange);font-weight:700;text-transform:uppercase;margin-right:6px}
+footer{border-top:1px solid var(--border);padding:28px var(--pad);display:flex;justify-content:space-between;align-items:center}
+.f-l{font-size:11px;color:var(--gris3);letter-spacing:.06em}
+footer a{font-size:12px;color:var(--gris2);text-decoration:none;letter-spacing:.04em;padding:7px 16px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,0.72);transition:color .2s,background .2s}
+footer a:hover{color:var(--noir);background:#fff}
+.sp{height:56px}
+.rv{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.rv.in{opacity:1;transform:none}
+@media(max-width:640px){.nav{padding:0 20px}.nav-logo-text{display:none}footer{flex-direction:column;gap:12px;text-align:center}}
 </style>
 </head>
 <body>
@@ -384,112 +76,92 @@
   <a href="../index.html" class="back">← Tous les projets</a>
 </nav>
 
-<div class="hero">
-  <p class="hero-meta">(003) — Objet · Peinture main · 2022</p>
-  <h1 class="hero-title">Capsule de<br>Naissance<br>Augmentée</h1>
-  <img class="hero-img" src="../assets/images/pura-vida/01.jpg" alt="Capsule de Naissance — face avant PURA VIDA" onerror="this.style.minHeight='480px'">
-  <p class="hero-img-caption">Face avant — élément frontal organique · graffiti peint main</p>
-
-  <div class="gallery-3">
-    <img src="../assets/images/pura-vida/01.1.jpg" alt="Pura Vida — 01.1.jpg" loading="lazy" onerror="this.style.minHeight='260px'">
-    <img src="../assets/images/pura-vida/02.2.jpg" alt="Pura Vida — 02.2.jpg" loading="lazy" onerror="this.style.minHeight='260px'">
+<section class="hero wrap">
+  <div class="hero-meta rv">
+    <span class="num">(003)</span>
+    <span class="tag">Objet Upcyclé · Peinture main · 2022</span>
   </div>
-</div>
-
-<section class="section">
-  <span class="section-label">(about)</span>
-  <div class="about-grid">
-    <div class="about-col">
-      <div class="about-col-label">Contexte</div>
-      <div class="about-col-val">Commande personnalisée</div>
-    </div>
-    <div class="about-col">
-      <div class="about-col-label">Médium</div>
-      <div class="about-col-val">Coffret · Peinture main</div>
-    </div>
-    <div class="about-col">
-      <div class="about-col-label">Année</div>
-      <div class="about-col-val">2022</div>
-    </div>
-    <div class="about-col">
-      <div class="about-col-label">Format</div>
-      <div class="about-col-val">Pièce unique · Interactif</div>
-    </div>
-  </div>
-  <p class="about-desc">
-    Coffret de naissance personnalisé, peint à la main, intégrant une <strong>dimension graphique et interactive</strong>.
-    Chaque face est un espace distinct — graffiti saturé, écriture manuscrite, messages, citations.
-    L'intérieur est intégralement recouvert de texte. Quatre <strong>QR codes embarqués</strong>
-    redirigent vers des contenus musicaux choisis pour l'enfant :
-    l'objet s'ouvre sur une expérience sonore. Visuel, textuel, numérique — tout dans un seul coffret.
-  </p>
+  <h1 class="rv">L'Objet<br><em>Pura Vida</em></h1>
+  <p class="hero-sub rv">Planches de skate recyclées assemblées en étagère murale. Couches de résine époxy sur lesquelles le graffiti est coulé — inscription "PURA VIDA" en lettrage main. Quatre QR codes intégrés, livré dans une boîte en bois décorée.</p>
 </section>
 
-<div class="gallery">
-  <div class="gallery-3">
-    <img src="../assets/images/pura-vida/02.jpg" alt="Face bleue — QR codes et To Infinity & Beyond" onerror="this.style.minHeight='260px'">
-    <img src="../assets/images/pura-vida/03.jpg" alt="Dessus coffret — texte manuscrit sur fond multicolore" onerror="this.style.minHeight='260px'">
-    <img src="../assets/images/pura-vida/04.jpg" alt="Face latérale — From Tabac With Love" onerror="this.style.minHeight='260px'">
-  </div>
-  <div class="gallery-wide">
-    <img src="../assets/images/pura-vida/05.jpg" alt="Intérieur coffret — textes lyriques manuscrits fond violet" onerror="this.style.minHeight='320px'">
-  </div>
+<div class="hero-band rv">
+  <img src="../assets/images/pura-vida/01.jpg" alt="Pura Vida — face avant, graffiti peint main">
 </div>
 
-<section class="section">
-  <span class="section-label">(process)</span>
-  <div class="process-list">
-    <div class="process-item">
-      <span class="process-num">(01)</span>
-      <div class="process-body">
-        <h3>Coffret comme support total</h3>
-        <p>Aucune face n'est laissée vierge. Chaque surface — avant, arrière, côtés, dessus, intérieur — reçoit un traitement graphique distinct. L'objet se déploie dans toutes ses dimensions : il faut le retourner, l'ouvrir, le scanner pour en saisir l'ensemble.</p>
-      </div>
-    </div>
-    <div class="process-item">
-      <span class="process-num">(02)</span>
-      <div class="process-body">
-        <h3>Graffiti, écriture, signe</h3>
-        <p>La face avant concentre le lettrage graffiti le plus dense — "PURA VIDA" en couleurs saturées sur fond orange. Les autres faces basculent vers l'écriture libre, les citations, les tags. Deux langages coexistent : la lettre construite et la lettre jetée.</p>
-      </div>
-    </div>
-    <div class="process-item">
-      <span class="process-num">(03)</span>
-      <div class="process-body">
-        <h3>QR codes — l'objet s'ouvre sur le son</h3>
-        <p>Quatre QR codes sont intégrés à la face bleue, chacun pointant vers un contenu musical sélectionné pour l'enfant. Le coffret devient interface : entre objet physique et expérience numérique, entre archive et transmission vivante.</p>
-      </div>
-    </div>
+<section class="wrap">
+  <p class="label rv">(À propos)</p>
+  <div class="about">
+    <div class="rv"><p class="col-lbl">Contexte</p><p class="col-txt"><strong>Commande de naissance</strong>Pièce personnalisée conçue pour un enfant, à emmener à la maison et à garder.</p></div>
+    <div class="rv"><p class="col-lbl">Matière</p><p class="col-txt"><strong>Planches de skate · Résine époxy</strong>Bois compressé de récupération. Résine couche par couche sur le graffiti.</p></div>
+    <div class="rv"><p class="col-lbl">Année</p><p class="col-txt"><strong>2022</strong>Pièce unique, non reproductible à l'identique.</p></div>
+    <div class="rv"><p class="col-lbl">Format</p><p class="col-txt"><strong>Pièce unique · QR codes · Boîte bois</strong>QR codes gravés dans la résine. Boîte de livraison peinte main.</p></div>
   </div>
 </section>
 
-<div class="keywords">
-  <span class="kw">Peinture main</span>
-  <span class="kw">Graffiti</span>
-  <span class="kw">Objet de naissance</span>
-  <span class="kw">QR codes</span>
-  <span class="kw">Interactif</span>
-  <span class="kw">Pièce unique</span>
-  <span class="kw">Mémoriel</span>
-</div>
-
-<div class="nav-projet">
-  <a href="002-cubes-evolutifs.html">
-    <span class="np-label">← Projet précédent</span>
-    <span>002 — Cubes Évolutifs</span>
-  </a>
-  <a href="004-cartographies.html" class="next">
-    <span class="np-label">Projet suivant →</span>
-    <span>004 — Cartographies Intérieures</span>
-  </a>
-</div>
-
-<footer>
-  <div class="footer-inner">
-    <span class="footer-left">003 — Capsule de Naissance Augmentée · Bazar Organisé</span>
-    <span class="footer-right">© 2025</span>
+<div class="wrap">
+  <div class="grid g-2-1 rv">
+    <div class="cell r4-5"><img src="../assets/images/pura-vida/02.jpg" alt="Face bleue — QR codes"></div>
+    <div class="cell r4-5"><img src="../assets/images/pura-vida/03.jpg" alt="Dessus coffret — texte manuscrit"></div>
   </div>
+</div>
+
+<section class="wrap">
+  <p class="label rv">(Process)</p>
+  <div class="process">
+    <div class="step rv"><span class="s-num">(01)</span><div class="s-body"><h3>Des planches au volume</h3><p>Planches de skate récupérées, découpées et assemblées en étagère murale. Le bois de skate — compressé, résistant, chargé d'histoire — comme matière première. Structure légère, pensée pour être accrochée et utilisée.</p></div></div>
+    <div class="step rv"><span class="s-num">(02)</span><div class="s-body"><h3>Résine époxy + graffiti intégré</h3><p>Couches successives de résine époxy dans lesquelles le graffiti est coulé — "PURA VIDA" en lettrage main saturé. La résine protège et fixe les couches. L'inscription devient permanente, inaltérable, presque minérale.</p></div></div>
+    <div class="step rv"><span class="s-num">(03)</span><div class="s-body"><h3>QR codes · Boîte décorée · Buzz l'Éclair</h3><p>Quatre QR codes intégrés à la surface pointent vers une sélection musicale et vidéo. Leitmotiv Buzz l'Éclair : To Infinity and Beyond. Livré dans une boîte en bois peinte à la main — l'emballage fait partie de l'objet.</p></div></div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="grid g-2-1 rv">
+    <div class="cell r16-9"><img src="../assets/images/pura-vida/04.jpg" alt="Face latérale"></div>
+    <div class="cell r16-9"><img src="../assets/images/pura-vida/05.jpg" alt="Intérieur coffret"></div>
+  </div>
+</div>
+
+<div class="sp"></div>
+<div class="fw rv"><img src="../assets/images/pura-vida/01.jpg" alt="Pura Vida — vue complète"></div>
+
+<section class="wrap">
+  <div class="kws rv">
+    <span class="kw-intro">ADN —</span>
+    <span class="kw">Peinture main</span>
+    <span class="kw">Graffiti</span>
+    <span class="kw">Objet upcyclé</span>
+    <span class="kw">Résine époxy</span>
+    <span class="kw">QR codes</span>
+    <span class="kw">Pièce unique</span>
+    <span class="kw">Skate</span>
+  </div>
+</section>
+
+<div class="wrap">
+  <p class="label rv">(Galerie)</p>
+  <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:10px;">
+    <div class="cell rv"><img src="../assets/images/pura-vida/02.jpg" alt="QR codes face bleue" loading="lazy"></div>
+    <div class="cell rv"><img src="../assets/images/pura-vida/03.jpg" alt="Dessus — texte manuscrit" loading="lazy"></div>
+    <div class="cell rv"><img src="../assets/images/pura-vida/04.jpg" alt="Face latérale" loading="lazy"></div>
+    <div class="cell rv" style="grid-column:span 3"><img src="../assets/images/pura-vida/05.jpg" alt="Intérieur — textes lyriques" loading="lazy" style="aspect-ratio:21/9;object-fit:cover;width:100%"></div>
+  </div>
+</div>
+
+<div class="sp"></div>
+<footer class="wrap">
+  <span class="f-l">003 — L'Objet Pura Vida · Bazar Organisé</span>
+  <a href="../index.html">← Retour au portfolio</a>
 </footer>
 
+<script>
+  const els = document.querySelectorAll('.rv');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) { setTimeout(() => e.target.classList.add('in'), i * 50); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.07 });
+  els.forEach(el => io.observe(el));
+</script>
 </body>
 </html>

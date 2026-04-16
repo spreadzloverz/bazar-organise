@@ -1,378 +1,73 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Design Espace (007) — Bazar Organisé</title>
-  <link rel="stylesheet" href="../assets/css/style.css" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --paper:   #F3F1ED;
-      --noir:    #111111;
-      --ink2:    #252A31;
-      --gris1:   #444444;
-      --gris2:   #777777;
-      --gris3:   #AAAAAA;
-      --border:  #E0DEDB;
-      --orange:  #C46A2D;
-      --shadow:  0 20px 50px rgba(17,17,17,0.07);
-      --font:    'Inter', -apple-system, sans-serif;
-      --nav-h:   60px;
-      --max:     1180px;
-      --pad:     clamp(20px, 5vw, 80px);
-    }
-
-    html { font-size: 16px; scroll-behavior: smooth; }
-
-    body {
-      font-family: var(--font);
-      background: var(--paper);
-      color: var(--noir);
-      font-size: 15px;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ── NAV ── */
-    .nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: var(--nav-h);
-      background: rgba(243,241,237,0.92);
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 40px;
-      z-index: 100;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-    }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      color: var(--noir);
-    }
-
-    .nav-logo img {
-      height: 36px;
-      width: auto;
-      display: block;
-    }
-
-    .nav-logo-text {
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--noir);
-    }
-
-    .back {
-      font-size: 12px;
-      color: var(--gris2);
-      text-decoration: none;
-      letter-spacing: 0.04em;
-      padding: 7px 16px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: rgba(255,255,255,0.72);
-      transition: color 0.2s, background 0.2s;
-    }
-
-    .back:hover { color: var(--noir); background: #fff; }
-
-    /* ── LAYOUT ── */
-    .wrap {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 var(--pad);
-    }
-
-    /* ── HERO ── */
-    .hero { padding-top: 108px; }
-
-    .hero-meta {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-
-    .num {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      color: var(--gris3);
-      text-transform: uppercase;
-      border: 1px solid var(--border);
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.72);
-    }
-
-    .tag, .kw {
-      display: inline-block;
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--gris2);
-      border: 1px solid var(--border);
-      border-radius: 100px;
-      padding: 4px 12px;
-      background: rgba(255,255,255,0.72);
-    }
-
-    h1 {
-      font-size: clamp(40px, 8vw, 96px);
-      font-weight: 700;
-      line-height: 0.97;
-      letter-spacing: -0.04em;
-      color: var(--noir);
-      margin-bottom: 20px;
-    }
-
-    h1 em {
-      font-style: normal;
-      color: var(--orange);
-    }
-
-    .hero-sub {
-      font-size: 16px;
-      color: var(--gris1);
-      max-width: 580px;
-      line-height: 1.75;
-      margin-bottom: 52px;
-    }
-
-    /* ── HERO BAND ── */
-    .hero-band {
-      width: 100%;
-      aspect-ratio: 21/9;
-      overflow: hidden;
-      background: var(--ink2);
-      border-radius: 20px;
-    }
-
-    .hero-band img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.8s ease;
-    }
-
-    .hero-band:hover img { transform: scale(1.02); }
-
-    /* ── LABELS ── */
-    .label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gris2);
-      padding-top: 56px;
-      margin-bottom: 28px;
-      border-top: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .label::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--orange);
-      flex-shrink: 0;
-    }
-
-    /* ── ABOUT GRID ── */
-    .about {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 32px;
-      padding-bottom: 56px;
-    }
-
-    @media (max-width: 820px) { .about { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 480px) { .about { grid-template-columns: 1fr; } }
-
-    .col-lbl {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--gris3);
-      margin-bottom: 10px;
-    }
-
-    .col-txt {
-      font-size: 14px;
-      color: var(--gris1);
-      line-height: 1.7;
-    }
-
-    .col-txt strong {
-      color: var(--noir);
-      font-weight: 600;
-      display: block;
-      margin-bottom: 4px;
-    }
-
-    /* ── IMAGE GRIDS ── */
-    .grid { display: grid; gap: 6px; }
-    .g-2-1 { grid-template-columns: 2fr 1fr; }
-    @media (max-width: 600px) { .g-2-1 { grid-template-columns: 1fr; } }
-
-    .cell {
-      overflow: hidden;
-      background: #E2E0DC;
-      border-radius: 12px;
-    }
-
-    .cell img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.55s ease;
-    }
-
-    .cell:hover img { transform: scale(1.035); }
-    .cell.contain img { object-fit: contain; background: var(--paper); padding: 24px; }
-    .r4-5 { aspect-ratio: 4/3; }
-    .r16-9 { aspect-ratio: 16/9; }
-
-    /* ── PROCESS ── */
-    .process { padding-bottom: 56px; }
-
-    .step {
-      display: grid;
-      grid-template-columns: 72px 1fr;
-      gap: 36px;
-      padding: 26px 0;
-      border-top: 1px solid var(--border);
-    }
-
-    .step:last-child { border-bottom: 1px solid var(--border); }
-
-    .s-num {
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--gris3);
-      padding-top: 3px;
-      letter-spacing: 0.1em;
-    }
-
-    .s-body h3 {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--noir);
-      margin-bottom: 8px;
-      letter-spacing: -0.01em;
-    }
-
-    .s-body p {
-      font-size: 14px;
-      color: var(--gris1);
-      line-height: 1.75;
-      max-width: 640px;
-    }
-
-    /* ── FULL WIDTH ── */
-    .fw {
-      width: 100%;
-      aspect-ratio: 21/9;
-      overflow: hidden;
-      background: var(--ink2);
-      border-radius: 20px;
-    }
-
-    .fw img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* ── KEYWORDS ── */
-    .kws {
-      padding: 40px 0;
-      border-top: 1px solid var(--border);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
-    }
-
-    .kw-intro {
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      color: var(--orange);
-      font-weight: 700;
-      text-transform: uppercase;
-      margin-right: 6px;
-    }
-
-    /* ── GALERIE ── */
-    .grid[style*="repeat(2"] .cell { border-radius: 12px; }
-
-    /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 28px var(--pad);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 100%;
-    }
-
-    .f-l {
-      font-size: 11px;
-      color: var(--gris3);
-      letter-spacing: 0.06em;
-    }
-
-    footer a {
-      font-size: 12px;
-      color: var(--gris2);
-      text-decoration: none;
-      letter-spacing: 0.04em;
-      padding: 7px 16px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: rgba(255,255,255,0.72);
-      transition: color 0.2s, background 0.2s;
-    }
-
-    footer a:hover { color: var(--noir); background: #fff; }
-
-    /* ── SPACER ── */
-    .sp { height: 56px; }
-
-    /* ── REVEAL ANIM ── */
-    .rv { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
-    .rv.in { opacity: 1; transform: none; }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 640px) {
-      .nav { padding: 0 20px; }
-      .nav-logo-text { display: none; }
-      footer { flex-direction: column; gap: 12px; text-align: center; }
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>006 — Loft Industriel · Bazar Organisé</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--paper:#F3F1ED;--noir:#111111;--ink2:#252A31;--gris1:#444444;--gris2:#777777;--gris3:#AAAAAA;--border:#E0DEDB;--orange:#C46A2D;--font:'Inter',-apple-system,sans-serif;--nav-h:60px;--max:1180px;--pad:clamp(20px,5vw,80px)}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--paper);color:var(--noir);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);background:rgba(243,241,237,0.92);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 40px;z-index:100;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--noir)}
+.nav-logo img{height:36px;width:auto;display:block}
+.nav-logo-text{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--noir)}
+.back{font-size:12px;color:var(--gris2);text-decoration:none;letter-spacing:.04em;padding:7px 16px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,0.72);transition:color .2s,background .2s}
+.back:hover{color:var(--noir);background:#fff}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+.hero{padding-top:108px}
+.hero-meta{display:flex;align-items:center;gap:12px;margin-bottom:24px}
+.num{font-size:10px;font-weight:700;letter-spacing:.18em;color:var(--gris3);text-transform:uppercase;border:1px solid var(--border);padding:4px 10px;border-radius:999px;background:rgba(255,255,255,0.72)}
+.tag,.kw{display:inline-block;font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--gris2);border:1px solid var(--border);border-radius:100px;padding:4px 12px;background:rgba(255,255,255,0.72)}
+h1{font-size:clamp(40px,8vw,96px);font-weight:700;line-height:.97;letter-spacing:-.04em;color:var(--noir);margin-bottom:20px}
+h1 em{font-style:normal;color:var(--orange)}
+.hero-sub{font-size:16px;color:var(--gris1);max-width:580px;line-height:1.75;margin-bottom:52px}
+.hero-band{width:100%;aspect-ratio:21/9;overflow:hidden;background:var(--ink2);border-radius:20px}
+.hero-band img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s ease}
+.hero-band:hover img{transform:scale(1.02)}
+.label{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gris2);padding-top:56px;margin-bottom:28px;border-top:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.label::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--orange);flex-shrink:0}
+.about{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;padding-bottom:56px}
+@media(max-width:820px){.about{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.about{grid-template-columns:1fr}}
+.col-lbl{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gris3);margin-bottom:10px}
+.col-txt{font-size:14px;color:var(--gris1);line-height:1.7}
+.col-txt strong{color:var(--noir);font-weight:600;display:block;margin-bottom:4px}
+.grid{display:grid;gap:6px}
+.g-2-1{grid-template-columns:2fr 1fr}
+@media(max-width:600px){.g-2-1{grid-template-columns:1fr}}
+.cell{overflow:hidden;background:#E2E0DC;border-radius:12px}
+.cell img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s ease}
+.cell:hover img{transform:scale(1.035)}
+.cell.contain img{object-fit:contain;background:var(--paper);padding:24px}
+.r4-5{aspect-ratio:4/3}
+.r16-9{aspect-ratio:16/9}
+.process{padding-bottom:56px}
+.step{display:grid;grid-template-columns:72px 1fr;gap:36px;padding:26px 0;border-top:1px solid var(--border)}
+.step:last-child{border-bottom:1px solid var(--border)}
+.s-num{font-size:10px;font-weight:700;color:var(--gris3);padding-top:3px;letter-spacing:.1em}
+.s-body h3{font-size:15px;font-weight:700;color:var(--noir);margin-bottom:8px;letter-spacing:-.01em}
+.s-body p{font-size:14px;color:var(--gris1);line-height:1.75;max-width:640px}
+.fw{width:100%;aspect-ratio:21/9;overflow:hidden;background:var(--ink2);border-radius:20px}
+.fw img{width:100%;height:100%;object-fit:cover;display:block}
+.kws{padding:40px 0;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.kw-intro{font-size:10px;letter-spacing:.14em;color:var(--orange);font-weight:700;text-transform:uppercase;margin-right:6px}
+footer{border-top:1px solid var(--border);padding:28px var(--pad);display:flex;justify-content:space-between;align-items:center}
+.f-l{font-size:11px;color:var(--gris3);letter-spacing:.06em}
+footer a{font-size:12px;color:var(--gris2);text-decoration:none;letter-spacing:.04em;padding:7px 16px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,0.72);transition:color .2s,background .2s}
+footer a:hover{color:var(--noir);background:#fff}
+.sp{height:56px}
+.rv{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.rv.in{opacity:1;transform:none}
+@media(max-width:640px){.nav{padding:0 20px}.nav-logo-text{display:none}footer{flex-direction:column;gap:12px;text-align:center}}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav class="nav">
   <a href="../index.html" class="nav-logo">
     <img src="../logo-bo-blanc.png" alt="Bazar Organisé" />
@@ -381,109 +76,94 @@
   <a href="../index.html" class="back">← Tous les projets</a>
 </nav>
 
-<div class="page">
-<div class="project-page">
-
-  <a href="../index.html" class="back-link">← Tous les projets</a>
-
-  <div class="proj-hero">
-    <div class="proj-meta">
-      <span class="proj-num">(007)</span>
-      <span class="proj-cat-label">— Architecture Intérieure</span>
-    </div>
-    <h1 class="proj-title">Design Espace</h1>
-    <div class="proj-tags"><span class="tag">Architecture intérieure</span><span class="tag">SketchUp</span><span class="tag">Chantier</span><span class="tag">Aménagement</span></div>
+<section class="hero wrap">
+  <div class="hero-meta rv">
+    <span class="num">(006)</span>
+    <span class="tag">Architecture Intérieure · 2024</span>
   </div>
+  <h1 class="rv">Loft<br><em>Industriel</em></h1>
+  <p class="hero-sub rv">Loft pour un couple créatif, sur deux niveaux. Ossature métallique apparente, plafond OSB brut. Zone jour, espace de travail, chambre dans une boîte surélevée. Du plan 3D SketchUp au suivi de chantier — un seul interlocuteur.</p>
+</section>
 
-  <!-- HERO IMAGE -->
-  <img src="../assets/images/design-espace/01.jpg"
-       alt="Design Espace"
-       class="proj-hero-img"
-       onerror="this.style.background='#E8E8E8'; this.style.minHeight='200px';" />
+<div class="hero-band rv">
+  <img src="../assets/images/design-espace/04.jpg" alt="Loft industriel — rendu 3D">
+</div>
 
-  <!-- BODY -->
-  <div class="proj-body">
-    <div class="proj-desc">
-      <p>Projets d'aménagement intérieur de la conception à la réalisation. Relevés de mesures, modélisation 3D sur SketchUp, coordination des corps d'état, suivi de chantier. Chaque projet engage une approche globale qui anticipe l'usage, la maintenance et l'évolution du lieu dans le temps.</p>
-    </div>
-    <aside class="proj-aside">
-      <div class="aside-block">
-        <div class="aside-label">Projet</div>
-        <div class="aside-value">007 — Design Espace</div>
-      </div>
-      <div class="aside-block">
-        <div class="aside-label">Catégorie</div>
-        <div class="aside-value">Architecture Intérieure</div>
-      </div>
-      <div class="aside-block">
-        <div class="aside-label">Année</div>
-        <div class="aside-value">2022–2025</div>
-      </div>
-      <div class="aside-block">
-        <div class="aside-label">Contexte</div>
-        <div class="aside-value">Commandes privées — Architecture intérieure</div>
-      </div>
-    </aside>
+<section class="wrap">
+  <p class="label rv">(À propos)</p>
+  <div class="about">
+    <div class="rv"><p class="col-lbl">Client</p><p class="col-txt"><strong>Couple créatif · 2 niveaux</strong>Espace polyvalent : vie, travail, stockage équipement photo.</p></div>
+    <div class="rv"><p class="col-lbl">Structure</p><p class="col-txt"><strong>Ossature métal · Plafond OSB</strong>Matériaux bruts apparents. Esthétique industrielle assumée.</p></div>
+    <div class="rv"><p class="col-lbl">Zones</p><p class="col-txt"><strong>Jour · Travail · Nuit</strong>Zonage précis sur double hauteur. Chaque espace lisible et distinct.</p></div>
+    <div class="rv"><p class="col-lbl">Chambre</p><p class="col-txt"><strong>Boîte surélevée</strong>Volume indépendant sur le niveau haut — ferme l'espace sans le clore.</p></div>
   </div>
+</section>
 
-  <!-- GALLERY -->
-    <div class="gallery-section">
-    <h2>(galerie)</h2>
-    <div class="gallery-grid">
-      <div class="gallery-item">
-        <img src="../assets/images/design-espace/01.jpg" alt="Design Espace — 01.jpg" loading="lazy" onerror="this.parentElement.style.display='none';" />
-      </div>
-      <div class="gallery-item">
-        <img src="../assets/images/design-espace/011.jpg" alt="Design Espace — 011.jpg" loading="lazy" onerror="this.parentElement.style.display='none';" />
-      </div>
-      <div class="gallery-item">
-        <img src="../assets/images/design-espace/02.jpg" alt="Design Espace — 02.jpg" loading="lazy" onerror="this.parentElement.style.display='none';" />
-      </div>
-      <div class="gallery-item">
-        <img src="../assets/images/design-espace/03.jpg" alt="Design Espace — 03.jpg" loading="lazy" onerror="this.parentElement.style.display='none';" />
-      </div>
-      <div class="gallery-item">
-        <img src="../assets/images/design-espace/04.jpg" alt="Design Espace — 04.jpg" loading="lazy" onerror="this.parentElement.style.display='none';" />
-      </div>
-      <div class="gallery-item">
-        <img src="../assets/images/design-espace/05.jpg" alt="Design Espace — 05.jpg" loading="lazy" onerror="this.parentElement.style.display='none';" />
-      </div>
-      <div class="gallery-item">
-        <img src="../assets/images/design-espace/07.jpg" alt="Design Espace — 07.jpg" loading="lazy" onerror="this.parentElement.style.display='none';" />
-      </div>
-      <div class="gallery-item">
-        <img src="../assets/images/design-espace/08.jpg" alt="Design Espace — 08.jpg" loading="lazy" onerror="this.parentElement.style.display='none';" />
-      </div>
-      <div class="gallery-item">
-        <img src="../assets/images/design-espace/09.jpg" alt="Design Espace — 09.jpg" loading="lazy" onerror="this.parentElement.style.display='none';" />
-      </div>
-      <div class="gallery-item">
-        <img src="../assets/images/design-espace/10.jpg" alt="Design Espace — 10.jpg" loading="lazy" onerror="this.parentElement.style.display='none';" />
-      </div>
-    </div>
+<div class="wrap">
+  <div class="grid g-2-1 rv">
+    <div class="cell r4-5"><img src="../assets/images/design-espace/01.jpg" alt="Vue d'ensemble du loft"></div>
+    <div class="cell r4-5"><img src="../assets/images/design-espace/02.jpg" alt="Détail ossature"></div>
   </div>
+</div>
+
+<section class="wrap">
+  <p class="label rv">(Process)</p>
+  <div class="process">
+    <div class="step rv"><span class="s-num">(01)</span><div class="s-body"><h3>Brief & relevés</h3><p>Rencontre sur site, mesures, compréhension des usages. Un couple créatif a des besoins précis — espace de concentration le jour, de vie le soir, de rangement en permanence. Le brief structure tout.</p></div></div>
+    <div class="step rv"><span class="s-num">(02)</span><div class="s-body"><h3>Modélisation 3D SketchUp</h3><p>Volume, matières, lumière. La maquette 3D est le langage commun avec le client : on teste les configurations, on valide les proportions avant de commander quoi que ce soit. La boîte chambre surélevée a été ajustée 3 fois avant validation.</p></div></div>
+    <div class="step rv"><span class="s-num">(03)</span><div class="s-body"><h3>Chantier & coordination</h3><p>Coordination des corps d'état — charpente métallique, électricité, plâtrerie OSB, menuiseries. Un seul interlocuteur pour tous les arbitrages techniques. Suivi hebdomadaire, ajustements en temps réel.</p></div></div>
   </div>
+</section>
 
-  <!-- NAVIGATION -->
-  <div class="proj-nav">
-    <a href="006-scenographie-fluo.html" class="proj-nav-item prev">
-      <div class="proj-nav-label">← Précédent</div>
-      <div class="proj-nav-title">Soirée Fluo</div>
-    </a>
-    <a href="008-graffiti.html" class="proj-nav-item next">
-      <div class="proj-nav-label">Suivant →</div>
-      <div class="proj-nav-title">Graffiti</div>
-    </a>
+<div class="wrap">
+  <div class="grid g-2-1 rv">
+    <div class="cell r16-9"><img src="../assets/images/design-espace/05.jpg" alt="Espace de travail"></div>
+    <div class="cell r16-9"><img src="../assets/images/design-espace/08.jpg" alt="Chambre surélevée"></div>
   </div>
+</div>
 
-</div><!-- /project-page -->
+<div class="sp"></div>
+<div class="fw rv"><img src="../assets/images/design-espace/09.jpg" alt="Vue générale du loft terminé"></div>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <span>Bazar Organisé — Xavier Talbot</span>
-  <a href="../index.html">← Retour au work</a>
+<section class="wrap">
+  <div class="kws rv">
+    <span class="kw-intro">ADN —</span>
+    <span class="kw">Architecture intérieure</span>
+    <span class="kw">SketchUp · 3D</span>
+    <span class="kw">Ossature métal</span>
+    <span class="kw">OSB</span>
+    <span class="kw">Aménagement</span>
+    <span class="kw">Chantier</span>
+    <span class="kw">Pilotage</span>
+  </div>
+</section>
+
+<div class="wrap">
+  <p class="label rv">(Galerie)</p>
+  <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:10px;">
+    <div class="cell rv"><img src="../assets/images/design-espace/01.jpg" alt="Loft — vue 01" loading="lazy"></div>
+    <div class="cell rv"><img src="../assets/images/design-espace/02.jpg" alt="Loft — vue 02" loading="lazy"></div>
+    <div class="cell rv"><img src="../assets/images/design-espace/03.jpg" alt="Loft — vue 03" loading="lazy"></div>
+    <div class="cell rv"><img src="../assets/images/design-espace/05.jpg" alt="Loft — vue 05" loading="lazy"></div>
+    <div class="cell rv"><img src="../assets/images/design-espace/07.jpg" alt="Loft — vue 07" loading="lazy"></div>
+    <div class="cell rv"><img src="../assets/images/design-espace/10.jpg" alt="Loft — vue 10" loading="lazy"></div>
+  </div>
+</div>
+
+<div class="sp"></div>
+<footer class="wrap">
+  <span class="f-l">006 — Loft Industriel · Bazar Organisé</span>
+  <a href="../index.html">← Retour au portfolio</a>
 </footer>
 
-</div><!-- /page -->
+<script>
+  const els = document.querySelectorAll('.rv');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) { setTimeout(() => e.target.classList.add('in'), i * 50); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.07 });
+  els.forEach(el => io.observe(el));
+</script>
 </body>
 </html>
