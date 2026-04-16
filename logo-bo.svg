@@ -1,0 +1,147 @@
+<svg viewBox="0 0 540 540" xmlns="http://www.w3.org/2000/svg" width="540" height="540">
+  <defs>
+    <pattern id="hatch" width="11" height="11" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="11" stroke="#C46A2D" stroke-width="1.1"/>
+    </pattern>
+    <pattern id="dots" width="13" height="13" patternUnits="userSpaceOnUse">
+      <circle cx="6.5" cy="6.5" r="1.6" fill="#C46A2D"/>
+    </pattern>
+    <pattern id="dots2" width="10" height="10" patternUnits="userSpaceOnUse">
+      <circle cx="5" cy="5" r="1.2" fill="#C46A2D"/>
+    </pattern>
+  </defs>
+
+  <!-- Fond blanc -->
+  <rect width="540" height="540" fill="white"/>
+
+  <!-- ════════════ DÉCOS ORANGES (arrière-plan) ════════════ -->
+
+  <!-- Rectangle hachuré haut-droite -->
+  <rect x="302" y="70" width="148" height="120" fill="url(#hatch)" stroke="#C46A2D" stroke-width="1.2"/>
+
+  <!-- Rectangle pointillé droite-milieu -->
+  <rect x="362" y="272" width="120" height="118" fill="url(#dots)" stroke="#C46A2D" stroke-width="1.2"/>
+
+  <!-- Rectangle pointillé bas-gauche -->
+  <rect x="60" y="372" width="110" height="100" fill="url(#dots2)" stroke="#C46A2D" stroke-width="1.0"/>
+
+  <!-- ── Croix / réticule haut-gauche ── -->
+  <line x1="35"  y1="188" x2="68"  y2="188" stroke="#C46A2D" stroke-width="1.5"/>
+  <line x1="82"  y1="188" x2="125" y2="188" stroke="#C46A2D" stroke-width="1.5"/>
+  <line x1="75"  y1="148" x2="75"  y2="180" stroke="#C46A2D" stroke-width="1.5"/>
+  <line x1="75"  y1="196" x2="75"  y2="248" stroke="#C46A2D" stroke-width="1.5"/>
+  <!-- petits tirets perpendiculaires -->
+  <line x1="68"  y1="182" x2="68"  y2="194" stroke="#C46A2D" stroke-width="1.5"/>
+  <line x1="82"  y1="182" x2="82"  y2="194" stroke="#C46A2D" stroke-width="1.5"/>
+
+  <!-- ── Croix / réticule milieu-gauche ── -->
+  <line x1="30"  y1="358" x2="62"  y2="358" stroke="#C46A2D" stroke-width="1.5"/>
+  <line x1="78"  y1="358" x2="120" y2="358" stroke="#C46A2D" stroke-width="1.5"/>
+  <line x1="70"  y1="318" x2="70"  y2="350" stroke="#C46A2D" stroke-width="1.5"/>
+  <line x1="70"  y1="366" x2="70"  y2="410" stroke="#C46A2D" stroke-width="1.5"/>
+  <line x1="62"  y1="352" x2="62"  y2="364" stroke="#C46A2D" stroke-width="1.5"/>
+  <line x1="78"  y1="352" x2="78"  y2="364" stroke="#C46A2D" stroke-width="1.5"/>
+
+  <!-- ── Croix / réticule haut (au-dessus B) ── -->
+  <line x1="168" y1="55"  x2="168" y2="78"  stroke="#C46A2D" stroke-width="1.5"/>
+  <line x1="145" y1="62"  x2="191" y2="62"  stroke="#C46A2D" stroke-width="1.5"/>
+
+  <!-- ── Croix / réticule bas-droite ── -->
+  <line x1="468" y1="355" x2="500" y2="355" stroke="#C46A2D" stroke-width="1.5"/>
+  <line x1="484" y1="335" x2="484" y2="375" stroke="#C46A2D" stroke-width="1.5"/>
+
+  <!-- ── Deux barres diagonales parallèles (bas-droite) ── -->
+  <line x1="398" y1="440" x2="430" y2="468" stroke="#C46A2D" stroke-width="7" stroke-linecap="round"/>
+  <line x1="416" y1="432" x2="448" y2="460" stroke="#C46A2D" stroke-width="7" stroke-linecap="round"/>
+
+  <!-- Ligne horizontale bas -->
+  <line x1="45"  y1="480" x2="200" y2="480" stroke="#C46A2D" stroke-width="1.3"/>
+  <line x1="340" y1="480" x2="500" y2="480" stroke="#C46A2D" stroke-width="1.3"/>
+
+  <!-- Ligne verticale droite -->
+  <line x1="310" y1="425" x2="310" y2="500" stroke="#C46A2D" stroke-width="1.3"/>
+
+  <!-- Petit cercle bas-gauche -->
+  <circle cx="88"  cy="438" r="14" fill="none" stroke="#C46A2D" stroke-width="1.3"/>
+  <circle cx="115" cy="455" r="5"  fill="none" stroke="#C46A2D" stroke-width="1.3"/>
+
+  <!-- Petits points bas-gauche -->
+  <circle cx="68"  cy="462" r="2.2" fill="#C46A2D"/>
+  <circle cx="82"  cy="478" r="1.5" fill="#C46A2D"/>
+  <circle cx="145" cy="468" r="3"   fill="#C46A2D"/>
+  <circle cx="168" cy="482" r="2"   fill="#C46A2D"/>
+
+  <!-- Point orange top-centre -->
+  <circle cx="370" cy="108" r="8" fill="#C46A2D"/>
+
+  <!-- ════════════ CLOUD ORANGE (bas, entre B et O) ════════════ -->
+  <path d="
+    M 218,455
+    Q 192,462 178,445
+    Q 158,440 160,418
+    Q 148,408 158,392
+    Q 155,372 178,374
+    Q 178,355 200,354
+    Q 212,344 228,352
+    Q 244,343 258,356
+    Q 278,355 280,376
+    Q 298,378 298,398
+    Q 308,416 296,432
+    Q 295,452 272,458
+    Q 248,468 228,462
+    Q 222,460 218,455 Z
+  " fill="#C46A2D"/>
+
+  <!-- ════════════ CLOUD NOIR (haut, entre les yeux du B) ════════════ -->
+  <path d="
+    M 155,248
+    Q 132,248 130,226
+    Q 126,206 145,200
+    Q 143,178 162,172
+    Q 172,155 190,162
+    Q 200,148 218,158
+    Q 234,150 248,164
+    Q 264,162 266,180
+    Q 282,182 282,202
+    Q 284,224 264,230
+    Q 268,250 248,255
+    Q 228,262 210,256
+    Q 190,265 172,258
+    Q 158,258 155,248 Z
+  " fill="#1a1a2e"/>
+
+  <!-- ════════════ LETTRE O ════════════ -->
+  <ellipse cx="368" cy="388" rx="108" ry="96"
+           fill="white" stroke="#1a1a2e" stroke-width="15"/>
+
+  <!-- ════════════ LETTRE B ════════════ -->
+  <!-- Forme extérieure B + contre-formes (evenodd) -->
+  <path fill-rule="evenodd"
+        fill="white"
+        stroke="#1a1a2e"
+        stroke-width="15"
+        stroke-linejoin="round"
+        d="
+    M 90,88
+    L 90,458
+    L 202,458
+    Q 316,458 316,362
+    Q 316,292 244,272
+    Q 316,254 316,172
+    Q 316,88 202,88
+    Z
+    M 138,115
+    L 196,115
+    Q 270,115 270,174
+    Q 270,244 196,244
+    L 138,244
+    Z
+    M 138,268
+    L 206,268
+    Q 284,268 284,362
+    Q 284,436 206,436
+    L 138,436
+    Z
+  "/>
+
+</svg>
