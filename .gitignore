@@ -7,3 +7,6 @@
 # OS
 .DS_Store
 Thumbs.db
+
+# Fichiers intermédiaires du build portfolio PDF
+portfolio/.build/
