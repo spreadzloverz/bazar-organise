@@ -15,7 +15,7 @@ Pour chaque recherche, GPS NIMBUS propose toujours deux réponses :
 - Calcul de trajets combinant marche, skate, métro, RER, tram et bus.
 - Les deux classements, avec tous leurs cas d'égalité.
 - Écran d'accueil, écran de résultats, détail étape par étape.
-- 76 tests automatiques.
+- 81 tests automatiques.
 
 ## Ce qui n'est pas encore réel — et l'application le dit
 
@@ -49,6 +49,26 @@ dart run tool/nimbus_cli.dart --list
 
 ## Lancer l'application
 
+### Dans un navigateur — y compris sur iPhone
+
+```bash
+./tool/build_web.sh ../nimbus
+```
+
+Le dossier `nimbus/` obtenu se dépose tel quel sur n'importe quel
+hébergement de fichiers statiques : il fonctionne à n'importe quelle
+adresse, sans recompiler. C'est aujourd'hui le seul moyen d'utiliser
+GPS NIMBUS sur iPhone sans Mac.
+
+La version web est autonome : la police et le moteur de rendu sont servis
+depuis le même hébergeur, aucun CDN n'est nécessaire pour l'affichage.
+Premier chargement : environ 15 Mo. Ensuite, c'est immédiat.
+
+Elle **n'est pas encore en ligne** : voir `../docs/STATUS.md`, section
+« Blocages », pour l'activer.
+
+### Sur un téléphone, en natif
+
 ```bash
 flutter run                 # sur un téléphone branché ou un émulateur
 flutter build apk --debug   # fabriquer un APK Android
@@ -57,8 +77,8 @@ flutter build apk --debug   # fabriquer un APK Android
 Un APK Android **n'a pas encore été produit** : voir `../docs/STATUS.md`,
 section « Blocages », pour les étapes à suivre.
 
-Un build iPhone demande un Mac avec Xcode. Le projet iOS est prêt, mais
-**aucun build iOS n'a été produit**.
+Un build iPhone natif demande un Mac avec Xcode. Le projet iOS est prêt,
+mais **aucun build iOS n'a été produit**.
 
 ## Vérifier que tout est sain
 

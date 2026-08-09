@@ -1,13 +1,16 @@
 # STATUS — GPS NIMBUS
 
-Dernière mise à jour : 2026-08-07
+Dernière mise à jour : 2026-08-09
 
 ## État actuel
 
 Le cœur de GPS NIMBUS fonctionne et est testé. L'application Flutter tourne
 sur le moteur réel, avec un réseau de transport fictif clairement signalé.
 
-**76 tests passent. `flutter analyze` ne relève aucun problème.**
+**81 tests passent. `flutter analyze` ne relève aucun problème.**
+
+Une **version web** existe et fonctionne : c'est aujourd'hui le seul moyen
+d'utiliser GPS NIMBUS depuis un iPhone sans Mac ni compte développeur.
 
 ## Terminé
 
@@ -39,6 +42,15 @@ sur le moteur réel, avec un réseau de transport fictif clairement signalé.
 - Détail : chiffres clés et séquence étape par étape.
 - Thème clair et sombre.
 
+**Version web**
+- `tool/build_web.sh` produit une version navigateur de 18 Mo, publiée dans
+  `nimbus/` à la racine du dépôt.
+- Vérifiée dans un vrai navigateur (Chromium, format iPhone) : saisie du
+  départ et de la destination, calcul, affichage des deux classements,
+  liste des autres itinéraires.
+- Police embarquée dans l'application, et moteur de rendu servi depuis le
+  même hébergeur : la page ne dépend d'aucun CDN pour s'afficher.
+
 **Harnais de test**
 - `dart run tool/nimbus_cli.dart` exerce tout le moteur sans interface.
 
@@ -56,11 +68,33 @@ Rien. Le lot est terminé.
 
 Voir `docs/BACKLOG.md`. Par ordre d'utilité :
 
-1. Faire produire un APK Android (voir « Blocages » ci-dessous).
+1. Mettre la version web en ligne (voir « Blocages » ci-dessous) et faire
+   produire un APK Android.
 2. Remplacer le réseau fictif par les données GTFS d'Île-de-France Mobilités.
 3. Remplacer les distances à vol d'oiseau par de vrais tracés de rues.
 
 ## Blocages
+
+### Version web — construite, pas encore en ligne
+
+Le dossier `nimbus/` contient l'application prête à être servie. Il ne
+manque qu'un hébergement. Le plus simple, sans rien installer ni payer :
+activer GitHub Pages sur ce dépôt.
+
+**ACTION REQUISE — pour ouvrir GPS NIMBUS depuis ton iPhone :**
+
+1. Sur ton iPhone, ouvre
+   `github.com/spreadzloverz/bazar-organise/settings/pages`
+2. Sous « Source », choisis **Deploy from a branch**.
+3. Choisis la branche `claude/gps-nimbus-mobile-app-p8iqf0`, dossier
+   `/ (root)`, puis **Save**.
+4. Attends deux à trois minutes, puis ouvre
+   `spreadzloverz.github.io/bazar-organise/nimbus/`
+5. Dans Safari : bouton Partager → « Sur l'écran d'accueil ». L'application
+   s'ouvre alors comme une vraie app.
+
+Le premier chargement télécharge environ 15 Mo (le moteur graphique) ; les
+suivants sont immédiats.
 
 ### Build Android — non produit ici
 
@@ -83,11 +117,14 @@ Le projet Android lui-même est complet et correctement configuré
    `build/app/outputs/flutter-apk/app-debug.apk` — copie-le sur ton
    téléphone et ouvre-le.
 
-### Build iOS — non produit
+### Build iOS natif — non produit
 
-Un Mac avec Xcode est indispensable pour compiler une application iPhone.
-Cette machine tourne sous Linux. Le projet iOS est présent et configuré,
-mais **aucun build iOS n'a été produit**.
+Un Mac avec Xcode est indispensable pour compiler une application iPhone
+native. Cette machine tourne sous Linux. Le projet iOS est présent et
+configuré, mais **aucun build iOS n'a été produit**.
+
+En attendant, la version web ci-dessus tourne sur iPhone et peut être
+ajoutée à l'écran d'accueil.
 
 **ACTION REQUISE — sur un Mac, si tu en as un :**
 

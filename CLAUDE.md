@@ -38,6 +38,9 @@ UI (lib/ui)  →  DOMAINE (lib/domain)  →  ROUTING (lib/routing)  →  DONNÉE
 - `lib/domain/ranking` : les deux classements produit
 - `lib/routing` : réseau de transport, recherche, moteur fictif, planificateur
 - `lib/data` : branchements OTP / GTFS / OSM (interfaces prêtes, non branchées)
+- `assets/fonts` : police embarquée — sans elle, la version web irait
+  chercher Roboto chez Google et n'afficherait rien hors ligne
+- `nimbus/` (racine du dépôt) : version web générée, publiable telle quelle
 
 Détails : `docs/ARCHITECTURE.md`.
 
@@ -59,7 +62,15 @@ dart run tool/nimbus_cli.dart --list
 # Applications
 flutter run
 flutter build apk --debug
+
+# Version web (celle qui tourne sur iPhone sans rien installer)
+./tool/build_web.sh            # build dans build/web
+./tool/build_web.sh ../nimbus  # build + copie dans le dossier publié
 ```
+
+La version web publiée vit dans `nimbus/` à la racine du dépôt. Elle est
+**générée** : ne jamais la modifier à la main, toujours relancer
+`tool/build_web.sh`.
 
 ## Règles de travail
 

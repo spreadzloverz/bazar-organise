@@ -41,6 +41,13 @@ class NimbusTheme {
   static const Color walkColor = Color(0xFF4C9AFF);
   static const Color transitColor = Color(0xFF9B7BFF);
 
+  /// Police embarquée avec l'application.
+  ///
+  /// Elle est déclarée explicitement pour que la version web n'aille pas
+  /// chercher Roboto sur les serveurs de Google au démarrage : GPS NIMBUS
+  /// doit s'afficher sans dépendre de personne, y compris hors ligne.
+  static const String fontFamily = 'NimbusSans';
+
   static ThemeData get light => _build(Brightness.light);
   static ThemeData get dark => _build(Brightness.dark);
 
@@ -52,6 +59,7 @@ class NimbusTheme {
     return ThemeData(
       useMaterial3: true,
       colorScheme: scheme,
+      fontFamily: fontFamily,
       scaffoldBackgroundColor: scheme.surface,
       appBarTheme: AppBarTheme(
         backgroundColor: scheme.surface,
@@ -70,7 +78,12 @@ class NimbusTheme {
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
           minimumSize: const Size.fromHeight(52),
+          // La famille est répétée ici volontairement : un TextStyle écrit
+          // à la main n'hérite pas de ThemeData.fontFamily, et son texte
+          // deviendrait invisible dès que la police par défaut du moteur
+          // n'est pas disponible (cas du web hors ligne).
           textStyle: const TextStyle(
+            fontFamily: fontFamily,
             fontSize: 16,
             fontWeight: FontWeight.w700,
             letterSpacing: 0.5,

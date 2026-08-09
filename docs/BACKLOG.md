@@ -2,13 +2,19 @@
 
 Par ordre d'utilité. Ce qui est fait est dans `docs/STATUS.md`.
 
-## 1. Rendre l'application installable
+## 1. Rendre l'application accessible
 
+- [x] Version web utilisable depuis un iPhone (`nimbus/`).
+- [ ] Mettre cette version web en ligne : activer GitHub Pages.
+      Étapes dans `docs/STATUS.md`.
 - [ ] Produire un APK Android. Bloqué ici par la politique réseau de
       l'environnement (`dl.google.com` inaccessible). Étapes pour
       l'utilisateur dans `docs/STATUS.md`.
-- [ ] Vérifier le build iOS. Nécessite un Mac avec Xcode.
-- [ ] Icône et écran de lancement aux couleurs de GPS NIMBUS.
+- [ ] Vérifier le build iOS natif. Nécessite un Mac avec Xcode.
+- [ ] Icône et écran de lancement aux couleurs de GPS NIMBUS — y compris
+      l'icône affichée quand la version web est ajoutée à l'écran d'accueil.
+- [ ] Alléger le premier chargement web (aujourd'hui ~15 Mo de moteur
+      graphique). Piste : la compilation WebAssembly de Flutter.
 
 ## 2. Données réelles de transport
 

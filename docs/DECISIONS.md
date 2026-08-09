@@ -125,3 +125,58 @@ WHY: Une recommandation qui change sans raison entre deux recherches
   identiques est un défaut visible par l'utilisateur, et rend les tests
   fragiles.
 REVERSIBLE: Oui.
+
+---
+
+DECISION: Produire une version web, publiée dans `nimbus/` à la racine
+CONTEXT: L'utilisateur est sur iPhone. Un build iOS natif demande un Mac
+  avec Xcode, et une publication App Store demande un compte développeur
+  payant. Le build Android est bloqué par la politique réseau de
+  l'environnement de développement.
+OPTIONS: (a) attendre un Mac ; (b) réécrire une interface web séparée en
+  JavaScript ; (c) compiler l'application Flutter existante pour le web.
+CHOICE: (c).
+WHY: (b) dupliquerait le moteur dans un second langage : deux versions à
+  maintenir, et le risque que les invariants produit divergent entre les
+  deux. (c) utilise exactement le même code Dart, donc les mêmes 81 tests
+  couvrent la version web. C'est aujourd'hui le seul moyen d'utiliser
+  GPS NIMBUS sur iPhone sans matériel ni compte supplémentaires.
+REVERSIBLE: Oui — supprimer `nimbus/` n'affecte ni le moteur ni les
+  applications natives.
+
+---
+
+DECISION: Embarquer une police dans l'application
+CONTEXT: Sur le web, le moteur de rendu de Flutter télécharge Roboto chez
+  Google au démarrage. Constaté en testant la version web dans un vrai
+  navigateur : sans accès à ce serveur, l'application s'affichait mais
+  **tous les textes étaient absents**.
+OPTIONS: (a) laisser Flutter télécharger Roboto ; (b) embarquer une police
+  dans l'application.
+CHOICE: (b) — Liberation Sans, sous licence SIL Open Font 1.1.
+WHY: Une application de trajet doit rester lisible dans le métro, avec un
+  réseau intermittent. (a) rend l'affichage dépendant d'un serveur tiers et
+  signale chaque ouverture à ce tiers. La licence OFL autorise explicitement
+  la redistribution.
+REVERSIBLE: Oui — retirer la déclaration `fonts:` du `pubspec.yaml`.
+NOTE: Le moteur tente malgré tout une requête vers `fonts.gstatic.com` au
+  démarrage, comme police de secours pour les caractères absents. Elle
+  échoue sans conséquence : l'application s'affiche entièrement sans elle.
+  Flutter 3.35 n'offre pas d'option pour la désactiver.
+
+---
+
+DECISION: Répéter la famille de police dans les `TextStyle` écrits à la main
+CONTEXT: Le libellé du bouton « CALCULER » était invisible sur le web.
+  Cause : un `TextStyle` construit à la main n'hérite pas de
+  `ThemeData.fontFamily` et retombait sur la police par défaut du moteur,
+  indisponible.
+OPTIONS: (a) corriger le seul bouton fautif ; (b) corriger tous les styles
+  écrits à la main et ajouter un test qui empêche la réapparition.
+CHOICE: (b).
+WHY: Le défaut est invisible en test unitaire classique et n'apparaît qu'à
+  l'exécution, sur un appareil réel, dans une condition réseau précise. Un
+  test qui parcourt l'arbre des widgets et refuse tout texte sans police
+  est le seul moyen fiable de ne pas le réintroduire. Ce test a été vérifié
+  en réintroduisant volontairement le défaut : il échoue bien.
+REVERSIBLE: Oui, mais sans intérêt.
