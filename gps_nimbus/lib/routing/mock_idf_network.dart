@@ -105,6 +105,26 @@ class MockIdfNetwork {
       position: GeoPoint(latitude: 48.8434, longitude: 2.322),
     ),
     Station(
+      id: 'pasteur',
+      name: 'Pasteur',
+      position: GeoPoint(latitude: 48.8429, longitude: 2.3126),
+    ),
+    Station(
+      id: 'convention',
+      name: 'Convention',
+      position: GeoPoint(latitude: 48.837, longitude: 2.2967),
+    ),
+    Station(
+      id: 'corentin_celton',
+      name: 'Corentin Celton',
+      position: GeoPoint(latitude: 48.8272, longitude: 2.2789),
+    ),
+    Station(
+      id: 'mairie_issy',
+      name: "Mairie d'Issy",
+      position: GeoPoint(latitude: 48.8242, longitude: 2.2737),
+    ),
+    Station(
       id: 'porte_orleans',
       name: "Porte d'Orléans",
       position: GeoPoint(latitude: 48.8232, longitude: 2.3258),
@@ -128,6 +148,11 @@ class MockIdfNetwork {
       id: 'place_italie',
       name: "Place d'Italie",
       position: GeoPoint(latitude: 48.8311, longitude: 2.3556),
+    ),
+    Station(
+      id: 'quai_de_la_gare',
+      name: 'Quai de la Gare',
+      position: GeoPoint(latitude: 48.837, longitude: 2.3728),
     ),
     Station(
       id: 'bercy',
@@ -215,9 +240,24 @@ class MockIdfNetwork {
       position: GeoPoint(latitude: 48.8836, longitude: 2.239),
     ),
     Station(
-      id: 'issy',
+      id: 'issy_val_de_seine',
       name: 'Issy–Val de Seine',
       position: GeoPoint(latitude: 48.8306, longitude: 2.2688),
+    ),
+    Station(
+      id: 'issy_rer',
+      name: 'Issy',
+      position: GeoPoint(latitude: 48.8198, longitude: 2.2597),
+    ),
+    Station(
+      id: 'ivry_sur_seine',
+      name: 'Ivry-sur-Seine',
+      position: GeoPoint(latitude: 48.8142, longitude: 2.3917),
+    ),
+    Station(
+      id: 'bfm',
+      name: 'Bibliothèque François-Mitterrand',
+      position: GeoPoint(latitude: 48.8299, longitude: 2.3763),
     ),
     Station(
       id: 'austerlitz',
@@ -228,6 +268,16 @@ class MockIdfNetwork {
       id: 'luxembourg',
       name: 'Luxembourg',
       position: GeoPoint(latitude: 48.8465, longitude: 2.34),
+    ),
+    Station(
+      id: 'champ_de_mars',
+      name: 'Champ de Mars–Tour Eiffel',
+      position: GeoPoint(latitude: 48.8552, longitude: 2.2897),
+    ),
+    Station(
+      id: 'javel',
+      name: 'Javel',
+      position: GeoPoint(latitude: 48.8462, longitude: 2.2768),
     ),
   ];
 
@@ -268,11 +318,23 @@ class MockIdfNetwork {
         'etoile',
         'trocadero',
         'bir_hakeim',
+        'pasteur',
         'montparnasse',
         'denfert',
         'place_italie',
+        'quai_de_la_gare',
         'bercy',
         'nation',
+      ],
+    ),
+    LineRoute(
+      line: TransitLine(name: '12', mode: SegmentType.metro, operator: 'RATP'),
+      stopIds: [
+        'pasteur',
+        'convention',
+        'porte_versailles',
+        'corentin_celton',
+        'mairie_issy',
       ],
     ),
     LineRoute(
@@ -305,6 +367,19 @@ class MockIdfNetwork {
       ],
     ),
     LineRoute(
+      line: TransitLine(name: 'C', mode: SegmentType.rer, operator: 'SNCF'),
+      stopIds: [
+        'ivry_sur_seine',
+        'bfm',
+        'austerlitz',
+        'saint_michel',
+        'champ_de_mars',
+        'javel',
+        'issy_val_de_seine',
+        'issy_rer',
+      ],
+    ),
+    LineRoute(
       line: TransitLine(name: 'T3a', mode: SegmentType.tram, operator: 'RATP'),
       stopIds: [
         'garigliano',
@@ -316,7 +391,12 @@ class MockIdfNetwork {
     ),
     LineRoute(
       line: TransitLine(name: 'T2', mode: SegmentType.tram, operator: 'RATP'),
-      stopIds: ['la_defense', 'puteaux', 'issy', 'porte_versailles'],
+      stopIds: [
+        'la_defense',
+        'puteaux',
+        'issy_val_de_seine',
+        'porte_versailles',
+      ],
     ),
     LineRoute(
       line: TransitLine(name: '91', mode: SegmentType.bus, operator: 'RATP'),
