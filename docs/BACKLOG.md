@@ -1,73 +1,91 @@
 # BACKLOG — GPS NIMBUS
 
-Par ordre d'utilité. Ce qui est fait est dans `docs/STATUS.md`.
+Dernière mise à jour : 2026-09-07
 
-## 1. Rendre l'application accessible
+Par ordre d'utilité. Les statuts prouvés sont dans `docs/STATUS.md`.
 
-- [x] Version web utilisable depuis un iPhone (`nimbus/`).
-- [ ] Mettre cette version web en ligne : activer GitHub Pages.
-      Étapes dans `docs/STATUS.md`.
-- [ ] Produire un APK Android. Bloqué ici par la politique réseau de
-      l'environnement (`dl.google.com` inaccessible). Étapes pour
-      l'utilisateur dans `docs/STATUS.md`.
-- [ ] Vérifier le build iOS natif. Nécessite un Mac avec Xcode.
-- [ ] Icône et écran de lancement aux couleurs de GPS NIMBUS — y compris
-      l'icône affichée quand la version web est ajoutée à l'écran d'accueil.
-- [ ] Alléger le premier chargement web (aujourd'hui ~15 Mo de moteur
-      graphique). Piste : la compilation WebAssembly de Flutter.
+## 1. Sécuriser la base actuelle
 
-## 2. Données réelles de transport
+- [x] Isoler les corrections sur `gps-nimbus/hardening-v1`.
+- [x] Interdire le déploiement du portfolio depuis une branche Claude.
+- [x] Ajouter les niveaux `MOCKED / IMPLEMENTED / TESTED /
+      DEVICE_TESTED / LIVE_DATA / PRODUCTION`.
+- [x] Ajouter une CI sans déploiement : format, analyse, tests, build web.
+- [ ] Obtenir une CI verte sur le lot de calibration utilisateur.
+- [ ] Relire le diff final puis ouvrir une PR de revue. Ne pas fusionner avant
+      contrôles verts.
 
-- [ ] Importer le GTFS d'Île-de-France Mobilités
-      (`GtfsNetworkSource`, aujourd'hui non implémenté).
-      Fichiers attendus : `stops.txt`, `routes.txt`, `trips.txt`,
-      `stop_times.txt`, `calendar.txt`.
-- [ ] Remplacer les intervalles moyens par de vrais horaires : l'attente
-      dépendra alors de l'heure de départ, déjà prévue dans `RouteRequest`.
-- [ ] Décider du stockage local du réseau (taille, mise à jour).
-      → décision de niveau B à documenter le moment venu.
+## 2. Migrer GPS NIMBUS hors du portfolio
 
-## 3. Tracés de rues réels
+- [ ] Créer le dépôt indépendant `spreadzloverz/gps-nimbus`.
+- [ ] Y transférer `gps_nimbus/`, la documentation et la CI utile.
+- [ ] Utiliser `main` pour la version stable et des branches courtes pour le
+      développement.
+- [ ] Construire le web avec GitHub Actions depuis la source.
+- [ ] N'activer Pages qu'après validation de l'artefact et sans publier la
+      racine du site Bazar Organisé.
 
-- [ ] Brancher OpenStreetMap (`OsmStreetNetworkSource`) pour remplacer
-      l'estimation « vol d'oiseau × 1,25 ».
-- [ ] Faire consommer les vraies catégories de voies par les politiques
-      d'accès marche et skate.
+La création du nouveau dépôt n'est pas disponible via le connecteur actuel.
+Elle demandera une action humaine simple ou un environnement GitHub CLI
+autorisé.
 
-## 4. Profil skate spécifique
+## 3. Transformer GOLDEN-001 en test complet
 
-- [ ] Remplacer le proxy cyclable par de vraies règles de circulation des
-      engins de déplacement personnel motorisés.
-- [ ] Retirer l'avertissement « estimé à partir des données cyclables »
-      une fois que c'est fait — et pas avant.
-- [ ] Étudier pentes et revêtement, qui comptent beaucoup en skate.
+- [x] Documenter le trajet Alfortville → Issy sous identifiants anonymisés.
+- [x] Modéliser les durées terrain et leur priorité.
+- [x] Appliquer une observation compatible à un tronçon marche/skate.
+- [x] Protéger un point d'accès explicite lorsqu'il existe dans le réseau.
+- [x] Signaler un point explicite absent au lieu de le remplacer.
+- [ ] Ajouter au réseau de test : Quai de la Gare, Pasteur, Mairie d'Issy,
+      Ivry-sur-Seine, ligne 12 et RER C.
+- [ ] Ajouter localement les coordonnées privées exactes sans les committer.
+- [ ] Comparer réellement l'itinéraire M6 + M12 et la variante RER C.
 
-## 5. Cartographie
+## 4. Données réelles de transport
 
-- [ ] Afficher le trajet sur une carte dans l'écran de détail.
-      → choix de la bibliothèque = décision de niveau B, à documenter.
-      À ne faire qu'une fois les tracés réels disponibles : une carte sans
-      tracé réel afficherait des lignes droites trompeuses.
+- [ ] Importer le GTFS d'Île-de-France Mobilités.
+- [ ] Remplacer les intervalles moyens par les horaires réels selon l'heure de
+      départ déjà prévue dans `RouteRequest`.
+- [ ] Ajouter les prochains passages et perturbations temps réel avec date de
+      fraîcheur et source.
+- [ ] Séparer `scheduledTime`, `expectedTime` et observation terrain.
+- [ ] Décider du stockage local et de la fréquence de mise à jour.
 
-## 6. Recherche de lieux
+## 5. Tracés de rues et recherche de lieux
 
-- [ ] Remplacer le catalogue de 20 lieux par une vraie recherche
-      d'adresses. Vérifier d'abord les conditions d'utilisation et si une
-      clé d'API est nécessaire → si oui, c'est une décision utilisateur.
-- [ ] Position actuelle comme point de départ (demande une autorisation
-      de géolocalisation sur Android et iOS).
+- [ ] Remplacer « vol d'oiseau × facteur » par un vrai réseau de rues OSM.
+- [ ] Ajouter un géocodage dont les conditions d'utilisation et quotas ont été
+      vérifiés.
+- [ ] Ajouter la position actuelle avec autorisation explicite de l'utilisateur.
+- [ ] Ne jamais exposer de clé privée dans le JavaScript web.
 
-## 7. Confort d'usage
+## 6. Road Intelligence progressive
 
-- [ ] Mémoriser les derniers trajets recherchés.
-- [ ] Réglages : vitesse skate et vitesse de marche personnelles
-      (`MobilityConfig` le permet déjà, il manque l'écran).
-- [ ] Limite de distance skate choisie par l'utilisateur
-      (`maxSkateDistanceMeters` est déjà pris en compte par le moteur).
+- [ ] Prévoir les champs source, fraîcheur, confiance et impact routing.
+- [ ] Intégrer d'abord uniquement les fermetures certaines, perturbations
+      datées et pentes fiables.
+- [ ] Collecter surface, état de voirie, travaux et accidents comme données
+      informatives avant de leur attribuer des coefficients.
+- [ ] Calibrer les effets avec des mesures terrain ; ne pas inventer des
+      multiplicateurs pseudo-scientifiques.
 
-## Volontairement hors du MVP
+## 7. Builds et tests appareils
 
-Compte utilisateur, authentification, Firebase, paiement, abonnement,
-publicité, tracking, fonctions sociales, backend, IA embarquée.
+- [ ] Produire un APK Android dans un environnement disposant du SDK.
+- [ ] Tester la version web sur un iPhone réel avec Safari et ajout à l'écran
+      d'accueil.
+- [ ] Vérifier le cache et la mise à jour de version PWA.
+- [ ] Vérifier le build iOS sur Mac avec Xcode.
+- [ ] Ne jamais appeler un test Chromium redimensionné `DEVICE_TESTED`.
 
-Aucun de ces éléments n'est nécessaire pour calculer un trajet.
+## 8. Cartographie et confort
+
+- [ ] Afficher une carte seulement lorsque les tracés réels existent.
+- [ ] Ajouter vitesse skate/marche réglables dans l'interface.
+- [ ] Ajouter la limite de distance skate déjà supportée par le moteur.
+- [ ] Mémoriser les derniers trajets sans publier l'historique privé.
+
+## Volontairement hors MVP
+
+Compte utilisateur, paiement, publicité, tracking marketing, fonctions
+sociales, IA embarquée, microservices et calcul batterie prétendument précis.
