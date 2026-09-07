@@ -130,11 +130,13 @@ class UserTravelContext {
     return matches.first;
   }
 
-  bool protectsBoarding(String label) =>
-      protectedBoardingLabels.any((value) => _normalize(value) == _normalize(label));
+  bool protectsBoarding(String label) => protectedBoardingLabels.any(
+    (value) => _normalize(value) == _normalize(label),
+  );
 
-  bool protectsAlighting(String label) =>
-      protectedAlightingLabels.any((value) => _normalize(value) == _normalize(label));
+  bool protectsAlighting(String label) => protectedAlightingLabels.any(
+    (value) => _normalize(value) == _normalize(label),
+  );
 }
 
 String _normalize(String value) {
