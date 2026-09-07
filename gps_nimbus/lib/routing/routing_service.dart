@@ -1,4 +1,5 @@
 import '../core/config/mobility_config.dart';
+import '../domain/calibration/user_travel_context.dart';
 import '../domain/model/geo_point.dart';
 import '../domain/model/route_option.dart';
 
@@ -9,6 +10,7 @@ class RouteRequest {
     required this.destination,
     this.config = MobilityConfig.defaults,
     this.departureTime,
+    this.userContext = UserTravelContext.empty,
   });
 
   final GeoPoint origin;
@@ -18,6 +20,10 @@ class RouteRequest {
   /// Heure de départ souhaitée. Ignorée tant que les horaires réels
   /// (GTFS) ne sont pas branchés ; les attentes sont alors moyennes.
   final DateTime? departureTime;
+
+  /// Observations terrain et points d'accès explicitement fournis par
+  /// l'utilisateur. Facultatif : le moteur reste utilisable sans historique.
+  final UserTravelContext userContext;
 }
 
 /// Résultat brut d'un service de routing, avant classement.
