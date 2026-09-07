@@ -1,182 +1,191 @@
 # DECISIONS — GPS NIMBUS
 
-Uniquement les décisions structurantes. Les choix locaux (noms, découpage
-de widgets, organisation d'un fichier) ne sont pas documentés ici.
+Dernière consolidation : 2026-09-07
+
+Seules les décisions structurantes sont conservées ici.
 
 ---
 
-DECISION: Placer l'application dans `gps_nimbus/` à la racine du dépôt
-CONTEXT: Le dépôt contient déjà le site web Bazar Organise (HTML, images,
-  scripts). GPS NIMBUS est un projet différent.
-OPTIONS: (a) nouveau dépôt ; (b) sous-dossier du dépôt existant ;
-  (c) mélanger à la racine.
-CHOICE: (b) sous-dossier `gps_nimbus/`.
-WHY: Aucun fichier du site n'est touché, aucune permission ni création de
-  dépôt n'est nécessaire, et tout reste dans une seule branche de travail.
-REVERSIBLE: Oui — déplacer le dossier suffit.
+DECISION: Héberger provisoirement le code dans `gps_nimbus/`, puis le migrer
+  vers un dépôt indépendant `spreadzloverz/gps-nimbus`.
+CONTEXT: `bazar-organise` contient déjà un portfolio public sans rapport avec
+  l'application.
+OPTIONS: Mélanger les projets ; rester durablement en sous-dossier ; créer un
+  dépôt GPS NIMBUS indépendant.
+CHOICE: Sous-dossier uniquement comme transition, dépôt indépendant comme
+  cible.
+WHY: Réduit le risque qu'un build, une branche Claude ou un réglage Pages
+  casse le portfolio.
+REVERSIBLE: Oui.
+SUPERSEDES: La décision initiale de conserver durablement les deux projets
+  dans le même dépôt.
 
 ---
 
-DECISION: Gestion d'état avec `StatefulWidget` et `setState`
-CONTEXT: L'application a un écran de saisie et deux écrans de lecture.
-OPTIONS: Provider, Riverpod, BLoC, ou rien du tout.
-CHOICE: Rien — `setState`.
-WHY: Aucun état partagé entre écrans, aucune synchronisation complexe.
-  Une bibliothèque de gestion d'état ajouterait une dépendance et du
-  vocabulaire sans résoudre de problème existant. Le moteur, lui, est déjà
-  isolé de l'interface, donc l'ajout d'une telle bibliothèque plus tard ne
-  touchera pas la logique métier.
-REVERSIBLE: Oui — l'interface est mince et le domaine n'en dépend pas.
+DECISION: Ne jamais publier GitHub Pages depuis une branche `claude/*` du
+  dépôt `bazar-organise`.
+CONTEXT: Pages publierait la racine entière de la branche, pas seulement
+  `/nimbus/`.
+CHOICE: Construire et publier plus tard depuis le dépôt GPS NIMBUS séparé,
+  après format, analyse et tests.
+WHY: Le site Bazar Organisé ne doit pas dépendre d'une branche de travail.
+REVERSIBLE: Oui ; aucun réglage Pages n'a été modifié.
 
 ---
 
-DECISION: Zéro dépendance externe au-delà du SDK Flutter
-CONTEXT: Un moteur d'itinéraires pourrait s'appuyer sur des paquets de
-  géométrie, de file de priorité, de HTTP, de cartographie.
-OPTIONS: Ajouter les paquets utiles maintenant, ou n'ajouter que le
-  nécessaire.
-CHOICE: Aucune dépendance pour l'instant.
-WHY: La distance de haversine fait dix lignes. Le réseau du MVP est assez
-  petit pour qu'une file de priorité naïve soit largement suffisante.
-  Aucun appel réseau n'existe encore. Moins de dépendances = moins de
-  risques de compatibilité Android/iOS et de licence.
-REVERSIBLE: Oui. La cartographie (`flutter_map` ou équivalent) sera une
-  vraie décision au moment de la Phase 7.
+DECISION: Employer six niveaux de réalité.
+CHOICE: `MOCKED`, `IMPLEMENTED`, `TESTED`, `DEVICE_TESTED`, `LIVE_DATA`,
+  `PRODUCTION`.
+WHY: Empêche de confondre code présent, test Chromium redimensionné, données
+  réelles et application publiée.
+REVERSIBLE: Oui, mais ces distinctions doivent rester au minimum aussi
+  précises.
 
 ---
 
-DECISION: Le graphe de transport a pour nœuds des couples (station, ligne)
-CONTEXT: Il faut produire des itinéraires qui distinguent l'attente, le
-  trajet à bord et les correspondances.
-OPTIONS: (a) graphe de stations avec pénalité forfaitaire de
-  correspondance ; (b) graphe (station × ligne).
-CHOICE: (b).
-WHY: Avec (a), on ne sait pas quelle ligne est empruntée ni quand un
-  changement de véhicule a lieu — donc on ne peut ni compter honnêtement
-  les correspondances, ni afficher la séquence réelle du trajet, qui sont
-  deux exigences produit. (b) les fait tomber naturellement.
-REVERSIBLE: Oui, mais sans intérêt : (b) est un sur-ensemble de (a).
+DECISION: Les mesures terrain utilisateur compatibles ont priorité sur les
+  estimations génériques.
+CONTEXT: Une vitesse libre de 27 km/h ne représente pas les feux, traversées,
+  relances et accès réels d'un segment connu.
+CHOICE: Conserver la durée générique dans les métadonnées, mais utiliser la
+  meilleure observation directionnelle lorsqu'origine, destination et mode
+  correspondent.
+WHY: Une mesure réelle est plus fiable qu'un calcul `distance / vitesse`.
+REVERSIBLE: Oui ; l'absence de contexte utilisateur conserve le comportement
+  antérieur.
 
 ---
 
-DECISION: La pénalité d'embarquement oriente le choix mais n'est pas
-  annoncée à l'utilisateur
-CONTEXT: Sans pénalité, le moteur propose des itinéraires théoriquement
-  rapides mais avec des correspondances absurdes.
-OPTIONS: (a) ajouter la pénalité à la durée affichée ; (b) l'utiliser
-  seulement pendant la recherche.
-CHOICE: (b).
-WHY: La durée annoncée doit être la somme exacte des tronçons réels.
-  Gonfler la durée affichée pour exprimer une préférence reviendrait à
-  mentir sur le temps de trajet.
-REVERSIBLE: Oui — un paramètre unique dans `findTransitSegments`.
-
----
-
-DECISION: Le profil skate emprunte temporairement les règles cyclables
-CONTEXT: Il n'existe pas de données de voirie spécifiques aux engins de
-  déplacement personnel motorisés en Île-de-France.
-OPTIONS: (a) traiter le skate comme un vélo ; (b) inventer des règles ;
-  (c) bloquer le développement en attendant de vraies données.
-CHOICE: (a), mais isolé et signalé.
-WHY: (c) empêcherait de construire le MVP ; (b) serait malhonnête. Le
-  proxy est confiné à `SkateAccessPolicy`, exposé par `isProxy`, affiché
-  à l'utilisateur via `proxyNotice`, et désactivable par un paramètre.
-  Le skate ne devient donc pas un alias permanent du vélo : c'est un
-  emprunt daté et visible.
-REVERSIBLE: Oui — une seule classe à remplacer.
-
----
-
-DECISION: Un réseau francilien fictif et simplifié pour le MVP
-CONTEXT: Le GTFS d'Île-de-France Mobilités est volumineux, se met à jour
-  régulièrement, et n'a pas encore été importé.
-OPTIONS: (a) attendre le GTFS ; (b) réseau réduit écrit à la main ;
-  (c) inventer des réponses d'API.
-CHOICE: (b).
-WHY: (c) est interdit par les règles du projet. (a) bloquerait tout. Un
-  réseau de 43 stations et 9 lignes suffit à exercer toutes les
-  combinaisons de modes et tous les cas de classement. Le calcul reste
-  réel ; seules les données sont approximatives, et l'application le dit.
-REVERSIBLE: Oui — `TransitNetworkSource` permet de fournir un autre réseau
-  sans toucher au moteur.
-
----
-
-DECISION: Distances estimées à vol d'oiseau × 1,25 en attendant OSM
-CONTEXT: Aucun tracé de rue n'est disponible.
-OPTIONS: (a) distance à vol d'oiseau brute ; (b) facteur de détour ;
-  (c) attendre OSM.
-CHOICE: (b), avec un facteur unique et documenté.
-WHY: La distance brute sous-estime systématiquement les trajets urbains.
-  Un facteur unique est grossier mais honnête, et l'écart est signalé à
-  l'utilisateur. Il est remplacé dès qu'un vrai calcul de chemin existe.
-REVERSIBLE: Oui — une constante et une méthode.
-
----
-
-DECISION: Départage final des classements par identifiant d'itinéraire
-CONTEXT: `List.sort` n'est pas stable en Dart : à égalité stricte, l'ordre
-  des résultats pouvait changer d'un appel à l'autre.
-OPTIONS: (a) accepter l'instabilité ; (b) trier avec un dernier critère
-  déterministe.
-CHOICE: (b).
-WHY: Une recommandation qui change sans raison entre deux recherches
-  identiques est un défaut visible par l'utilisateur, et rend les tests
-  fragiles.
+DECISION: Une plage terrain reste une plage.
+CONTEXT: Certaines observations sont exprimées comme « 7 à 10 minutes ».
+CHOICE: Conserver min et max ; utiliser provisoirement leur milieu comme
+  valeur représentative tant qu'aucune médiane n'existe.
+WHY: Évite d'inventer une précision. Le choix représentatif pourra évoluer
+  avec davantage de passages.
 REVERSIBLE: Oui.
 
 ---
 
-DECISION: Produire une version web, publiée dans `nimbus/` à la racine
-CONTEXT: L'utilisateur est sur iPhone. Un build iOS natif demande un Mac
-  avec Xcode, et une publication App Store demande un compte développeur
-  payant. Le build Android est bloqué par la politique réseau de
-  l'environnement de développement.
-OPTIONS: (a) attendre un Mac ; (b) réécrire une interface web séparée en
-  JavaScript ; (c) compiler l'application Flutter existante pour le web.
-CHOICE: (c).
-WHY: (b) dupliquerait le moteur dans un second langage : deux versions à
-  maintenir, et le risque que les invariants produit divergent entre les
-  deux. (c) utilise exactement le même code Dart, donc les mêmes 81 tests
-  couvrent la version web. C'est aujourd'hui le seul moyen d'utiliser
-  GPS NIMBUS sur iPhone sans matériel ni compte supplémentaires.
-REVERSIBLE: Oui — supprimer `nimbus/` n'affecte ni le moteur ni les
-  applications natives.
+DECISION: Protéger les points d'accès explicitement donnés.
+CONTEXT: Une recommandation précédente avait remplacé Ivry-sur-Seine par BFM
+  sans justification.
+CHOICE: Ajouter tout point explicite existant aux candidats, même hors des
+  trois stations les plus proches. S'il manque dans le réseau courant, le
+  signaler au lieu de le remplacer.
+WHY: Les connaissances terrain utilisateur ne doivent pas disparaître dans
+  la génération automatique de candidats.
+REVERSIBLE: Oui.
 
 ---
 
-DECISION: Embarquer une police dans l'application
-CONTEXT: Sur le web, le moteur de rendu de Flutter télécharge Roboto chez
-  Google au démarrage. Constaté en testant la version web dans un vrai
-  navigateur : sans accès à ce serveur, l'application s'affichait mais
-  **tous les textes étaient absents**.
-OPTIONS: (a) laisser Flutter télécharger Roboto ; (b) embarquer une police
-  dans l'application.
-CHOICE: (b) — Liberation Sans, sous licence SIL Open Font 1.1.
-WHY: Une application de trajet doit rester lisible dans le métro, avec un
-  réseau intermittent. (a) rend l'affichage dépendant d'un serveur tiers et
-  signale chaque ouverture à ce tiers. La licence OFL autorise explicitement
-  la redistribution.
-REVERSIBLE: Oui — retirer la déclaration `fonts:` du `pubspec.yaml`.
-NOTE: Le moteur tente malgré tout une requête vers `fonts.gstatic.com` au
-  démarrage, comme police de secours pour les caractères absents. Elle
-  échoue sans conséquence : l'application s'affiche entièrement sans elle.
-  Flutter 3.35 n'offre pas d'option pour la désactiver.
+DECISION: Ne pas enregistrer les adresses personnelles exactes dans le dépôt
+  public.
+CHOICE: Tests publics anonymisés ; coordonnées et historique privés sous
+  `gps_nimbus/private_data/` ou `test_private/`, ignorés par Git.
+WHY: La reproductibilité ne justifie pas la publication d'une adresse privée.
+REVERSIBLE: Non pour une donnée déjà publiée, donc prévention obligatoire.
 
 ---
 
-DECISION: Répéter la famille de police dans les `TextStyle` écrits à la main
-CONTEXT: Le libellé du bouton « CALCULER » était invisible sur le web.
-  Cause : un `TextStyle` construit à la main n'hérite pas de
-  `ThemeData.fontFamily` et retombait sur la police par défaut du moteur,
-  indisponible.
-OPTIONS: (a) corriger le seul bouton fautif ; (b) corriger tous les styles
-  écrits à la main et ajouter un test qui empêche la réapparition.
-CHOICE: (b).
-WHY: Le défaut est invisible en test unitaire classique et n'apparaît qu'à
-  l'exécution, sur un appareil réel, dans une condition réseau précise. Un
-  test qui parcourt l'arbre des widgets et refuse tout texte sans police
-  est le seul moyen fiable de ne pas le réintroduire. Ce test a été vérifié
-  en réintroduisant volontairement le défaut : il échoue bien.
-REVERSIBLE: Oui, mais sans intérêt.
+DECISION: Gestion d'état Flutter avec `StatefulWidget` et `setState`.
+CONTEXT: L'interface actuelle a peu d'état partagé.
+CHOICE: Ne pas ajouter Provider, Riverpod ou BLoC maintenant.
+WHY: Réduit dépendances et vocabulaire sans bloquer une évolution ultérieure.
+REVERSIBLE: Oui.
+
+---
+
+DECISION: Zéro dépendance externe au-delà du SDK Flutter pour le cœur actuel.
+CONTEXT: Haversine et Dijkstra sur le petit réseau mock restent simples.
+CHOICE: Ajouter une dépendance seulement lorsqu'elle résout un besoin réel.
+WHY: Compatibilité Android/iOS et maintenance plus simples.
+REVERSIBLE: Oui.
+
+---
+
+DECISION: Graphe transport basé sur les couples `(station, ligne)`.
+CONTEXT: Il faut distinguer attente, trajet à bord et changement de véhicule.
+CHOICE: Graphe station × ligne.
+WHY: Permet de compter et afficher honnêtement les correspondances.
+REVERSIBLE: Oui, mais sans avantage à revenir à un graphe moins expressif.
+
+---
+
+DECISION: Utiliser la pénalité de correspondance uniquement dans la recherche.
+CONTEXT: Elle évite les itinéraires absurdes mais ne représente pas un temps
+  réellement écoulé.
+CHOICE: Ne pas l'ajouter à la durée affichée.
+WHY: La durée annoncée doit rester la somme des tronçons réels.
+REVERSIBLE: Oui.
+
+---
+
+DECISION: Utiliser temporairement les règles cyclables comme proxy skate.
+CONTEXT: Les données de voirie spécifiques au skateboard électrique ne sont
+  pas encore disponibles.
+CHOICE: Proxy isolé dans la politique d'accès et explicitement signalé.
+WHY: Mieux qu'inventer des règles ou bloquer le MVP.
+REVERSIBLE: Oui ; le profil skate ne doit jamais devenir un alias permanent
+  du vélo.
+
+---
+
+DECISION: Réseau francilien fictif et simplifié pour exercer le moteur.
+CONTEXT: Le GTFS IDFM réel n'est pas encore importé.
+CHOICE: Réseau mock clairement marqué, sans fausse API.
+WHY: Permet de tester les combinaisons et classements avant les données
+  réelles.
+REVERSIBLE: Oui via les adaptateurs de données.
+
+---
+
+DECISION: Estimer provisoirement les distances de rue par haversine × facteur
+  de détour.
+CONTEXT: Aucun graphe OSM routable n'est encore branché.
+CHOICE: Approximation unique, visible et remplaçable.
+WHY: Plus honnête que prétendre disposer d'un tracé réel.
+REVERSIBLE: Oui.
+
+---
+
+DECISION: Départage final déterministe des classements par identifiant.
+CONTEXT: Un tri instable pouvait modifier l'ordre de résultats strictement
+  égaux.
+CHOICE: Dernier critère déterministe.
+WHY: Reproductibilité utilisateur et tests stables.
+REVERSIBLE: Oui.
+
+---
+
+DECISION: Conserver Flutter Web comme banc d'essai, pas comme équivalent
+  définitif des applications natives.
+CONTEXT: Le web donne accès rapidement au prototype depuis un iPhone mais a
+  des limites de GPS, arrière-plan, stockage et cycle de vie Safari.
+CHOICE: Même code Dart pour web/Android/iOS ; validations séparées.
+WHY: Évite une réécriture tout en conservant l'objectif natif.
+REVERSIBLE: Oui.
+
+---
+
+DECISION: Générer le build web en CI et le conserver comme artefact de test.
+CONTEXT: Un dossier compilé committé peut diverger du code source.
+CHOICE: Source Dart comme vérité ; workflow sans déploiement pour format,
+  analyse, tests et build.
+WHY: Un artefact doit être reproductible à partir d'un commit contrôlé.
+REVERSIBLE: Oui.
+
+---
+
+DECISION: Embarquer une police libre dans l'application.
+CONTEXT: Sans accès au serveur de polices, le texte Flutter Web disparaissait.
+CHOICE: Liberation Sans sous SIL Open Font License.
+WHY: Affichage autonome et confidentialité améliorée.
+REVERSIBLE: Oui.
+
+---
+
+DECISION: Vérifier tous les `TextStyle` créés manuellement.
+CONTEXT: Le libellé « CALCULER » n'héritait pas de la police embarquée.
+CHOICE: Famille explicite et test anti-régression.
+WHY: Empêche un défaut visible uniquement à l'exécution web.
+REVERSIBLE: Oui, sans intérêt pratique.
