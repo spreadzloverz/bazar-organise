@@ -7,14 +7,10 @@ on:
       - 'claude/gps-nimbus-*'
     paths:
       - 'gps_nimbus/**'
-      - 'CLAUDE.md'
-      - 'docs/**'
       - '.github/workflows/gps-nimbus-ci.yml'
   pull_request:
     paths:
       - 'gps_nimbus/**'
-      - 'CLAUDE.md'
-      - 'docs/**'
       - '.github/workflows/gps-nimbus-ci.yml'
   workflow_dispatch:
 
