@@ -11,9 +11,11 @@ Par ordre d'utilité. Les statuts prouvés sont dans `docs/STATUS.md`.
 - [x] Ajouter les niveaux `MOCKED / IMPLEMENTED / TESTED /
       DEVICE_TESTED / LIVE_DATA / PRODUCTION`.
 - [x] Ajouter une CI sans déploiement : format, analyse, tests, build web.
-- [ ] Obtenir une CI verte sur le lot de calibration utilisateur.
-- [ ] Relire le diff final puis ouvrir une PR de revue. Ne pas fusionner avant
-      contrôles verts.
+- [x] Obtenir une CI verte sur la calibration et les corridors GOLDEN-001.
+- [x] Ouvrir une pull request de revue en brouillon vers la branche Claude,
+      jamais vers `main`.
+- [ ] Conserver la pull request en brouillon jusqu'à la migration ; ne pas
+      fusionner le projet GPS dans la branche principale du portfolio.
 
 ## 2. Migrer GPS NIMBUS hors du portfolio
 
@@ -29,17 +31,21 @@ La création du nouveau dépôt n'est pas disponible via le connecteur actuel.
 Elle demandera une action humaine simple ou un environnement GitHub CLI
 autorisé.
 
-## 3. Transformer GOLDEN-001 en test complet
+## 3. Transformer GOLDEN-001 en référence réelle
 
 - [x] Documenter le trajet Alfortville → Issy sous identifiants anonymisés.
 - [x] Modéliser les durées terrain et leur priorité.
 - [x] Appliquer une observation compatible à un tronçon marche/skate.
 - [x] Protéger un point d'accès explicite lorsqu'il existe dans le réseau.
 - [x] Signaler un point explicite absent au lieu de le remplacer.
-- [ ] Ajouter au réseau de test : Quai de la Gare, Pasteur, Mairie d'Issy,
-      Ivry-sur-Seine, ligne 12 et RER C.
-- [ ] Ajouter localement les coordonnées privées exactes sans les committer.
-- [ ] Comparer réellement l'itinéraire M6 + M12 et la variante RER C.
+- [x] Ajouter au réseau de test Quai de la Gare, Pasteur, Mairie d'Issy,
+      Ivry-sur-Seine, Issy–Val de Seine, métro 12 et RER C.
+- [x] Tester la structure des variantes M6 + M12 et RER C avec les durées
+      terrain anonymisées.
+- [ ] Ajouter localement les détails de localisation nécessaires aux essais,
+      sans les committer.
+- [ ] Comparer les deux variantes avec vrais horaires, vrais accès de rue et
+      une heure de départ donnée.
 
 ## 4. Données réelles de transport
 
