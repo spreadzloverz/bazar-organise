@@ -1,86 +1,70 @@
 # GPS NIMBUS
 
-Application mobile Android et iPhone qui calcule des trajets combinant
-**skateboard électrique, marche et transports en commun** en Île-de-France.
+Application Flutter Android, iPhone et Web destinée à comparer des trajets
+combinant **skateboard électrique, marche et transports en commun** en
+Île-de-France.
 
-Pour chaque recherche, GPS NIMBUS propose toujours deux réponses :
+Pour chaque recherche, GPS NIMBUS doit toujours distinguer :
 
-- **PLUS RAPIDE** — le temps total le plus court, porte à porte, attente et
+- **PLUS RAPIDE** — temps total porte à porte minimal, attente et
   correspondances comprises ;
-- **MOINS DE SKATE** — le trajet qui réduit au maximum la distance parcourue
-  en skate.
+- **MOINS DE SKATE** — distance skate minimale, puis temps total,
+  correspondances et marche.
 
-## Ce qui marche aujourd'hui
+## État vérifié
 
-- Calcul de trajets combinant marche, skate, métro, RER, tram et bus.
-- Les deux classements, avec tous leurs cas d'égalité.
-- Écran d'accueil, écran de résultats, détail étape par étape.
-- 81 tests automatiques.
+Le projet est actuellement un **prototype fonctionnel sur réseau fictif**.
 
-## Ce qui n'est pas encore réel — et l'application le dit
+Fonctions testées :
 
-- **Le réseau de transport est fictif et simplifié** : 43 stations et
-  9 lignes écrites à la main. Les horaires réels ne sont pas branchés,
-  les temps d'attente sont des moyennes.
-- **Les distances marche et skate sont estimées** à vol d'oiseau avec un
-  facteur de détour. Aucun tracé de rue réel n'est utilisé.
-- **Le trajet en skate s'appuie sur les données cyclables**, faute de
-  données spécifiques aux engins de déplacement personnel motorisés.
+- marche, skate, métro, RER, tram et bus ;
+- classements PLUS RAPIDE et MOINS DE SKATE ;
+- accueil, résultats et détail étape par étape ;
+- prise en compte de durées terrain directionnelles ;
+- conservation d'un point d'accès explicitement indiqué ;
+- corridors fictifs M6 → M12 et RER C du cas GOLDEN-001 ;
+- build Flutter Web reproductible.
 
-Ces trois limites sont affichées dans l'application, sous « À SAVOIR ».
-Rien n'est présenté comme plus abouti qu'il ne l'est.
+Dernier contrôle GitHub Actions :
 
-## Essayer le moteur sans téléphone
+- format : succès ;
+- analyse statique : aucun problème ;
+- **95 tests réussis** ;
+- build web : succès.
+
+Voir `../docs/STATUS.md` pour la preuve et la matrice complète.
+
+## Ce qui n'est pas encore réel
+
+- Le réseau de transport est simplifié et écrit à la main.
+- Les horaires, prochains passages et perturbations IDFM ne sont pas branchés.
+- Les distances marche et skate sont estimées à vol d'oiseau avec un facteur
+  de détour ; aucun vrai tracé de rue n'est utilisé.
+- Le profil skate utilise temporairement certaines règles cyclables comme
+  proxy clairement signalé.
+- Les positions ajoutées au réseau mock sont approximatives.
+
+Les résultats actuels servent à tester le moteur. Ils ne doivent pas être
+présentés comme des conseils de trajet en temps réel.
+
+## Tester le moteur
 
 Depuis ce dossier :
 
 ```bash
 flutter pub get
 
-# Les sept trajets de référence
+# Scénarios de démonstration
 dart run tool/nimbus_cli.dart --scenarios
 
-# Un trajet précis, avec tous les itinéraires calculés
+# Une recherche parmi les lieux du catalogue
 dart run tool/nimbus_cli.dart "Châtelet" "La Défense" --all
 
-# La liste des lieux disponibles
+# Lieux disponibles
 dart run tool/nimbus_cli.dart --list
 ```
 
-## Lancer l'application
-
-### Dans un navigateur — y compris sur iPhone
-
-```bash
-./tool/build_web.sh ../nimbus
-```
-
-Le dossier `nimbus/` obtenu se dépose tel quel sur n'importe quel
-hébergement de fichiers statiques : il fonctionne à n'importe quelle
-adresse, sans recompiler. C'est aujourd'hui le seul moyen d'utiliser
-GPS NIMBUS sur iPhone sans Mac.
-
-La version web est autonome : la police et le moteur de rendu sont servis
-depuis le même hébergeur, aucun CDN n'est nécessaire pour l'affichage.
-Premier chargement : environ 15 Mo. Ensuite, c'est immédiat.
-
-Elle **n'est pas encore en ligne** : voir `../docs/STATUS.md`, section
-« Blocages », pour l'activer.
-
-### Sur un téléphone, en natif
-
-```bash
-flutter run                 # sur un téléphone branché ou un émulateur
-flutter build apk --debug   # fabriquer un APK Android
-```
-
-Un APK Android **n'a pas encore été produit** : voir `../docs/STATUS.md`,
-section « Blocages », pour les étapes à suivre.
-
-Un build iPhone natif demande un Mac avec Xcode. Le projet iOS est prêt,
-mais **aucun build iOS n'a été produit**.
-
-## Vérifier que tout est sain
+## Vérifier le projet
 
 ```bash
 dart format lib test tool
@@ -88,26 +72,58 @@ flutter analyze
 flutter test
 ```
 
-## Comment c'est construit
+La CI exécute aussi un build web. Aucun déploiement public n'est automatique.
 
+## Construire la version Web
+
+```bash
+./tool/build_web.sh ../nimbus
 ```
+
+Le chemin d'hébergement doit être pris en compte lors du build. La CI de ce
+lot compile avec la base `/gps-nimbus/` et conserve le résultat comme artefact
+de contrôle.
+
+La version Web est un banc d'essai rapide. Elle ne remplace pas les validations
+sur Safari iPhone, Android natif et iOS natif.
+
+## Construire les versions natives
+
+```bash
+flutter run
+flutter build apk --debug
+```
+
+Aucun APK n'a été produit dans le dernier contrôle. Un build iOS réel nécessite
+un Mac avec Xcode ; aucun build iOS n'est validé à ce stade.
+
+## Architecture
+
+```text
 lib/
-├── core/          configuration (vitesses), lieux, mise en forme
-├── domain/        le métier : tronçons, itinéraires, profils, classements
-├── routing/       réseau de transport, recherche de chemin, planificateur
-├── data/          branchements OTP / GTFS / OSM (interfaces, non branchées)
+├── core/          configuration, lieux, mise en forme
+├── domain/        modèles, profils, classements et calibration terrain
+├── routing/       réseau, recherche de chemin et planificateur
+├── data/          adaptateurs OTP / GTFS / OSM non branchés
 └── ui/            écrans et widgets
-tool/nimbus_cli.dart   essayer le moteur sans interface graphique
+
+tool/nimbus_cli.dart
 ```
 
-Explications complètes : `../docs/ARCHITECTURE.md`.
+Documentation :
+
+- `../docs/ARCHITECTURE.md`
+- `../docs/GOLDEN_ROUTES.md`
+- `../docs/DEPLOYMENT.md`
+- `../docs/STATUS.md`
 
 ## Réglages de mobilité
 
-| Réglage | Valeur | Où |
-|---------|--------|-----|
-| Vitesse skate | 27 km/h | `lib/core/config/mobility_config.dart` |
-| Vitesse marche | 5 km/h | idem |
+| Réglage | Valeur de référence | Fichier |
+|---|---:|---|
+| Skate | 27 km/h | `lib/core/config/mobility_config.dart` |
+| Marche | 5 km/h | `lib/core/config/mobility_config.dart` |
 
-Ces deux valeurs sont des règles produit : elles ne changent pas sans
-décision explicite. Elles restent configurables dans le code.
+Ces valeurs restent configurables. Une durée terrain compatible peut remplacer
+l'estimation générique du tronçon sans effacer cette estimation des
+métadonnées.
