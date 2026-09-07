@@ -1,0 +1,72 @@
+name: GPS NIMBUS CI
+
+on:
+  push:
+    branches:
+      - 'gps-nimbus/**'
+      - 'claude/gps-nimbus-*'
+    paths:
+      - 'gps_nimbus/**'
+      - 'CLAUDE.md'
+      - 'docs/**'
+      - '.github/workflows/gps-nimbus-ci.yml'
+  pull_request:
+    paths:
+      - 'gps_nimbus/**'
+      - 'CLAUDE.md'
+      - 'docs/**'
+      - '.github/workflows/gps-nimbus-ci.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gps-nimbus-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Format, analyze, test and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    defaults:
+      run:
+        working-directory: gps_nimbus
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2.23.0
+        with:
+          channel: stable
+          cache: true
+
+      - name: Environment
+        run: flutter --version
+
+      - name: Dependencies
+        run: flutter pub get
+
+      - name: Formatting
+        run: dart format --output=none --set-exit-if-changed lib test tool
+
+      - name: Static analysis
+        run: flutter analyze
+
+      - name: Tests
+        run: flutter test
+
+      - name: Web build
+        run: flutter build web --release --base-href /gps-nimbus/
+
+      - name: Preserve web build for inspection
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: gps-nimbus-web-${{ github.sha }}
+          path: gps_nimbus/build/web
+          if-no-files-found: error
+          retention-days: 7
