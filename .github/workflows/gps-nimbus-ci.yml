@@ -7,10 +7,12 @@ on:
       - 'claude/gps-nimbus-*'
     paths:
       - 'gps_nimbus/**'
+      - 'migration/**'
       - '.github/workflows/gps-nimbus-ci.yml'
   pull_request:
     paths:
       - 'gps_nimbus/**'
+      - 'migration/**'
       - '.github/workflows/gps-nimbus-ci.yml'
   workflow_dispatch:
 
@@ -23,7 +25,7 @@ concurrency:
 
 jobs:
   quality:
-    name: Format, analyze, test and build
+    name: Format, analyze, test, build and package
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
@@ -68,3 +70,18 @@ jobs:
           path: gps_nimbus/build/web
           if-no-files-found: error
           retention-days: 7
+
+      - name: Prepare standalone source package
+        working-directory: ${{ github.workspace }}
+        run: |
+          bash migration/prepare_standalone.sh \
+            "${RUNNER_TEMP}/GPS_NIMBUS_REPO_READY" \
+            "${RUNNER_TEMP}/GPS_NIMBUS_REPO_READY.zip"
+
+      - name: Preserve standalone source package
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: gps-nimbus-repo-ready-${{ github.sha }}
+          path: ${{ runner.temp }}/GPS_NIMBUS_REPO_READY.zip
+          if-no-files-found: error
+          retention-days: 14
