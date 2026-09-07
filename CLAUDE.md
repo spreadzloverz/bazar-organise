@@ -1,10 +1,10 @@
 # GPS NIMBUS
 
-Application mobile (Android + iOS) de calcul d'itinéraires multimodaux pour
+Application mobile Android + iOS de calcul d'itinéraires multimodaux pour
 skateur urbain en Île-de-France.
 
 Le code de l'application vit dans `gps_nimbus/`.
-Le reste du dépôt est le site web Bazar Organise : **ne pas y toucher**.
+Le reste du dépôt est le site Bazar Organisé : **ne pas y toucher**.
 
 ## Objectif
 
@@ -14,35 +14,37 @@ métro, RER, tram et bus, et toujours proposer deux réponses :
 
 ## Invariants produit — ne pas modifier sans validation humaine
 
-- Skate : **27 km/h** de moyenne (`MobilityConfig.defaultSkateSpeedKmh`)
-- Marche : **5 km/h** de moyenne (`MobilityConfig.defaultWalkingSpeedKmh`)
-- Les deux vitesses restent **configurables** via `MobilityConfig`.
-- **PLUS RAPIDE** = temps total porte-à-porte minimal (skate + marche +
-  attente + transport + correspondances inclus).
-  Départages : correspondances, distance skate, distance marche.
-- **MOINS DE SKATE** = distance skate minimale.
-  Départages : temps total, correspondances, distance à pied.
-- Pas d'estimation de batterie. On dit « distance skate réduite ».
-- Rien de fictif ne doit être présenté comme réel : le réseau simplifié et
-  l'approximation skate/vélo sont affichés dans l'application.
+- Skate : **27 km/h** de référence (`MobilityConfig.defaultSkateSpeedKmh`).
+- Marche : **5 km/h** de référence (`MobilityConfig.defaultWalkingSpeedKmh`).
+- Les deux vitesses restent configurables via `MobilityConfig`.
+- Une durée terrain personnelle compatible peut remplacer l'estimation
+  générique du segment ; l'estimation initiale doit rester traçable.
+- Un point d'accès explicitement donné reste candidat. Ne jamais remplacer
+  silencieusement Ivry-sur-Seine par BFM ou une autre station.
+- **PLUS RAPIDE** = temps total porte-à-porte minimal, attentes et
+  correspondances comprises.
+- **MOINS DE SKATE** = distance skate minimale, puis temps total,
+  correspondances et distance à pied.
+- Pas d'estimation de batterie : employer « distance skate réduite ».
+- Rien de fictif ne doit être présenté comme réel.
 
 ## Architecture
 
-```
-UI (lib/ui)  →  DOMAINE (lib/domain)  →  ROUTING (lib/routing)  →  DONNÉES (lib/data)
+```text
+UI → DOMAINE → ROUTING → ADAPTATEURS DE DONNÉES
 ```
 
 - `lib/core` : configuration, lieux, mise en forme
-- `lib/domain/model` : `RouteSegment`, `RouteOption`, `GeoPoint`, `TransitLine`
-- `lib/domain/profile` : profils de mobilité + politiques d'accès
-- `lib/domain/ranking` : les deux classements produit
-- `lib/routing` : réseau de transport, recherche, moteur fictif, planificateur
-- `lib/data` : branchements OTP / GTFS / OSM (interfaces prêtes, non branchées)
-- `assets/fonts` : police embarquée — sans elle, la version web irait
-  chercher Roboto chez Google et n'afficherait rien hors ligne
-- `nimbus/` (racine du dépôt) : version web générée, publiable telle quelle
+- `lib/domain/model` : segments, itinéraires, points, lignes
+- `lib/domain/profile` : profils de mobilité et politiques d'accès
+- `lib/domain/ranking` : classements produit
+- `lib/domain/calibration` : observations terrain et préférences utilisateur
+- `lib/routing` : réseau, recherche, moteur fictif, planificateur
+- `lib/data` : adaptateurs OTP / GTFS / OSM non encore branchés
+- `assets/fonts` : police embarquée
+- `nimbus/` à la racine : ancien artefact web généré, jamais source de vérité
 
-Détails : `docs/ARCHITECTURE.md`.
+Détails : `docs/ARCHITECTURE.md` et `docs/DEPLOYMENT.md`.
 
 ## Commandes
 
@@ -50,41 +52,69 @@ Depuis `gps_nimbus/` :
 
 ```bash
 flutter pub get
+dart format lib test tool
 flutter analyze
 flutter test
-dart format lib test tool
 
-# Essayer le moteur sans interface graphique
 dart run tool/nimbus_cli.dart --scenarios
 dart run tool/nimbus_cli.dart "Châtelet" "La Défense" --all
-dart run tool/nimbus_cli.dart --list
 
-# Applications
 flutter run
 flutter build apk --debug
-
-# Version web (celle qui tourne sur iPhone sans rien installer)
-./tool/build_web.sh            # build dans build/web
-./tool/build_web.sh ../nimbus  # build + copie dans le dossier publié
+./tool/build_web.sh
 ```
 
-La version web publiée vit dans `nimbus/` à la racine du dépôt. Elle est
-**générée** : ne jamais la modifier à la main, toujours relancer
-`tool/build_web.sh`.
+## Niveaux de réalité
+
+Employer systématiquement :
+
+- `MOCKED` : données ou comportement simulés
+- `IMPLEMENTED` : code présent, pas encore validé dans l'environnement courant
+- `TESTED` : contrôle automatisé exécuté et traçable
+- `DEVICE_TESTED` : vérifié sur un appareil physique identifié
+- `LIVE_DATA` : relié à une source réelle et datée
+- `PRODUCTION` : publié, surveillé et réversible
+
+Une fenêtre Chromium au format iPhone n'est pas `DEVICE_TESTED`.
+
+## Déploiement verrouillé
+
+- Ne pas utiliser une branche `claude/*` comme source publique GitHub Pages.
+- Ne pas modifier les réglages Pages de `bazar-organise`.
+- Préparer un dépôt indépendant `spreadzloverz/gps-nimbus` et une CI qui
+  construit le web depuis la source après analyse et tests.
+- Ne jamais modifier manuellement un build compilé.
+
+## Confidentialité
+
+Le dépôt est public. Ne jamais y committer :
+
+- adresse personnelle exacte ;
+- historique privé de trajets ;
+- position habituelle identifiable ;
+- clé API, token, fichier `.env` ou credential.
+
+Utiliser des identifiants anonymisés dans les tests publics. Les données
+privées locales vont dans `gps_nimbus/private_data/` ou `test_private/`,
+ignorés par Git.
 
 ## Règles de travail
 
-- Le dépôt est la mémoire du projet, pas la conversation.
-- Avant de déclarer terminé : `dart format`, `flutter analyze`, `flutter test`.
-- Ne jamais simuler une API réelle. Interface + mock + dépendance signalée.
+- Le dépôt est la mémoire technique, pas la conversation.
+- Avant de déclarer terminé : format, analyse et tests.
+- Ne jamais simuler une API réelle. Interface + mock + blocage signalé.
 - Toute décision structurante va dans `docs/DECISIONS.md`.
 - Mettre `docs/STATUS.md` à jour à la fin de chaque lot.
+- Après trois stratégies différentes sans succès, documenter le blocage et
+  poursuivre une tâche indépendante.
 
 ## Documentation
 
-- `docs/STATUS.md` — où en est le projet
-- `docs/ARCHITECTURE.md` — comment c'est construit
-- `docs/DECISIONS.md` — décisions structurantes et pourquoi
-- `docs/BACKLOG.md` — ce qu'il reste à faire
-- `docs/notebooklm/` — résumés courts importables dans NotebookLM
+- `docs/STATUS.md` — état prouvé du projet
+- `docs/DEPLOYMENT.md` — stratégie de publication sûre
+- `docs/GOLDEN_ROUTES.md` — cas terrain anonymisés
+- `docs/ARCHITECTURE.md` — architecture
+- `docs/DECISIONS.md` — décisions structurantes
+- `docs/BACKLOG.md` — travail restant
+- `docs/notebooklm/` — résumés importables dans NotebookLM
 - `gps_nimbus/README.md` — prise en main
