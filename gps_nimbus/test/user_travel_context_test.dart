@@ -164,32 +164,29 @@ void main() {
       },
     );
 
-    test(
-      "un point absent reste signalé au lieu d'être remplacé",
-      () async {
-        final origin = Places.byLabel('Châtelet')!;
-        final destination = Places.byLabel('Bastille')!;
-        final service = MockRoutingService();
+    test("un point absent reste signalé au lieu d'être remplacé", () async {
+      final origin = Places.byLabel('Châtelet')!;
+      final destination = Places.byLabel('Bastille')!;
+      final service = MockRoutingService();
 
-        final result = await service.findRoutes(
-          RouteRequest(
-            origin: origin,
-            destination: destination,
-            userContext: const UserTravelContext(
-              protectedBoardingLabels: ['Ivry-sur-Seine'],
-            ),
+      final result = await service.findRoutes(
+        RouteRequest(
+          origin: origin,
+          destination: destination,
+          userContext: const UserTravelContext(
+            protectedBoardingLabels: ['Ivry-sur-Seine'],
           ),
-        );
+        ),
+      );
 
-        expect(
-          result.notices.any(
-            (notice) =>
-                notice.contains('Ivry-sur-Seine') &&
-                notice.contains('absents du réseau fictif'),
-          ),
-          isTrue,
-        );
-      },
-    );
+      expect(
+        result.notices.any(
+          (notice) =>
+              notice.contains('Ivry-sur-Seine') &&
+              notice.contains('absents du réseau fictif'),
+        ),
+        isTrue,
+      );
+    });
   });
 }
