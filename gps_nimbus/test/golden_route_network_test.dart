@@ -68,7 +68,7 @@ void main() {
 
       expect(segments, isNotNull);
       final route = RouteOption(id: 'golden-001-metro', segments: segments!);
-      final lineNames = route.transitLines.map((line) => line.name).toList();
+      final lineNames = _transitLineNames(route);
 
       expect(lineNames, ['6', '12']);
       expect(route.transferCount, 1);
@@ -138,7 +138,7 @@ void main() {
             candidate.segments.first.destination.label == 'Quai de la Gare' &&
             candidate.segments.last.type == SegmentType.skate &&
             candidate.segments.last.origin.label == "Mairie d'Issy" &&
-            candidate.transitLines.map((line) => line.name).join(',') == '6,12',
+            _transitLineNames(candidate).join(',') == '6,12',
       );
 
       expect(route.segments.first.duration, const Duration(minutes: 10));
@@ -178,7 +178,7 @@ void main() {
         (candidate) =>
             candidate.segments.first.type == SegmentType.skate &&
             candidate.segments.first.destination.label == 'Ivry-sur-Seine' &&
-            candidate.transitLines.any((line) => line.name == 'C'),
+            _transitLineNames(candidate).contains('C'),
       );
 
       expect(
@@ -190,3 +190,8 @@ void main() {
     });
   });
 }
+
+List<String> _transitLineNames(RouteOption route) => route.segments
+    .where((segment) => segment.type.isTransit && segment.line != null)
+    .map((segment) => segment.line!.name)
+    .toList(growable: false);
