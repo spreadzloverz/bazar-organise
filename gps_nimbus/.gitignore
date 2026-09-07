@@ -33,6 +33,14 @@ migrate_working_dir/
 /build/
 /coverage/
 
+# GPS NIMBUS private/local data — never commit exact personal addresses,
+# API credentials or private route history to this public repository.
+/private_data/
+/test_private/
+.env
+.env.*
+!.env.example
+
 # Symbolication related
 app.*.symbols
 
