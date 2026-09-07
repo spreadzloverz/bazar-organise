@@ -169,12 +169,13 @@ void main() {
       final destination = Places.byLabel('Bastille')!;
       final service = MockRoutingService();
 
+      const missingStation = 'Station utilisateur hors réseau';
       final result = await service.findRoutes(
         RouteRequest(
           origin: origin,
           destination: destination,
           userContext: const UserTravelContext(
-            protectedBoardingLabels: ['Ivry-sur-Seine'],
+            protectedBoardingLabels: [missingStation],
           ),
         ),
       );
@@ -182,7 +183,7 @@ void main() {
       expect(
         result.notices.any(
           (notice) =>
-              notice.contains('Ivry-sur-Seine') &&
+              notice.contains(missingStation) &&
               notice.contains('absents du réseau fictif'),
         ),
         isTrue,
