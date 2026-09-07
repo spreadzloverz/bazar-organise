@@ -1,4 +1,5 @@
 import '../core/config/mobility_config.dart';
+import '../domain/calibration/user_travel_context.dart';
 import '../domain/model/geo_point.dart';
 import '../domain/model/route_option.dart';
 import '../domain/model/route_segment.dart';
@@ -14,8 +15,7 @@ import 'transit_network.dart';
 ///  - un trajet en transport en commun calculé sur le réseau ;
 ///  - une sortie (marche ou skate) vers la destination.
 ///
-/// Il produit aussi les options sans transport : marche seule, skate seul,
-/// et skate + marche.
+/// Il produit aussi les options sans transport : marche seule et skate seul.
 ///
 /// Le calcul est réel ; seules les données de réseau sont fictives, ce que
 /// le service signale via [isMock] et les avertissements du résultat.
@@ -56,46 +56,48 @@ class MockRoutingService implements RoutingService {
     final origin = request.origin;
     final destination = request.destination;
     final config = request.config;
+    final context = request.userContext;
     final directDistance = _groundDistance(origin, destination);
 
     // 1. Trajets sans transport en commun.
     if (directDistance <= maxWalkOnlyMeters) {
+      final genericWalk = _walk.buildSegment(
+        origin: origin,
+        destination: destination,
+        config: config,
+        distanceMeters: directDistance,
+      );
       routes.add(
         RouteOption(
           id: nextId('marche'),
-          segments: [
-            _walk.buildSegment(
-              origin: origin,
-              destination: destination,
-              config: config,
-              distanceMeters: directDistance,
-            ),
-          ],
+          segments: [_applyObservation(genericWalk, context)],
         ),
       );
     }
+
+    final genericSkate = _skate.buildSegment(
+      origin: origin,
+      destination: destination,
+      config: config,
+      distanceMeters: directDistance,
+    );
     routes.add(
       RouteOption(
         id: nextId('skate'),
-        segments: [
-          _skate.buildSegment(
-            origin: origin,
-            destination: destination,
-            config: config,
-            distanceMeters: directDistance,
-          ),
-        ],
+        segments: [_applyObservation(genericSkate, context)],
       ),
     );
 
     // 2. Trajets combinant transport en commun et accès marche/skate.
-    final boardingStations = network.nearestStations(
+    // Les stations explicitement citées par l'utilisateur sont ajoutées aux
+    // plus proches lorsqu'elles existent dans le réseau courant.
+    final boardingStations = _candidateStations(
       origin,
-      count: candidateStationCount,
+      protectedLabels: context.protectedBoardingLabels,
     );
-    final alightingStations = network.nearestStations(
+    final alightingStations = _candidateStations(
       destination,
-      count: candidateStationCount,
+      protectedLabels: context.protectedAlightingLabels,
     );
 
     for (final boarding in boardingStations) {
@@ -121,6 +123,7 @@ class MockRoutingService implements RoutingService {
               accessBySkate: accessBySkate,
               egressBySkate: egressBySkate,
               config: config,
+              context: context,
             );
             if (option != null) routes.add(option);
           }
@@ -129,6 +132,8 @@ class MockRoutingService implements RoutingService {
     }
 
     final deduplicated = _deduplicate(routes);
+    final missingProtected = _missingProtectedLabels(context);
+
     return RouteSearchResult(
       routes: deduplicated,
       notices: [
@@ -138,6 +143,13 @@ class MockRoutingService implements RoutingService {
         'Distances marche et skate estimées à vol d\'oiseau avec un facteur '
             'de détour ; aucun tracé de rue réel n\'est encore utilisé.',
         if (_skate.accessPolicy.isProxy) _skate.accessPolicy.proxyNotice!,
+        if (context.observedSegments.isNotEmpty)
+          'Les durées terrain utilisateur compatibles remplacent les '
+              'estimations génériques des tronçons concernés.',
+        if (missingProtected.isNotEmpty)
+          'Points utilisateur absents du réseau fictif actuel : '
+              '${missingProtected.join(', ')}. Ils restent enregistrés mais '
+              'ne peuvent pas encore être calculés.',
       ],
     );
   }
@@ -152,6 +164,7 @@ class MockRoutingService implements RoutingService {
     required bool accessBySkate,
     required bool egressBySkate,
     required MobilityConfig config,
+    required UserTravelContext context,
   }) {
     final boardingPoint = boarding.position.copyWith(label: boarding.name);
     final alightingPoint = alighting.position.copyWith(label: alighting.name);
@@ -165,25 +178,25 @@ class MockRoutingService implements RoutingService {
     final segments = <RouteSegment>[];
 
     if (accessDistance > 0) {
-      segments.add(
-        (accessBySkate ? _skate : _walk).buildSegment(
-          origin: origin,
-          destination: boardingPoint,
-          config: config,
-          distanceMeters: accessDistance,
-        ),
+      final genericAccess = (accessBySkate ? _skate : _walk).buildSegment(
+        origin: origin,
+        destination: boardingPoint,
+        config: config,
+        distanceMeters: accessDistance,
       );
+      segments.add(_applyObservation(genericAccess, context));
     }
+
     segments.addAll(transitSegments);
+
     if (egressDistance > 0) {
-      segments.add(
-        (egressBySkate ? _skate : _walk).buildSegment(
-          origin: alightingPoint,
-          destination: destination,
-          config: config,
-          distanceMeters: egressDistance,
-        ),
+      final genericEgress = (egressBySkate ? _skate : _walk).buildSegment(
+        origin: alightingPoint,
+        destination: destination,
+        config: config,
+        distanceMeters: egressDistance,
       );
+      segments.add(_applyObservation(genericEgress, context));
     }
 
     if (segments.isEmpty) return null;
@@ -194,6 +207,70 @@ class MockRoutingService implements RoutingService {
       return null;
     }
     return option;
+  }
+
+  RouteSegment _applyObservation(
+    RouteSegment generic,
+    UserTravelContext context,
+  ) {
+    if (!generic.type.isSkate && !generic.type.isWalking) return generic;
+
+    final observation = context.bestObservationFor(
+      originLabel: generic.origin.label,
+      destinationLabel: generic.destination.label,
+      mode: generic.type,
+    );
+    if (observation == null) return generic;
+
+    return RouteSegment(
+      type: generic.type,
+      origin: generic.origin,
+      destination: generic.destination,
+      distanceMeters: generic.distanceMeters,
+      duration: observation.representativeDuration,
+      line: generic.line,
+      details: {
+        ...generic.details,
+        'durationSource': observation.source.name,
+        'genericDurationSeconds': generic.duration.inSeconds,
+        'observedMinSeconds': observation.minDuration.inSeconds,
+        'observedMaxSeconds': observation.maxDuration.inSeconds,
+        'observationCount': observation.observationCount,
+      },
+    );
+  }
+
+  List<Station> _candidateStations(
+    GeoPoint point, {
+    required List<String> protectedLabels,
+  }) {
+    final candidates = network.nearestStations(
+      point,
+      count: candidateStationCount,
+    );
+    final ids = candidates.map((station) => station.id).toSet();
+
+    for (final station in network.stations.values) {
+      final protected = protectedLabels.any(
+        (label) => _normalize(label) == _normalize(station.name),
+      );
+      if (protected && ids.add(station.id)) candidates.add(station);
+    }
+
+    return candidates;
+  }
+
+  List<String> _missingProtectedLabels(UserTravelContext context) {
+    final requested = <String>{
+      ...context.protectedBoardingLabels,
+      ...context.protectedAlightingLabels,
+    };
+    final available = network.stations.values
+        .map((station) => _normalize(station.name))
+        .toSet();
+    return requested
+        .where((label) => !available.contains(_normalize(label)))
+        .toList(growable: false);
   }
 
   /// Distance au sol estimée : vol d'oiseau × facteur de détour.
@@ -217,4 +294,16 @@ class MockRoutingService implements RoutingService {
     }
     return unique;
   }
+}
+
+String _normalize(String value) {
+  const accents = 'àâäéèêëîïôöùûüçÀÂÄÉÈÊËÎÏÔÖÙÛÜÇ';
+  const plain = 'aaaeeeeiioouuucAAAEEEEIIOOUUUC';
+  final buffer = StringBuffer();
+  for (final rune in value.trim().toLowerCase().runes) {
+    final char = String.fromCharCode(rune);
+    final index = accents.indexOf(char);
+    buffer.write(index >= 0 ? plain[index].toLowerCase() : char);
+  }
+  return buffer.toString();
 }
