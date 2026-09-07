@@ -2,7 +2,7 @@
 
 Dernière mise à jour : 2026-09-07
 Branche : `gps-nimbus/hardening-v1`
-Commit applicatif contrôlé : `090a83fab9c8713d12d3a285c76c2d1f81900e33`
+Commit contrôlé : `8a56b4cc9b33ee375f4d4e8107825a747b427388`
 
 ## Verdict actuel
 
@@ -13,18 +13,22 @@ perturbations réels ne sont pas encore branchés.
 
 ## Contrôle automatique
 
-GitHub Actions, Flutter 3.47.2 et Dart 3.13.2 :
+GitHub Actions, run `34142788873` :
 
 - format : succès ;
-- analyse statique : aucun problème ;
+- analyse statique : succès ;
 - tests : **95 réussis** ;
 - build Flutter Web : succès ;
-- artefact web : **14 684 407 octets** ;
+- contrôle de confidentialité du paquet : succès ;
+- paquet autonome : succès ;
 - déploiement public : non effectué.
 
-Run : `34141968781`
-Artefact : `10026265555`
-Expiration de l'artefact : 2026-09-14
+Artefacts :
+
+- Web : `10026555789`, 14 684 408 octets, expiration 2026-09-14 ;
+- dépôt autonome : `10026556285`, 810 840 octets, expiration 2026-09-21 ;
+- empreinte du paquet autonome :
+  `sha256:aa3f09a997914e5b5e0e8d22a301d7cf02d5d010584f45c8b85012aebdb7d64d`.
 
 ## Matrice de réalité
 
@@ -47,6 +51,7 @@ Expiration de l'artefact : 2026-09-14
 | Réseau de rues OSM | NOT IMPLEMENTED | Distances approximatives |
 | Road Intelligence | PLANNED | Aucun coefficient arbitraire activé |
 | Build web CI | TESTED | Non publié |
+| Paquet autonome reproductible | TESTED | Nouveau dépôt non encore créé |
 | Safari sur iPhone | NOT DEVICE_TESTED | Appareil physique nécessaire |
 | APK Android | NOT BUILT | Non produit dans ce lot |
 | Build iOS | NOT BUILT | Mac et Xcode nécessaires |
@@ -71,6 +76,11 @@ Expiration de l'artefact : 2026-09-14
 - Deux défauts découverts par les contrôles puis corrigés : liste de candidats
   non extensible et test d'absence devenu obsolète après l'ajout d'Ivry.
 - Build web reconstruit depuis les sources.
+- Paquet autonome créé avec règles Claude, documentation, CI racine,
+  guide de migration, provenance et manifeste SHA-256.
+- Le script de paquetage exclut caches, builds, données locales, fichiers de
+  signature et secrets, puis bloque si les adresses exactes du cas terrain
+  apparaissent dans l'archive.
 
 ## Données de test
 
@@ -88,8 +98,8 @@ locales complémentaires restent hors du dépôt via `private_data/` ou
 ### Dépôt indépendant
 
 La cible reste `spreadzloverz/gps-nimbus`. Le connecteur disponible ne sait pas
-créer un nouveau dépôt. Le développement peut continuer sur la branche isolée,
-mais la séparation définitive et la publication propre demandent cette création.
+créer un nouveau dépôt. Le paquet est prêt ; la séparation définitive demande
+uniquement la création du dépôt vide.
 
 ### Données réelles
 
@@ -104,9 +114,10 @@ un téléphone Android ou une application iOS native.
 
 ## Prochaine séquence
 
-1. Créer le dépôt indépendant et y transférer GPS NIMBUS.
-2. Importer le GTFS IDFM.
-3. Ajouter prochains passages et perturbations datées.
-4. Remplacer les distances approximatives par un vrai réseau OSM.
-5. Comparer GOLDEN-001 sur une heure de départ et des données réelles.
-6. Tester la version Web sur un iPhone physique.
+1. Créer le dépôt privé vide `gps-nimbus`.
+2. Y transférer le paquet autonome et relancer la CI.
+3. Importer le GTFS IDFM.
+4. Ajouter prochains passages et perturbations datées.
+5. Remplacer les distances approximatives par un vrai réseau OSM.
+6. Comparer GOLDEN-001 sur une heure de départ et des données réelles.
+7. Tester la version Web sur un iPhone physique.
