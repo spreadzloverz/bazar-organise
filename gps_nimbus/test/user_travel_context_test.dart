@@ -16,7 +16,10 @@ void main() {
         maxDuration: Duration(minutes: 10),
       );
 
-      expect(observation.representativeDuration, const Duration(minutes: 8, seconds: 30));
+      expect(
+        observation.representativeDuration,
+        const Duration(minutes: 8, seconds: 30),
+      );
       expect(observation.minDuration, const Duration(minutes: 7));
       expect(observation.maxDuration, const Duration(minutes: 10));
     });
@@ -89,95 +92,104 @@ void main() {
   });
 
   group('intégration au moteur mock', () {
-    test('la durée observée remplace le calcul générique du skate direct', () async {
-      final origin = Places.byLabel('Châtelet')!;
-      final destination = Places.byLabel('Bastille')!;
-      final service = MockRoutingService();
+    test(
+      'la durée observée remplace le calcul générique du skate direct',
+      () async {
+        final origin = Places.byLabel('Châtelet')!;
+        final destination = Places.byLabel('Bastille')!;
+        final service = MockRoutingService();
 
-      final result = await service.findRoutes(
-        RouteRequest(
-          origin: origin,
-          destination: destination,
-          userContext: const UserTravelContext(
-            observedSegments: [
-              ObservedSegment(
-                originLabel: 'Châtelet',
-                destinationLabel: 'Bastille',
-                mode: SegmentType.skate,
-                minDuration: Duration(minutes: 12),
-                maxDuration: Duration(minutes: 12),
-                observationCount: 3,
-              ),
-            ],
+        final result = await service.findRoutes(
+          RouteRequest(
+            origin: origin,
+            destination: destination,
+            userContext: const UserTravelContext(
+              observedSegments: [
+                ObservedSegment(
+                  originLabel: 'Châtelet',
+                  destinationLabel: 'Bastille',
+                  mode: SegmentType.skate,
+                  minDuration: Duration(minutes: 12),
+                  maxDuration: Duration(minutes: 12),
+                  observationCount: 3,
+                ),
+              ],
+            ),
           ),
-        ),
-      );
+        );
 
-      final directSkate = result.routes.firstWhere(
-        (route) => route.id.startsWith('skate_'),
-      );
+        final directSkate = result.routes.firstWhere(
+          (route) => route.id.startsWith('skate_'),
+        );
 
-      expect(directSkate.totalDuration, const Duration(minutes: 12));
-      expect(
-        directSkate.segments.single.details['durationSource'],
-        TravelEvidenceSource.userMeasured.name,
-      );
-      expect(
-        directSkate.segments.single.details['genericDurationSeconds'],
-        isA<int>(),
-      );
-    });
+        expect(directSkate.totalDuration, const Duration(minutes: 12));
+        expect(
+          directSkate.segments.single.details['durationSource'],
+          TravelEvidenceSource.userMeasured.name,
+        );
+        expect(
+          directSkate.segments.single.details['genericDurationSeconds'],
+          isA<int>(),
+        );
+      },
+    );
 
-    test('un point explicite existant est ajouté aux stations candidates', () async {
-      final origin = Places.byLabel('Châtelet')!;
-      final destination = Places.byLabel('Bastille')!;
-      final service = MockRoutingService();
+    test(
+      'un point explicite existant est ajouté aux stations candidates',
+      () async {
+        final origin = Places.byLabel('Châtelet')!;
+        final destination = Places.byLabel('Bastille')!;
+        final service = MockRoutingService();
 
-      final result = await service.findRoutes(
-        RouteRequest(
-          origin: origin,
-          destination: destination,
-          userContext: const UserTravelContext(
-            protectedBoardingLabels: ["Gare d'Austerlitz"],
+        final result = await service.findRoutes(
+          RouteRequest(
+            origin: origin,
+            destination: destination,
+            userContext: const UserTravelContext(
+              protectedBoardingLabels: ["Gare d'Austerlitz"],
+            ),
           ),
-        ),
-      );
+        );
 
-      expect(
-        result.routes.any(
-          (route) => route.segments.any(
-            (segment) =>
-                segment.origin.label == "Gare d'Austerlitz" ||
-                segment.destination.label == "Gare d'Austerlitz",
+        expect(
+          result.routes.any(
+            (route) => route.segments.any(
+              (segment) =>
+                  segment.origin.label == "Gare d'Austerlitz" ||
+                  segment.destination.label == "Gare d'Austerlitz",
+            ),
           ),
-        ),
-        isTrue,
-      );
-    });
+          isTrue,
+        );
+      },
+    );
 
-    test('un point absent reste signalé au lieu d'être remplacé', () async {
-      final origin = Places.byLabel('Châtelet')!;
-      final destination = Places.byLabel('Bastille')!;
-      final service = MockRoutingService();
+    test(
+      "un point absent reste signalé au lieu d'être remplacé",
+      () async {
+        final origin = Places.byLabel('Châtelet')!;
+        final destination = Places.byLabel('Bastille')!;
+        final service = MockRoutingService();
 
-      final result = await service.findRoutes(
-        RouteRequest(
-          origin: origin,
-          destination: destination,
-          userContext: const UserTravelContext(
-            protectedBoardingLabels: ['Ivry-sur-Seine'],
+        final result = await service.findRoutes(
+          RouteRequest(
+            origin: origin,
+            destination: destination,
+            userContext: const UserTravelContext(
+              protectedBoardingLabels: ['Ivry-sur-Seine'],
+            ),
           ),
-        ),
-      );
+        );
 
-      expect(
-        result.notices.any(
-          (notice) =>
-              notice.contains('Ivry-sur-Seine') &&
-              notice.contains('absents du réseau fictif'),
-        ),
-        isTrue,
-      );
-    });
+        expect(
+          result.notices.any(
+            (notice) =>
+                notice.contains('Ivry-sur-Seine') &&
+                notice.contains('absents du réseau fictif'),
+          ),
+          isTrue,
+        );
+      },
+    );
   });
 }
