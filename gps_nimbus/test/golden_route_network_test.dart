@@ -33,7 +33,9 @@ void main() {
       );
 
       expect(segments, isNotNull);
-      final rides = segments!.where((segment) => segment.type.isTransit).toList();
+      final rides = segments!
+          .where((segment) => segment.type.isTransit)
+          .toList();
       expect(rides.length, 1);
       expect(rides.single.line!.name, '6');
       expect(rides.single.origin.label, 'Quai de la Gare');
@@ -48,7 +50,9 @@ void main() {
       );
 
       expect(segments, isNotNull);
-      final rides = segments!.where((segment) => segment.type.isTransit).toList();
+      final rides = segments!
+          .where((segment) => segment.type.isTransit)
+          .toList();
       expect(rides.length, 1);
       expect(rides.single.line!.name, '12');
       expect(rides.single.origin.label, 'Pasteur');
@@ -78,7 +82,9 @@ void main() {
       );
 
       expect(segments, isNotNull);
-      final rides = segments!.where((segment) => segment.type.isTransit).toList();
+      final rides = segments!
+          .where((segment) => segment.type.isTransit)
+          .toList();
       expect(rides.length, 1);
       expect(rides.single.line!.name, 'C');
       expect(rides.single.origin.label, 'Ivry-sur-Seine');
