@@ -1,137 +1,128 @@
 # STATUS — GPS NIMBUS
 
-Dernière mise à jour : 2026-08-09
+Dernière mise à jour : 2026-09-07
+Branche contrôlée : `gps-nimbus/hardening-v1`
+Commit applicatif contrôlé : `de17b6b00648a09b29d70fc878681ed9a3fd0938`
 
 ## État actuel
 
-Le cœur de GPS NIMBUS fonctionne et est testé. L'application Flutter tourne
-sur le moteur réel, avec un réseau de transport fictif clairement signalé.
+GPS NIMBUS est un **prototype Flutter fonctionnel sur données fictives**.
+Le cœur métier, les classements et la nouvelle calibration terrain sont testés.
+Ce n'est pas encore un GPS relié aux transports et aux rues réelles.
 
-**81 tests passent. `flutter analyze` ne relève aucun problème.**
+Contrôle GitHub Actions exécuté avec Flutter 3.47.2 et Dart 3.13.2 :
 
-Une **version web** existe et fonctionne : c'est aujourd'hui le seul moyen
-d'utiliser GPS NIMBUS depuis un iPhone sans Mac ni compte développeur.
+- format : **succès** ;
+- analyse statique : **succès, aucun problème** ;
+- tests : **88 réussis** ;
+- build Flutter Web : **succès** ;
+- artefact web : **42 fichiers, 14 683 975 octets** ;
+- déploiement public : **non effectué**.
 
-## Terminé
+Run de preuve : `34140843124`.
+Artefact : `10025892847`, conservé temporairement jusqu'au 14 septembre 2026.
 
-**Moteur métier**
-- Tronçons (`RouteSegment`) : marche de déplacement, marche de
-  correspondance, skate, métro, RER, tram, bus, attente.
-- Itinéraires (`RouteOption`) : durée totale, distance totale, distance
-  skate, distance marche, temps de transport, attente, nombre de
-  transports, nombre de correspondances, séquence lisible.
-- Profils de mobilité : skate 27 km/h, marche 5 km/h, configurables.
-- Politique d'accès séparée du profil, pour que le skate ne devienne pas
-  un alias permanent du vélo.
+## Matrice de réalité
 
-**Classements**
-- PLUS RAPIDE et MOINS DE SKATE, avec tous leurs départages.
-- Résultat déterministe : à données égales, même ordre à chaque appel.
+| Fonction | Statut | Limite principale |
+|---|---|---|
+| Modèles marche, skate, métro, RER, tram, bus | TESTED | Modèles métier uniquement |
+| Skate de référence à 27 km/h | TESTED | Vitesse générique, pas vitesse réelle de chaque rue |
+| Marche de référence à 5 km/h | TESTED | Vitesse générique |
+| Classement PLUS RAPIDE | TESTED | Sur candidats et temps actuellement mockés |
+| Classement MOINS DE SKATE | TESTED | Distance skate utilisée comme proxy batterie |
+| Routage multimodal | TESTED / MOCKED | Algorithme testé, réseau francilien fictif |
+| Observations terrain utilisateur | TESTED | Correspondance actuelle par libellés ; identifiants géographiques à venir |
+| Priorité mesure terrain sur estimation générique | TESTED | Pour tronçons marche/skate correspondants |
+| Plage 7–10 min conservée | TESTED | Milieu utilisé provisoirement comme valeur représentative |
+| Point d'accès explicitement protégé | TESTED | Doit déjà exister dans le réseau chargé |
+| Ivry non remplacé silencieusement par BFM | TESTED | Test de non-régression logique |
+| GOLDEN-001 Alfortville → Issy | DOCUMENTED | Réseau mock incomplet et données privées non committées |
+| Ligne 12 / RER C du cas réel | NOT IMPLEMENTED | Absents du réseau mock actuel |
+| GTFS Île-de-France Mobilités | NOT IMPLEMENTED | Aucune donnée horaire réelle |
+| Prochains passages / perturbations | NOT IMPLEMENTED | Aucune donnée temps réel |
+| Réseau de rues OSM | NOT IMPLEMENTED | Distances encore approximées |
+| Géocodage réel | NOT IMPLEMENTED | Catalogue de lieux limité |
+| Road Intelligence | PLANNED | Aucune pénalité arbitraire activée |
+| Build web reproductible en CI | TESTED | Artefact non publié |
+| Test navigateur local antérieur | TESTED selon rapport précédent | Pas revérifié indépendamment dans cette passe |
+| Safari sur iPhone réel | NOT DEVICE_TESTED | Action terrain nécessaire |
+| APK Android | NOT BUILT dans cette passe | CI actuelle ne construit que le web |
+| Application iOS native | NOT BUILT | Mac + Xcode nécessaires |
+| GitHub Pages | NOT DEPLOYED | Publication volontairement bloquée ici |
+| Application en production | NOT PRODUCTION | Données réelles et essais terrain manquants |
 
-**Routing**
-- Réseau francilien simplifié : 43 stations, 9 lignes
-  (métro 1/4/6, RER A/B, tram T2/T3a, bus 38/91).
-- Recherche de chemin réelle (Dijkstra sur station × ligne), qui produit
-  attentes, correspondances à pied et fusion des arrêts d'une même ligne.
-- Génération de candidats : marche seule, skate seul, et toutes les
-  combinaisons accès/sortie marche ou skate.
+## Réalisé dans le lot de durcissement
 
-**Application Flutter**
-- Accueil : départ, destination, inversion, Calculer, hypothèses de calcul.
-- Résultats : les deux recommandations, puis les autres itinéraires.
-- Détail : chiffres clés et séquence étape par étape.
-- Thème clair et sombre.
+- Branche isolée créée sans modifier `main`.
+- Aucune modification des fichiers du portfolio Bazar Organisé.
+- Déploiement Pages depuis une branche Claude explicitement interdit.
+- Architecture de migration vers un dépôt indépendant documentée.
+- Données privées exclues du dépôt public par `.gitignore`.
+- GOLDEN-001 documenté avec identifiants anonymisés.
+- Modèle `ObservedSegment` ajouté avec :
+  - sens du trajet ;
+  - mode ;
+  - durée minimale et maximale ;
+  - nombre d'observations ;
+  - date et source facultatives.
+- Hiérarchie de preuves ajoutée : mesure utilisateur, temps réel, historique,
+  réseau, horaire, estimation générique.
+- Durées terrain appliquées aux segments marche/skate compatibles.
+- Stations explicitement indiquées ajoutées aux candidats quand elles existent.
+- Station absente signalée au lieu d'être remplacée.
+- Défaut de liste fixe découvert et corrigé avant validation.
+- Workflow CI ajouté sans permission de publication.
+- Build web généré depuis la source et conservé comme artefact inspectable.
 
-**Version web**
-- `tool/build_web.sh` produit une version navigateur de 18 Mo, publiée dans
-  `nimbus/` à la racine du dépôt.
-- Vérifiée dans un vrai navigateur (Chromium, format iPhone) : saisie du
-  départ et de la destination, calcul, affichage des deux classements,
-  liste des autres itinéraires.
-- Police embarquée dans l'application, et moteur de rendu servi depuis le
-  même hébergeur : la page ne dépend d'aucun CDN pour s'afficher.
+## Confidentialité
 
-**Harnais de test**
-- `dart run tool/nimbus_cli.dart` exerce tout le moteur sans interface.
+Le dépôt est public. Les deux adresses personnelles exactes du cas GOLDEN-001
+n'ont pas été publiées. Les tests publics utilisent :
 
-**Honnêteté**
-- Le réseau fictif, l'approximation des distances et le proxy skate/vélo
-  sont affichés dans l'application, pas seulement dans le code.
-- Les adaptateurs OTP / GTFS / OSM refusent de répondre tant qu'ils ne
-  sont pas configurés. Aucune API réelle n'est simulée.
+- `GOLDEN-001_ORIGIN_ALFORTVILLE` ;
+- `GOLDEN-001_DESTINATION_ISSY`.
 
-## En cours
+Les coordonnées et historiques privés devront rester localement dans
+`gps_nimbus/private_data/` ou `test_private/`, tous deux ignorés par Git.
 
-Rien. Le lot est terminé.
+## Ce qui reste bloquant
 
-## Prochaine action
+### 1. Dépôt indépendant
 
-Voir `docs/BACKLOG.md`. Par ordre d'utilité :
+Le connecteur GitHub utilisé dans cette passe peut créer des branches,
+modifier le code, lancer les contrôles et ouvrir une pull request, mais il ne
+permet pas de créer un nouveau dépôt.
 
-1. Mettre la version web en ligne (voir « Blocages » ci-dessous) et faire
-   produire un APK Android.
-2. Remplacer le réseau fictif par les données GTFS d'Île-de-France Mobilités.
-3. Remplacer les distances à vol d'oiseau par de vrais tracés de rues.
+Cible : `spreadzloverz/gps-nimbus`.
 
-## Blocages
+Ce blocage n'empêche pas le développement ni les tests sur la branche isolée.
+Il empêche seulement la séparation définitive et le déploiement propre.
 
-### Version web — construite, pas encore en ligne
+### 2. Données réelles
 
-Le dossier `nimbus/` contient l'application prête à être servie. Il ne
-manque qu'un hébergement. Le plus simple, sans rien installer ni payer :
-activer GitHub Pages sur ce dépôt.
+Le moteur utilise encore :
 
-**ACTION REQUISE — pour ouvrir GPS NIMBUS depuis ton iPhone :**
+- un réseau de transport fictif ;
+- des attentes moyennes ;
+- des distances à vol d'oiseau corrigées par un facteur.
 
-1. Sur ton iPhone, ouvre
-   `github.com/spreadzloverz/bazar-organise/settings/pages`
-2. Sous « Source », choisis **Deploy from a branch**.
-3. Choisis la branche `claude/gps-nimbus-mobile-app-p8iqf0`, dossier
-   `/ (root)`, puis **Save**.
-4. Attends deux à trois minutes, puis ouvre
-   `spreadzloverz.github.io/bazar-organise/nimbus/`
-5. Dans Safari : bouton Partager → « Sur l'écran d'accueil ». L'application
-   s'ouvre alors comme une vraie app.
+Aucun itinéraire actuel ne doit être présenté comme un conseil réel de trajet.
 
-Le premier chargement télécharge environ 15 Mo (le moteur graphique) ; les
-suivants sont immédiats.
+### 3. Validation sur appareil
 
-### Build Android — non produit ici
+Le build web de CI prouve que les sources compilent. Il ne prouve pas le
+comportement de Safari sur un iPhone physique, ni celui d'un build Android ou
+iOS natif.
 
-L'environnement de développement à distance bloque l'accès à
-`dl.google.com`. Or le SDK Android et les greffons Gradle ne se
-téléchargent que depuis cette adresse. **Aucun APK n'a donc été produit,
-et aucun build Android n'est présenté comme existant.**
+## Prochaine séquence
 
-Le projet Android lui-même est complet et correctement configuré
-(nom « GPS NIMBUS », identifiant `fr.gpsnimbus.gps_nimbus`).
-
-**ACTION REQUISE — pour obtenir l'application sur un téléphone Android :**
-
-1. Installe Android Studio sur ton ordinateur (gratuit,
-   <https://developer.android.com/studio>).
-2. Installe Flutter en suivant <https://docs.flutter.dev/get-started/install>.
-3. Ouvre un terminal dans le dossier `gps_nimbus` du projet.
-4. Tape : `flutter build apk --debug`
-5. Le fichier obtenu est dans
-   `build/app/outputs/flutter-apk/app-debug.apk` — copie-le sur ton
-   téléphone et ouvre-le.
-
-### Build iOS natif — non produit
-
-Un Mac avec Xcode est indispensable pour compiler une application iPhone
-native. Cette machine tourne sous Linux. Le projet iOS est présent et
-configuré, mais **aucun build iOS n'a été produit**.
-
-En attendant, la version web ci-dessus tourne sur iPhone et peut être
-ajoutée à l'écran d'accueil.
-
-**ACTION REQUISE — sur un Mac, si tu en as un :**
-
-1. Installe Xcode depuis le Mac App Store.
-2. Installe Flutter (<https://docs.flutter.dev/get-started/install/macos>).
-3. Ouvre un terminal dans le dossier `gps_nimbus`.
-4. Tape : `flutter run` avec ton iPhone branché en USB.
-
-La publication sur l'App Store demande un compte développeur Apple payant :
-c'est une décision qui t'appartient, elle n'a pas été engagée.
+1. Revue de la pull request de durcissement ; ne pas fusionner vers `main`.
+2. Créer le dépôt indépendant GPS NIMBUS et y transférer le projet.
+3. Ajouter Quai de la Gare, Pasteur, Mairie d'Issy, Ivry-sur-Seine, ligne 12
+   et RER C à un réseau de test contrôlé.
+4. Transformer GOLDEN-001 en comparaison automatisée complète.
+5. Brancher le GTFS IDFM, puis les prochains passages et perturbations.
+6. Remplacer les distances approximatives par un vrai réseau de rues.
+7. Tester la version web sur un iPhone réel avant toute qualification
+   `DEVICE_TESTED`.
