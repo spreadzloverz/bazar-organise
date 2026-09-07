@@ -3,26 +3,26 @@
 Dernière mise à jour : 2026-09-07
 
 Les Golden Routes sont des cas terrain utilisés pour empêcher les régressions
-du moteur. Ce dépôt étant public, les adresses personnelles exactes ne sont
-jamais enregistrées ici.
+du moteur. Les points de domicile et d'arrivée sont remplacés par des
+identifiants de test ; seuls les arrêts publics sont nommés.
 
 ## GOLDEN-001 — Alfortville → Issy-les-Moulineaux
 
-### Identifiants anonymisés
+### Identifiants de test
 
-- Départ privé : `GOLDEN-001_ORIGIN_ALFORTVILLE`
-- Destination privée : `GOLDEN-001_DESTINATION_ISSY`
+- Départ : `GOLDEN-001_ORIGIN_ALFORTVILLE`
+- Destination : `GOLDEN-001_DESTINATION_ISSY`
 
-Les coordonnées et adresses exactes doivent rester dans un fichier local
-ignoré par Git sous `gps_nimbus/private_data/`.
+Les détails de localisation nécessaires aux essais personnels restent hors du
+dépôt, dans un fichier local ignoré par Git.
 
-### Observations terrain fournies par l'utilisateur
+### Observations terrain
 
 | Segment | Mode | Observation |
 |---|---|---:|
-| Départ privé → Quai de la Gare | skate | environ 10 min |
-| Départ privé → gare d'Ivry-sur-Seine | skate | environ 7 à 10 min |
-| Mairie d'Issy → destination privée | skate | environ 5 min |
+| Départ → Quai de la Gare | skate | environ 10 min |
+| Départ → gare d'Ivry-sur-Seine | skate | environ 7 à 10 min |
+| Mairie d'Issy → destination | skate | environ 5 min |
 
 Ces mesures ont priorité sur une durée générique calculée uniquement avec
 `distance / 27 km/h`, à condition que le sens, le mode et les extrémités du
@@ -39,11 +39,8 @@ SKATE
 → MÉTRO 12
 → Mairie d'Issy
 → SKATE
-→ destination privée
+→ destination
 ```
-
-Cet itinéraire ne doit pas être déclaré meilleur sans horaires réels. Il doit
-rester un candidat explicitement protégé et comparable aux autres solutions.
 
 ### Itinéraire candidat B
 
@@ -53,12 +50,16 @@ SKATE
 → RER C
 → Issy ou Issy–Val de Seine selon la mission réelle
 → SKATE ou MARCHE
-→ destination privée
+→ destination
 ```
 
-La gare d'Ivry-sur-Seine doit rester candidate lorsqu'elle est explicitement
-donnée. Le moteur ne doit jamais la remplacer silencieusement par
-Bibliothèque François-Mitterrand.
+Le réseau fictif sait désormais représenter les deux corridors. Il ne dispose
+pas encore des horaires IDFM, des perturbations, ni des vrais tracés de rue :
+aucun gagnant réel ne doit donc être annoncé à partir de ce test seul.
+
+La gare d'Ivry-sur-Seine reste candidate lorsqu'elle est explicitement donnée.
+Le moteur ne la remplace jamais silencieusement par Bibliothèque
+François-Mitterrand.
 
 ### Règles de non-régression
 
@@ -69,17 +70,22 @@ Bibliothèque François-Mitterrand.
 4. Ivry-sur-Seine reste un point d'accès candidat explicite.
 5. Une station absente du réseau mock est signalée comme non calculable ; elle
    n'est ni supprimée ni remplacée.
-6. Une perturbation temporaire doit être liée à une période de validité ; elle
-   ne devient jamais une règle permanente.
-7. Le classement final doit distinguer données mockées, horaires prévus,
+6. Une perturbation temporaire devra être liée à une période de validité ; elle
+   ne deviendra jamais une règle permanente.
+7. Le classement final devra distinguer données mockées, horaires prévus,
    données temps réel et mesures terrain.
 
-### État d'implémentation
+### État vérifié
 
-- Modèle d'observation utilisateur : `IMPLEMENTED`
-- Application des durées observées aux tronçons marche/skate : `IMPLEMENTED`
-- Protection des stations existant dans le réseau courant : `IMPLEMENTED`
-- Tests automatisés : écrits, en attente d'exécution CI
-- Ligne 12, RER C et stations de ce cas dans le réseau mock : `NOT IMPLEMENTED`
-- Horaires IDFM réels : `NOT IMPLEMENTED`
-- Test sur le trajet privé exact : local uniquement, non committé
+- Modèle d'observation utilisateur : `TESTED`
+- Application aux tronçons marche/skate compatibles : `TESTED`
+- Protection des stations explicites : `TESTED`
+- Métro 6 Quai de la Gare → Pasteur : `TESTED / MOCKED`
+- Métro 12 Pasteur → Mairie d'Issy : `TESTED / MOCKED`
+- RER C Ivry-sur-Seine → Issy–Val de Seine : `TESTED / MOCKED`
+- Variante M6 + M12 avec temps terrain d'accès et de sortie : `TESTED / MOCKED`
+- Variante RER C avec plage terrain 7–10 min : `TESTED / MOCKED`
+- Suite complète : 95 tests réussis dans le run CI `34141968781`
+- Horaires et perturbations IDFM : `NOT IMPLEMENTED`
+- Comparaison porte-à-porte sur données réelles : `NOT IMPLEMENTED`
+- Essai sur appareil physique : `NOT DEVICE_TESTED`
