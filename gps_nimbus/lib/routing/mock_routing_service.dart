@@ -244,10 +244,9 @@ class MockRoutingService implements RoutingService {
     GeoPoint point, {
     required List<String> protectedLabels,
   }) {
-    final candidates = network.nearestStations(
-      point,
-      count: candidateStationCount,
-    );
+    final candidates = network
+        .nearestStations(point, count: candidateStationCount)
+        .toList(growable: true);
     final ids = candidates.map((station) => station.id).toSet();
 
     for (final station in network.stations.values) {
